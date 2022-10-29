@@ -31,7 +31,6 @@
 <meta property="og:image" content="https://code-thinking.cdn.bcebos.com/pics/24.%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B91.png">
 <meta property="og:image" content="https://code-thinking.cdn.bcebos.com/pics/24.%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B92.png">
 <meta property="og:image" content="https://code-thinking.cdn.bcebos.com/pics/24.%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B93.png">
-<meta property="og:image" content="https://code-thinking.cdn.bcebos.com/pics/24.%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20210510085957392.png">
 <meta property="og:image" content="https://code-thinking.cdn.bcebos.com/pics/19.%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACN%E4%B8%AA%E8%8A%82%E7%82%B9.png">
 <meta property="og:image" content="https://code-thinking.cdn.bcebos.com/pics/19.%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACN%E4%B8%AA%E8%8A%82%E7%82%B91.png">
@@ -53,7 +52,7 @@
 <meta property="og:image" content="https://img-blog.csdnimg.cn/2021031816503266.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/2021031816515727.png">
 <meta property="article:published_time" content="2022-10-29T07:00:00.000Z">
-<meta property="article:modified_time" content="2022-10-29T08:46:21.020Z">
+<meta property="article:modified_time" content="2022-10-29T12:55:03.254Z">
 <meta property="article:author" content="Cheng Qi">
 <meta property="article:tag" content="代码随想录训练营">
 <meta name="twitter:card" content="summary">
@@ -216,7 +215,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2022-10-29 15:00:00 / 修改时间：16:46:21" itemprop="dateCreated datePublished" datetime="2022-10-29T15:00:00+08:00">2022-10-29</time>
+              <time title="创建时间：2022-10-29 15:00:00 / 修改时间：20:55:03" itemprop="dateCreated datePublished" datetime="2022-10-29T15:00:00+08:00">2022-10-29</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -274,7 +273,6 @@
 <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p><strong>视频资料：</strong><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1YT411g7br">帮你把链表细节学清楚！ | LeetCode：24. 两两交换链表中的节点</a></p>
 <p>这道题目正常模拟就可以了。</p>
 <p>建议使用虚拟头结点，这样会方便很多，要不然每次针对头结点（没有前一个指针指向头结点），还要单独处理。</p>
-<p>对虚拟头结点的操作，还不熟悉的话，可以看这篇<a target="_blank" rel="noopener" href="https://programmercarl.com/0203.%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0.html">链表：听说用虚拟头节点会方便很多？</a>。</p>
 <p>接下来就是交换相邻两个元素了，<strong>此时一定要画图，不画图，操作多个指针很容易乱，而且要操作的先后顺序</strong></p>
 <p>初始时，cur指向虚拟头结点，然后进行如下三步：</p>
 <p><img src="https://code-thinking.cdn.bcebos.com/pics/24.%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B91.png" alt="24.两两交换链表中的节点1"></p>
@@ -289,13 +287,6 @@
 <li>时间复杂度：O(n)</li>
 <li>空间复杂度：O(1)</li>
 </ul>
-<h2 id="拓展"><a href="#拓展" class="headerlink" title="拓展"></a>拓展</h2><p><strong>这里还是说一下，不必太在意力扣上执行用时，打败多少多少用户，这个统计不准确的。</strong></p>
-<p>做题的时候自己能分析出来时间复杂度就可以了，至于力扣上执行用时，大概看一下就行。</p>
-<p>上面的代码我第一次提交执行用时8ms，打败6.5%的用户，差点吓到我了。</p>
-<p>心想应该没有更好的方法了吧，也就$O(n)$的时间复杂度，重复提交几次，这样了：</p>
-<p><img src="https://code-thinking.cdn.bcebos.com/pics/24.%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9.png" alt="24.两两交换链表中的节点"></p>
-<p>力扣上的统计如果两份代码是 100ms 和 300ms的耗时，其实是需要注意的。</p>
-<p>如果一个是 4ms 一个是 12ms，看上去好像是一个打败了80%，一个打败了20%，其实是没有差别的。 只不过是力扣上统计的误差而已。</p>
 <h2 id="其他语言版本"><a href="#其他语言版本" class="headerlink" title="其他语言版本"></a>其他语言版本</h2><p>C:</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     struct ListNode *next;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">//递归版本</span></span><br><span class="line"><span class="keyword">struct</span> ListNode* <span class="title function_">swapPairs</span><span class="params">(<span class="keyword">struct</span> ListNode* head)</span>&#123;</span><br><span class="line">    <span class="comment">//递归结束条件：头节点不存在或头节点的下一个节点不存在。此时不需要交换，直接返回head</span></span><br><span class="line">    <span class="keyword">if</span>(!head || !head-&gt;next)</span><br><span class="line">        <span class="keyword">return</span> head;</span><br><span class="line">    <span class="comment">//创建一个节点指针类型保存头结点下一个节点</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span> *<span class="title">newHead</span> =</span> head-&gt;next;</span><br><span class="line">    <span class="comment">//更改头结点+2位节点后的值，并将头结点的next指针指向这个更改过的list</span></span><br><span class="line">    head-&gt;next = swapPairs(newHead-&gt;next);</span><br><span class="line">    <span class="comment">//将新的头结点的next指针指向老的头节点</span></span><br><span class="line">    newHead-&gt;next = head;</span><br><span class="line">    <span class="keyword">return</span> newHead;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -306,7 +297,7 @@
 
 <h1 id="19-删除链表的倒数第N个节点"><a href="#19-删除链表的倒数第N个节点" class="headerlink" title="19.删除链表的倒数第N个节点"></a>19.删除链表的倒数第N个节点</h1><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/remove-nth-node-from-end-of-list/">力扣题目链接</a></p>
 <p>给你一个链表，删除链表的倒数第 n 个结点，并且返回链表的头结点。</p>
-<p>进阶：你能尝试使用一趟扫描实现吗？</p>
+<p>进阶：尝试使用一趟扫描实现？</p>
 <p>示例 1：</p>
 <p><img src="https://img-blog.csdnimg.cn/20210510085957392.png" alt="19.删除链表的倒数第N个节点"></p>
 <p>输入：head &#x3D; [1,2,3,4,5], n &#x3D; 2<br>输出：[1,2,3,5]<br>示例 2：</p>
@@ -317,7 +308,7 @@
 <p>思路是这样的，但要注意一些细节。</p>
 <p>分为如下几步：</p>
 <ul>
-<li><p>首先这里我推荐使用虚拟头结点，这样方便处理删除实际头结点的逻辑，如果虚拟头结点不清楚，可以看这篇： <a target="_blank" rel="noopener" href="https://programmercarl.com/0203.%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0.html">链表：听说用虚拟头节点会方便很多？</a></p>
+<li><p>首先这里推荐使用虚拟头结点，这样方便处理删除实际头结点的逻辑</p>
 </li>
 <li><p>定义fast指针和slow指针，初始值为虚拟头结点，如图：</p>
 </li>
@@ -379,7 +370,7 @@
 <p>为了表示给定链表中的环，使用整数 pos 来表示链表尾连接到链表中的位置（索引从 0 开始）。 如果 pos 是 -1，则在该链表中没有环。</p>
 <p><strong>说明</strong>：不允许修改给定的链表。</p>
 <p><img src="https://img-blog.csdnimg.cn/20200816110112704.png" alt="循环链表"></p>
-<h2 id="思路-3"><a href="#思路-3" class="headerlink" title="思路"></a>思路</h2><p><strong>视频资料：</strong><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1if4y1d7ob">把环形链表讲清楚！| LeetCode:142.环形链表II</a>，相信结合视频在看本篇题解，更有助于对链表的理解。</p>
+<h2 id="思路-3"><a href="#思路-3" class="headerlink" title="思路"></a>思路</h2><p><strong>视频资料：</strong><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1if4y1d7ob">把环形链表讲清楚！| LeetCode:142.环形链表II</a></p>
 <p>这道题目，不仅考察对链表的操作，而且还需要一些数学运算。</p>
 <p>主要考察两知识点：</p>
 <ul>
@@ -421,7 +412,7 @@
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode *next;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) : val(x), next(NULL) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode *<span class="title">detectCycle</span><span class="params">(ListNode *head)</span> </span>&#123;</span><br><span class="line">        ListNode* fast = head;</span><br><span class="line">        ListNode* slow = head;</span><br><span class="line">        <span class="keyword">while</span>(fast != <span class="literal">NULL</span> &amp;&amp; fast-&gt;next != <span class="literal">NULL</span>) &#123;</span><br><span class="line">            slow = slow-&gt;next;</span><br><span class="line">            fast = fast-&gt;next-&gt;next;</span><br><span class="line">            <span class="comment">// 快慢指针相遇，此时从head 和 相遇点，同时查找直至相遇</span></span><br><span class="line">            <span class="keyword">if</span> (slow == fast) &#123;</span><br><span class="line">                ListNode* index1 = fast;</span><br><span class="line">                ListNode* index2 = head;</span><br><span class="line">                <span class="keyword">while</span> (index1 != index2) &#123;</span><br><span class="line">                    index1 = index1-&gt;next;</span><br><span class="line">                    index2 = index2-&gt;next;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">return</span> index2; <span class="comment">// 返回环的入口</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 <h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>在推理过程中，可能有一个疑问就是：<strong>为什么第一次在环中相遇，slow的 步数 是 x+y 而不是 x + 若干环的长度 + y 呢？</strong></p>
-<p>即文章<a target="_blank" rel="noopener" href="https://programmercarl.com/0142.%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8II.html">链表：环找到了，那入口呢？</a>中如下的地方：</p>
+<p>即如下的地方：</p>
 <p><img src="https://img-blog.csdnimg.cn/20210318165123581.png" alt="142环形链表5"></p>
 <p>首先slow进环的时候，fast一定是先进环来了。</p>
 <p>如果slow进环入口，fast也在环入口，那么把这个环展开成直线，就是如下图的样子：</p>
@@ -435,8 +426,8 @@
 <p>这说明什么呢？</p>
 <p><strong>在slow开始走的那一环已经和fast相遇了</strong>。</p>
 <p>为什么fast不能跳过去呢？ 在刚刚已经说过一次了，<strong>fast相对于slow是一次移动一个节点，所以不可能跳过去</strong>。</p>
-<p>好了，这次把为什么第一次在环中相遇，slow的 步数 是 x+y 而不是 x + 若干环的长度 + y ，用数学推理了一下，算是对<a target="_blank" rel="noopener" href="https://programmercarl.com/0142.%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8II.html">链表：环找到了，那入口呢？</a>的补充。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这次可以说把环形链表这道题目的各个细节，完完整整的证明了一遍，说这是全网最详细讲解不为过吧，哈哈。</p>
+<p>好了，这次把为什么第一次在环中相遇，slow的 步数 是 x+y 而不是 x + 若干环的长度 + y ，用数学推理了一下，算是补充。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这次把环形链表这道题目的各个细节，完完整整的证明了一遍。</p>
 <h2 id="其他语言版本-3"><a href="#其他语言版本-3" class="headerlink" title="其他语言版本"></a>其他语言版本</h2><p>Python：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">detectCycle</span>(<span class="params">self, head: ListNode</span>) -&gt; ListNode:</span><br><span class="line">        slow, fast = head, head</span><br><span class="line">        <span class="keyword">while</span> fast <span class="keyword">and</span> fast.<span class="built_in">next</span>:</span><br><span class="line">            slow = slow.<span class="built_in">next</span></span><br><span class="line">            fast = fast.<span class="built_in">next</span>.<span class="built_in">next</span></span><br><span class="line">            <span class="comment"># 如果相遇</span></span><br><span class="line">            <span class="keyword">if</span> slow == fast:</span><br><span class="line">                p = head</span><br><span class="line">                q = slow</span><br><span class="line">                <span class="keyword">while</span> p!=q:</span><br><span class="line">                    p = p.<span class="built_in">next</span></span><br><span class="line">                    q = q.<span class="built_in">next</span></span><br><span class="line">                <span class="comment">#你也可以return q</span></span><br><span class="line">                <span class="keyword">return</span> p</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span></span><br></pre></td></tr></table></figure>
 <p>C：</p>
@@ -472,8 +463,8 @@
       <i class="fa fa-chevron-left"></i> 【第八周】Day5_记录
     </a></div>
       <div class="post-nav-item">
-    <a href="/2022/10/29/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E8%AE%AD%E7%BB%83%E8%90%A5/%E3%80%90%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E8%AE%AD%E7%BB%83%E8%90%A5%E3%80%91%E9%93%BE%E8%A1%A8%E7%AF%87%E6%80%BB%E7%BB%93/" rel="next" title="【代码随想录训练营】链表篇总结">
-      【代码随想录训练营】链表篇总结 <i class="fa fa-chevron-right"></i>
+    <a href="/2022/10/29/%E7%A0%94%E4%B8%80%E4%B8%8A/%E7%A0%94%E4%B8%80%E4%B8%8A%E7%AC%AC%E5%85%AB%E5%91%A8/%E3%80%90%E7%AC%AC%E5%85%AB%E5%91%A8%E3%80%91Day6_%E8%AE%B0%E5%BD%95/" rel="next" title="【第八周】Day6_记录">
+      【第八周】Day6_记录 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -534,7 +525,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%AD%E7%BB%83%E8%90%A5%E4%BB%BB%E5%8A%A1"><span class="nav-number">1.</span> <span class="nav-text">训练营任务</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#24-%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9"><span class="nav-number">2.</span> <span class="nav-text">24. 两两交换链表中的节点</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF"><span class="nav-number">2.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8B%93%E5%B1%95"><span class="nav-number">2.2.</span> <span class="nav-text">拓展</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E8%AF%AD%E8%A8%80%E7%89%88%E6%9C%AC"><span class="nav-number">2.3.</span> <span class="nav-text">其他语言版本</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#19-%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACN%E4%B8%AA%E8%8A%82%E7%82%B9"><span class="nav-number">3.</span> <span class="nav-text">19.删除链表的倒数第N个节点</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-1"><span class="nav-number">3.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E8%AF%AD%E8%A8%80%E7%89%88%E6%9C%AC-1"><span class="nav-number">3.2.</span> <span class="nav-text">其他语言版本</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9D%A2%E8%AF%95%E9%A2%98-02-07-%E9%93%BE%E8%A1%A8%E7%9B%B8%E4%BA%A4"><span class="nav-number">4.</span> <span class="nav-text">面试题 02.07. 链表相交</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-2"><span class="nav-number">4.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E8%AF%AD%E8%A8%80%E7%89%88%E6%9C%AC-2"><span class="nav-number">4.2.</span> <span class="nav-text">其他语言版本</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#142-%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8II"><span class="nav-number">5.</span> <span class="nav-text">142.环形链表II</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-3"><span class="nav-number">5.1.</span> <span class="nav-text">思路</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A4%E6%96%AD%E9%93%BE%E8%A1%A8%E6%98%AF%E5%90%A6%E6%9C%89%E7%8E%AF"><span class="nav-number">5.1.1.</span> <span class="nav-text">判断链表是否有环</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E6%9E%9C%E6%9C%89%E7%8E%AF%EF%BC%8C%E5%A6%82%E4%BD%95%E6%89%BE%E5%88%B0%E8%BF%99%E4%B8%AA%E7%8E%AF%E7%9A%84%E5%85%A5%E5%8F%A3"><span class="nav-number">5.1.2.</span> <span class="nav-text">如果有环，如何找到这个环的入口</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A1%A5%E5%85%85"><span class="nav-number">5.2.</span> <span class="nav-text">补充</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">5.3.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E8%AF%AD%E8%A8%80%E7%89%88%E6%9C%AC-3"><span class="nav-number">5.4.</span> <span class="nav-text">其他语言版本</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%AD%E7%BB%83%E8%90%A5%E4%BB%BB%E5%8A%A1"><span class="nav-number">1.</span> <span class="nav-text">训练营任务</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#24-%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9"><span class="nav-number">2.</span> <span class="nav-text">24. 两两交换链表中的节点</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF"><span class="nav-number">2.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E8%AF%AD%E8%A8%80%E7%89%88%E6%9C%AC"><span class="nav-number">2.2.</span> <span class="nav-text">其他语言版本</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#19-%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACN%E4%B8%AA%E8%8A%82%E7%82%B9"><span class="nav-number">3.</span> <span class="nav-text">19.删除链表的倒数第N个节点</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-1"><span class="nav-number">3.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E8%AF%AD%E8%A8%80%E7%89%88%E6%9C%AC-1"><span class="nav-number">3.2.</span> <span class="nav-text">其他语言版本</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9D%A2%E8%AF%95%E9%A2%98-02-07-%E9%93%BE%E8%A1%A8%E7%9B%B8%E4%BA%A4"><span class="nav-number">4.</span> <span class="nav-text">面试题 02.07. 链表相交</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-2"><span class="nav-number">4.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E8%AF%AD%E8%A8%80%E7%89%88%E6%9C%AC-2"><span class="nav-number">4.2.</span> <span class="nav-text">其他语言版本</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#142-%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8II"><span class="nav-number">5.</span> <span class="nav-text">142.环形链表II</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-3"><span class="nav-number">5.1.</span> <span class="nav-text">思路</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A4%E6%96%AD%E9%93%BE%E8%A1%A8%E6%98%AF%E5%90%A6%E6%9C%89%E7%8E%AF"><span class="nav-number">5.1.1.</span> <span class="nav-text">判断链表是否有环</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E6%9E%9C%E6%9C%89%E7%8E%AF%EF%BC%8C%E5%A6%82%E4%BD%95%E6%89%BE%E5%88%B0%E8%BF%99%E4%B8%AA%E7%8E%AF%E7%9A%84%E5%85%A5%E5%8F%A3"><span class="nav-number">5.1.2.</span> <span class="nav-text">如果有环，如何找到这个环的入口</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A1%A5%E5%85%85"><span class="nav-number">5.2.</span> <span class="nav-text">补充</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">5.3.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E8%AF%AD%E8%A8%80%E7%89%88%E6%9C%AC-3"><span class="nav-number">5.4.</span> <span class="nav-text">其他语言版本</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -550,7 +541,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-count">21</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
