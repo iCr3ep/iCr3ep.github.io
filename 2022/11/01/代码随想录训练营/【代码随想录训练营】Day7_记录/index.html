@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/%E5%A4%A9%E7%A7%A4.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/%E5%A4%A9%E7%A7%A4.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="参考资料来自：代码随想录 训练营任务 454.四数相加II 383.赎金信 15.三数之和 18.四数之和 总结">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【代码随想录训练营】Day7_记录">
+<meta property="og:url" content="http://example.com/2022/11/01/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E8%AE%AD%E7%BB%83%E8%90%A5/%E3%80%90%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E8%AE%AD%E7%BB%83%E8%90%A5%E3%80%91Day7_%E8%AE%B0%E5%BD%95/index.html">
+<meta property="og:site_name" content="KeyChan&#39;s">
+<meta property="og:description" content="参考资料来自：代码随想录 训练营任务 454.四数相加II 383.赎金信 15.三数之和 18.四数之和 总结">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://code-thinking.cdn.bcebos.com/gifs/15.%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C.gif">
+<meta property="article:published_time" content="2022-11-01T07:00:00.000Z">
+<meta property="article:modified_time" content="2022-11-01T12:44:23.868Z">
+<meta property="article:author" content="Cheng Qi">
+<meta property="article:tag" content="代码随想录训练营">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://code-thinking.cdn.bcebos.com/gifs/15.%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C.gif">
+
+<link rel="canonical" href="http://example.com/2022/11/01/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E8%AE%AD%E7%BB%83%E8%90%A5/%E3%80%90%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E8%AE%AD%E7%BB%83%E8%90%A5%E3%80%91Day7_%E8%AE%B0%E5%BD%95/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>【代码随想录训练营】Day7_记录 | KeyChan's</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">KeyChan's</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/11/01/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E8%AE%AD%E7%BB%83%E8%90%A5/%E3%80%90%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E8%AE%AD%E7%BB%83%E8%90%A5%E3%80%91Day7_%E8%AE%B0%E5%BD%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/headImage.jpg">
+      <meta itemprop="name" content="Cheng Qi">
+      <meta itemprop="description" content="珍惜每分每秒，把硕士三年当做高中三年，只要学不死，就往死里学。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KeyChan's">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【代码随想录训练营】Day7_记录
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-11-01 15:00:00 / 修改时间：20:44:23" itemprop="dateCreated datePublished" datetime="2022-11-01T15:00:00+08:00">2022-11-01</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/" itemprop="url" rel="index"><span itemprop="name">学习总结</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2022/11/01/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E8%AE%AD%E7%BB%83%E8%90%A5/%E3%80%90%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E8%AE%AD%E7%BB%83%E8%90%A5%E3%80%91Day7_%E8%AE%B0%E5%BD%95/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2022/11/01/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E8%AE%AD%E7%BB%83%E8%90%A5/%E3%80%90%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E8%AE%AD%E7%BB%83%E8%90%A5%E3%80%91Day7_%E8%AE%B0%E5%BD%95/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><strong>参考资料来自：</strong><a target="_blank" rel="noopener" href="https://programmercarl.com/">代码随想录</a></p>
+<h1 id="训练营任务"><a href="#训练营任务" class="headerlink" title="训练营任务"></a>训练营任务</h1><ul>
+<li>454.四数相加II</li>
+<li>383.赎金信</li>
+<li>15.三数之和</li>
+<li>18.四数之和</li>
+<li>总结<span id="more"></span></li>
+</ul>
+<blockquote>
+<p>需要哈希的地方都能找到map的身影</p>
+</blockquote>
+<h1 id="第454题-四数相加II"><a href="#第454题-四数相加II" class="headerlink" title="第454题.四数相加II"></a>第454题.四数相加II</h1><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/4sum-ii/">力扣题目链接</a></p>
+<p>给定四个包含整数的数组列表 A , B , C , D ,计算有多少个元组 (i, j, k, l) ，使得 A[i] + B[j] + C[k] + D[l] &#x3D; 0。</p>
+<p>为了使问题简单化，所有的 A, B, C, D 具有相同的长度 N，且 0 ≤ N ≤ 500 。所有整数的范围在 -2^28 到 2^28 - 1 之间，最终结果不会超过 2^31 - 1 。</p>
+<p><strong>例如:</strong></p>
+<p>输入:</p>
+<ul>
+<li>A &#x3D; [ 1, 2]</li>
+<li>B &#x3D; [-2,-1]</li>
+<li>C &#x3D; [-1, 2]</li>
+<li>D &#x3D; [ 0, 2]</li>
+</ul>
+<p>输出:</p>
+<p>2</p>
+<p><strong>解释:</strong></p>
+<p>两个元组如下:</p>
+<ol>
+<li>(0, 0, 0, 1) -&gt; A[0] + B[0] + C[0] + D[1] &#x3D; 1 + (-2) + (-1) + 2 &#x3D; 0</li>
+<li>(1, 1, 0, 0) -&gt; A[1] + B[1] + C[0] + D[0] &#x3D; 2 + (-1) + (-1) + 0 &#x3D; 0</li>
+</ol>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>本题视频讲解：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Md4y1Q7Yh">学透哈希表，map使用有技巧！LeetCode：454.四数相加II</a>，结合视频在看本题解，事半功倍。</p>
+<p>本题咋眼一看好像和<a target="_blank" rel="noopener" href="https://programmercarl.com/0015.%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C.html">0015.三数之和</a>，<a target="_blank" rel="noopener" href="https://programmercarl.com/0018.%E5%9B%9B%E6%95%B0%E4%B9%8B%E5%92%8C.html">0018.四数之和</a>差不多，其实差很多。</p>
+<p><strong>本题是使用哈希法的经典题目，而<a target="_blank" rel="noopener" href="https://programmercarl.com/0015.%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C.html">0015.三数之和</a>，<a target="_blank" rel="noopener" href="https://programmercarl.com/0018.%E5%9B%9B%E6%95%B0%E4%B9%8B%E5%92%8C.html">0018.四数之和</a>并不合适使用哈希法</strong>，因为三数之和和四数之和这两道题目使用哈希法在不超时的情况下做到对结果去重是很困难的，很有多细节需要处理。</p>
+<p><strong>而这道题目是四个独立的数组，只要找到A[i] + B[j] + C[k] + D[l] &#x3D; 0就可以，不用考虑有重复的四个元素相加等于0的情况，所以相对于题目18. 四数之和，题目15.三数之和，还是简单了不少！</strong></p>
+<p>如果本题想难度升级：就是给出一个数组（而不是四个数组），在这里找出四个元素相加等于0，答案中不可以包含重复的四元组，可以思考一下，后续的文章也会讲到的。</p>
+<p>本题解题步骤：</p>
+<ol>
+<li>首先定义 一个unordered_map，key放a和b两数之和，value 放a和b两数之和出现的次数。</li>
+<li>遍历大A和大B数组，统计两个数组元素之和，和出现的次数，放到map中。</li>
+<li>定义int变量count，用来统计 a+b+c+d &#x3D; 0 出现的次数。</li>
+<li>在遍历大C和大D数组，找到如果 0-(c+d) 在map中出现过的话，就用count把map中key对应的value也就是出现次数统计出来。</li>
+<li>最后返回统计值 count 就可以了</li>
+</ol>
+<p>C++代码:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">fourSumCount</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; A, vector&lt;<span class="type">int</span>&gt;&amp; B, vector&lt;<span class="type">int</span>&gt;&amp; C, vector&lt;<span class="type">int</span>&gt;&amp; D)</span> </span>&#123;</span><br><span class="line">        unordered_map&lt;<span class="type">int</span>, <span class="type">int</span>&gt; umap; <span class="comment">//key:a+b的数值，value:a+b数值出现的次数</span></span><br><span class="line">        <span class="comment">// 遍历大A和大B数组，统计两个数组元素之和，和出现的次数，放到map中</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> a : A) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> b : B) &#123;</span><br><span class="line">                umap[a + b]++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">int</span> count = <span class="number">0</span>; <span class="comment">// 统计a+b+c+d = 0 出现的次数</span></span><br><span class="line">        <span class="comment">// 在遍历大C和大D数组，找到如果 0-(c+d) 在map中出现过的话，就把map中key对应的value也就是出现次数统计出来。</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> c : C) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> d : D) &#123;</span><br><span class="line">                <span class="keyword">if</span> (umap.<span class="built_in">find</span>(<span class="number">0</span> - (c + d)) != umap.<span class="built_in">end</span>()) &#123;</span><br><span class="line">                    count += umap[<span class="number">0</span> - (c + d)];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> count;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="其他语言版本"><a href="#其他语言版本" class="headerlink" title="其他语言版本"></a>其他语言版本</h2><p>Python：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">fourSumCount</span>(<span class="params">self, nums1, nums2, nums3, nums4</span>):</span><br><span class="line">        <span class="comment"># use a dict to store the elements in nums1 and nums2 and their sum</span></span><br><span class="line">        hashmap = <span class="built_in">dict</span>()</span><br><span class="line">        <span class="keyword">for</span> n1 <span class="keyword">in</span> nums1:</span><br><span class="line">            <span class="keyword">for</span> n2 <span class="keyword">in</span> nums2:</span><br><span class="line">                <span class="keyword">if</span> n1 + n2 <span class="keyword">in</span> hashmap:</span><br><span class="line">                    hashmap[n1+n2] += <span class="number">1</span></span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    hashmap[n1+n2] = <span class="number">1</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment"># if the -(a+b) exists in nums3 and nums4, we shall add the count</span></span><br><span class="line">        count = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> n3 <span class="keyword">in</span> nums3:</span><br><span class="line">            <span class="keyword">for</span> n4 <span class="keyword">in</span> nums4:</span><br><span class="line">                key = - n3 - n4</span><br><span class="line">                <span class="keyword">if</span> key <span class="keyword">in</span> hashmap:</span><br><span class="line">                    count += hashmap[key]</span><br><span class="line">        <span class="keyword">return</span> count</span><br><span class="line"> </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">fourSumCount</span>(<span class="params">self, nums1: <span class="built_in">list</span>, nums2: <span class="built_in">list</span>, nums3: <span class="built_in">list</span>, nums4: <span class="built_in">list</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="keyword">from</span> collections <span class="keyword">import</span> defaultdict <span class="comment"># You may use normal dict instead.</span></span><br><span class="line">        rec, cnt = defaultdict(<span class="keyword">lambda</span> : <span class="number">0</span>), <span class="number">0</span></span><br><span class="line">        <span class="comment"># To store the summary of all the possible combinations of nums1 &amp; nums2, together with their frequencies.</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> nums1:</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> nums2:</span><br><span class="line">                rec[i+j] += <span class="number">1</span></span><br><span class="line">        <span class="comment"># To add up the frequencies if the corresponding value occurs in the dictionary</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> nums3:</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> nums4:</span><br><span class="line">                cnt += rec.get(-(i+j), <span class="number">0</span>) <span class="comment"># No matched key, return 0.</span></span><br><span class="line">        <span class="keyword">return</span> cnt</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>在哈希法中有一些场景就是为数组量身定做的。</p>
+</blockquote>
+<h1 id="383-赎金信"><a href="#383-赎金信" class="headerlink" title="383. 赎金信"></a>383. 赎金信</h1><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/ransom-note/">力扣题目链接</a></p>
+<p>给定一个赎金信 (ransom) 字符串和一个杂志(magazine)字符串，判断第一个字符串 ransom 能不能由第二个字符串 magazines 里面的字符构成。如果可以构成，返回 true ；否则返回 false。</p>
+<p>(题目说明：为了不暴露赎金信字迹，要从杂志上搜索各个需要的字母，组成单词来表达意思。杂志字符串中的每个字符只能在赎金信字符串中使用一次。)</p>
+<p><strong>注意：</strong></p>
+<p>你可以假设两个字符串均只含有小写字母。</p>
+<p>canConstruct(“a”, “b”) -&gt; false<br>canConstruct(“aa”, “ab”) -&gt; false<br>canConstruct(“aa”, “aab”) -&gt; true      </p>
+<h2 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h2><p>这道题目和<a target="_blank" rel="noopener" href="https://programmercarl.com/0242.%E6%9C%89%E6%95%88%E7%9A%84%E5%AD%97%E6%AF%8D%E5%BC%82%E4%BD%8D%E8%AF%8D.html">242.有效的字母异位词</a>很像，<a target="_blank" rel="noopener" href="https://programmercarl.com/0242.%E6%9C%89%E6%95%88%E7%9A%84%E5%AD%97%E6%AF%8D%E5%BC%82%E4%BD%8D%E8%AF%8D.html">242.有效的字母异位词</a>相当于求 字符串a 和 字符串b 是否可以相互组成 ，而这道题目是求 字符串a能否组成字符串b，而不用管字符串b 能不能组成字符串a。</p>
+<p>本题判断第一个字符串ransom能不能由第二个字符串magazines里面的字符构成，但是这里需要注意两点。</p>
+<ul>
+<li><p> 第一点“为了不暴露赎金信字迹，要从杂志上搜索各个需要的字母，组成单词来表达意思”  这里<em>说明杂志里面的字母不可重复使用。</em></p>
+</li>
+<li><p>第二点 “你可以假设两个字符串均只含有小写字母。” <em>说明只有小写字母</em>，这一点很重要</p>
+</li>
+</ul>
+<h2 id="暴力解法"><a href="#暴力解法" class="headerlink" title="暴力解法"></a>暴力解法</h2><p>那么第一个思路其实就是暴力枚举了，两层for循环，不断去寻找，代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 时间复杂度: O(n^2)</span></span><br><span class="line"><span class="comment">// 空间复杂度：O(1)</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">canConstruct</span><span class="params">(string ransomNote, string magazine)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; magazine.<span class="built_in">length</span>(); i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; ransomNote.<span class="built_in">length</span>(); j++) &#123;</span><br><span class="line">                <span class="comment">// 在ransomNote中找到和magazine相同的字符</span></span><br><span class="line">                <span class="keyword">if</span> (magazine[i] == ransomNote[j]) &#123;</span><br><span class="line">                    ransomNote.<span class="built_in">erase</span>(ransomNote.<span class="built_in">begin</span>() + j); <span class="comment">// ransomNote删除这个字符</span></span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 如果ransomNote为空，则说明magazine的字符可以组成ransomNote</span></span><br><span class="line">        <span class="keyword">if</span> (ransomNote.<span class="built_in">length</span>() == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>这里时间复杂度是比较高的，而且里面还有一个字符串删除也就是erase的操作，也是费时的，当然这段代码也可以过这道题。</p>
+<h2 id="哈希解法"><a href="#哈希解法" class="headerlink" title="哈希解法"></a>哈希解法</h2><p>因为题目所只有小写字母，那可以采用空间换取时间的哈希策略， 用一个长度为26的数组还记录magazine里字母出现的次数。</p>
+<p>然后再用ransomNote去验证这个数组是否包含了ransomNote所需要的所有字母。</p>
+<p>依然是数组在哈希法中的应用。</p>
+<p>一些可能想，用数组干啥，都用map完事了，<strong>其实在本题的情况下，使用map的空间消耗要比数组大一些的，因为map要维护红黑树或者哈希表，而且还要做哈希函数，是费时的！数据量大的话就能体现出来差别了。 所以数组更加简单直接有效！</strong></p>
+<p>代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 时间复杂度: O(n)</span></span><br><span class="line"><span class="comment">// 空间复杂度：O(1)</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">canConstruct</span><span class="params">(string ransomNote, string magazine)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> record[<span class="number">26</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">        <span class="comment">//add</span></span><br><span class="line">        <span class="keyword">if</span> (ransomNote.<span class="built_in">size</span>() &gt; magazine.<span class="built_in">size</span>()) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; magazine.<span class="built_in">length</span>(); i++) &#123;</span><br><span class="line">            <span class="comment">// 通过recode数据记录 magazine里各个字符出现次数</span></span><br><span class="line">            record[magazine[i]-<span class="string">&#x27;a&#x27;</span>] ++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; ransomNote.<span class="built_in">length</span>(); j++) &#123;</span><br><span class="line">            <span class="comment">// 遍历ransomNote，在record里对应的字符个数做--操作</span></span><br><span class="line">            record[ransomNote[j]-<span class="string">&#x27;a&#x27;</span>]--;</span><br><span class="line">            <span class="comment">// 如果小于零说明ransomNote里出现的字符，magazine没有</span></span><br><span class="line">            <span class="keyword">if</span>(record[ransomNote[j]-<span class="string">&#x27;a&#x27;</span>] &lt; <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="其他语言版本-1"><a href="#其他语言版本-1" class="headerlink" title="其他语言版本"></a>其他语言版本</h2><p>Python写法一（使用数组作为哈希表）：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">canConstruct</span>(<span class="params">self, ransomNote: <span class="built_in">str</span>, magazine: <span class="built_in">str</span></span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line"></span><br><span class="line">        arr = [<span class="number">0</span>] * <span class="number">26</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> x <span class="keyword">in</span> magazine:</span><br><span class="line">            arr[<span class="built_in">ord</span>(x) - <span class="built_in">ord</span>(<span class="string">&#x27;a&#x27;</span>)] += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> x <span class="keyword">in</span> ransomNote:</span><br><span class="line">            <span class="keyword">if</span> arr[<span class="built_in">ord</span>(x) - <span class="built_in">ord</span>(<span class="string">&#x27;a&#x27;</span>)] == <span class="number">0</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                arr[<span class="built_in">ord</span>(x) - <span class="built_in">ord</span>(<span class="string">&#x27;a&#x27;</span>)] -= <span class="number">1</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+
+<p>Python写法二（使用defaultdict）：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">canConstruct</span>(<span class="params">self, ransomNote: <span class="built_in">str</span>, magazine: <span class="built_in">str</span></span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line"></span><br><span class="line">        <span class="keyword">from</span> collections <span class="keyword">import</span> defaultdict</span><br><span class="line"></span><br><span class="line">        hashmap = defaultdict(<span class="built_in">int</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> x <span class="keyword">in</span> magazine:</span><br><span class="line">            hashmap[x] += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> x <span class="keyword">in</span> ransomNote:</span><br><span class="line">            value = hashmap.get(x)</span><br><span class="line">            <span class="keyword">if</span> value <span class="keyword">is</span> <span class="literal">None</span> <span class="keyword">or</span> value == <span class="number">0</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                hashmap[x] -= <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+
+<p>Python写法三：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">canConstruct</span>(<span class="params">self, ransomNote, magazine</span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type ransomNote: str</span></span><br><span class="line"><span class="string">        :type magazine: str</span></span><br><span class="line"><span class="string">        :rtype: bool</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment"># use a dict to store the number of letter occurance in ransomNote</span></span><br><span class="line">        hashmap = <span class="built_in">dict</span>()</span><br><span class="line">        <span class="keyword">for</span> s <span class="keyword">in</span> ransomNote:</span><br><span class="line">            <span class="keyword">if</span> s <span class="keyword">in</span> hashmap:</span><br><span class="line">                hashmap[s] += <span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                hashmap[s] = <span class="number">1</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment"># check if the letter we need can be found in magazine</span></span><br><span class="line">        <span class="keyword">for</span> l <span class="keyword">in</span> magazine:</span><br><span class="line">            <span class="keyword">if</span> l <span class="keyword">in</span> hashmap:</span><br><span class="line">                hashmap[l] -= <span class="number">1</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> key <span class="keyword">in</span> hashmap:</span><br><span class="line">            <span class="keyword">if</span> hashmap[key] &gt; <span class="number">0</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+
+<p>Python写法四：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">canConstruct</span>(<span class="params">self, ransomNote: <span class="built_in">str</span>, magazine: <span class="built_in">str</span></span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        c1 = collections.Counter(ransomNote)</span><br><span class="line">        c2 = collections.Counter(magazine)</span><br><span class="line">        x = c1 - c2</span><br><span class="line">        <span class="comment">#x只保留值大于0的符号，当c1里面的符号个数小于c2时，不会被保留</span></span><br><span class="line">        <span class="comment">#所以x只保留下了，magazine不能表达的</span></span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">len</span>(x)==<span class="number">0</span>):</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br></pre></td></tr></table></figure>
+
+
+<blockquote>
+<p>用哈希表解决了<a target="_blank" rel="noopener" href="https://programmercarl.com/0001.%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C.html">两数之和</a>，那么三数之和呢？</p>
+</blockquote>
+<h1 id="第15题-三数之和"><a href="#第15题-三数之和" class="headerlink" title="第15题. 三数之和"></a>第15题. 三数之和</h1><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/3sum/">力扣题目链接</a></p>
+<p>给你一个包含 n 个整数的数组 nums，判断 nums 中是否存在三个元素 a，b，c ，使得 a + b + c &#x3D; 0 ？请你找出所有满足条件且不重复的三元组。</p>
+<p><strong>注意：</strong> 答案中不可以包含重复的三元组。</p>
+<p>示例：</p>
+<p>给定数组 nums &#x3D; [-1, 0, 1, 2, -1, -4]，</p>
+<p>满足要求的三元组集合为：<br>[<br>  [-1, 0, 1],<br>  [-1, -1, 2]<br>]</p>
+<h2 id="思路-2"><a href="#思路-2" class="headerlink" title="思路"></a>思路</h2><p>针对本题，录制了视频讲解：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1GW4y127qo">梦破碎的地方！| LeetCode：15.三数之和</a>，结合本题解一起看，事半功倍！</p>
+<p><strong>注意[0， 0， 0， 0] 这组数据</strong></p>
+<h2 id="哈希解法-1"><a href="#哈希解法-1" class="headerlink" title="哈希解法"></a>哈希解法</h2><p>两层for循环就可以确定 a 和b 的数值了，可以使用哈希法来确定 0-(a+b) 是否在 数组里出现过，其实这个思路是正确的，但是有一个非常棘手的问题，就是题目中说的不可以包含重复的三元组。</p>
+<p>把符合条件的三元组放进vector中，然后再去重，这样是非常费时的，很容易超时，也是这道题目通过率如此之低的根源所在。</p>
+<p>去重的过程不好处理，有很多小细节，如果在面试中很难想到位。</p>
+<p>时间复杂度可以做到O(n^2)，但还是比较费时的，因为不好做剪枝操作。</p>
+<p>可以尝试使用哈希法写一写，就知道其困难的程度了。</p>
+<p>哈希法C++代码:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">threeSum</span>(vector&lt;<span class="type">int</span>&gt;&amp; nums) &#123;</span><br><span class="line">        vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; result;</span><br><span class="line">        <span class="built_in">sort</span>(nums.<span class="built_in">begin</span>(), nums.<span class="built_in">end</span>());</span><br><span class="line">        <span class="comment">// 找出a + b + c = 0</span></span><br><span class="line">        <span class="comment">// a = nums[i], b = nums[j], c = -(a + b)</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; nums.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            <span class="comment">// 排序之后如果第一个元素已经大于零，那么不可能凑成三元组</span></span><br><span class="line">            <span class="keyword">if</span> (nums[i] &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (i &gt; <span class="number">0</span> &amp;&amp; nums[i] == nums[i - <span class="number">1</span>]) &#123; <span class="comment">//三元组元素a去重</span></span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            unordered_set&lt;<span class="type">int</span>&gt; set;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = i + <span class="number">1</span>; j &lt; nums.<span class="built_in">size</span>(); j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (j &gt; i + <span class="number">2</span></span><br><span class="line">                        &amp;&amp; nums[j] == nums[j<span class="number">-1</span>]</span><br><span class="line">                        &amp;&amp; nums[j<span class="number">-1</span>] == nums[j<span class="number">-2</span>]) &#123; <span class="comment">// 三元组元素b去重</span></span><br><span class="line">                    <span class="keyword">continue</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="type">int</span> c = <span class="number">0</span> - (nums[i] + nums[j]);</span><br><span class="line">                <span class="keyword">if</span> (set.<span class="built_in">find</span>(c) != set.<span class="built_in">end</span>()) &#123;</span><br><span class="line">                    result.<span class="built_in">push_back</span>(&#123;nums[i], nums[j], c&#125;);</span><br><span class="line">                    set.<span class="built_in">erase</span>(c);<span class="comment">// 三元组元素c去重</span></span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    set.<span class="built_in">insert</span>(nums[j]);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="双指针"><a href="#双指针" class="headerlink" title="双指针"></a>双指针</h2><p><strong>其实这道题目使用哈希法并不十分合适</strong>，因为在去重的操作中有很多细节需要注意，在面试中很难直接写出没有bug的代码。</p>
+<p>而且使用哈希法 在使用两层for循环的时候，能做的剪枝操作很有限，虽然时间复杂度是O(n^2)，也是可以在leetcode上通过，但是程序的执行时间依然比较长 。</p>
+<p>接下来来介绍另一个解法：双指针法，<strong>这道题目使用双指针法 要比哈希法高效一些</strong>，那么来讲解一下具体实现的思路。</p>
+<p>动画效果如下：</p>
+<p><img src="https://code-thinking.cdn.bcebos.com/gifs/15.%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C.gif" alt="15.三数之和"></p>
+<p>拿这个nums数组来举例，首先将数组排序，然后有一层for循环，i从下标0的地方开始，同时定一个下标left 定义在i+1的位置上，定义下标right 在数组结尾的位置上。</p>
+<p>依然还是在数组中找到 abc 使得a + b +c &#x3D;0，这里相当于  a &#x3D; nums[i]，b &#x3D; nums[left]，c &#x3D; nums[right]。</p>
+<p>接下来如何移动left 和right呢， 如果nums[i] + nums[left] + nums[right] &gt; 0  就说明 此时三数之和大了，因为数组是排序后了，所以right下标就应该向左移动，这样才能让三数之和小一些。</p>
+<p>如果 nums[i] + nums[left] + nums[right] &lt; 0 说明 此时 三数之和小了，left 就向右移动，才能让三数之和大一些，直到left与right相遇为止。</p>
+<p>时间复杂度：O(n^2)。</p>
+<p>C++代码代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">threeSum</span>(vector&lt;<span class="type">int</span>&gt;&amp; nums) &#123;</span><br><span class="line">        vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; result;</span><br><span class="line">        <span class="built_in">sort</span>(nums.<span class="built_in">begin</span>(), nums.<span class="built_in">end</span>());</span><br><span class="line">        <span class="comment">// 找出a + b + c = 0</span></span><br><span class="line">        <span class="comment">// a = nums[i], b = nums[left], c = nums[right]</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; nums.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            <span class="comment">// 排序之后如果第一个元素已经大于零，那么无论如何组合都不可能凑成三元组，直接返回结果就可以了</span></span><br><span class="line">            <span class="keyword">if</span> (nums[i] &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> result;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 错误去重a方法，将会漏掉-1,-1,2 这种情况</span></span><br><span class="line">            <span class="comment">/*</span></span><br><span class="line"><span class="comment">            if (nums[i] == nums[i + 1]) &#123;</span></span><br><span class="line"><span class="comment">                continue;</span></span><br><span class="line"><span class="comment">            &#125;</span></span><br><span class="line"><span class="comment">            */</span></span><br><span class="line">            <span class="comment">// 正确去重a方法</span></span><br><span class="line">            <span class="keyword">if</span> (i &gt; <span class="number">0</span> &amp;&amp; nums[i] == nums[i - <span class="number">1</span>]) &#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="type">int</span> left = i + <span class="number">1</span>;</span><br><span class="line">            <span class="type">int</span> right = nums.<span class="built_in">size</span>() - <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">while</span> (right &gt; left) &#123;</span><br><span class="line">                <span class="comment">// 去重复逻辑如果放在这里，0，0，0 的情况，可能直接导致 right&lt;=left 了，从而漏掉了 0,0,0 这种三元组</span></span><br><span class="line">                <span class="comment">/*</span></span><br><span class="line"><span class="comment">                while (right &gt; left &amp;&amp; nums[right] == nums[right - 1]) right--;</span></span><br><span class="line"><span class="comment">                while (right &gt; left &amp;&amp; nums[left] == nums[left + 1]) left++;</span></span><br><span class="line"><span class="comment">                */</span></span><br><span class="line">                <span class="keyword">if</span> (nums[i] + nums[left] + nums[right] &gt; <span class="number">0</span>) right--;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span> (nums[i] + nums[left] + nums[right] &lt; <span class="number">0</span>) left++;</span><br><span class="line">                <span class="keyword">else</span> &#123;</span><br><span class="line">                    result.<span class="built_in">push_back</span>(vector&lt;<span class="type">int</span>&gt;&#123;nums[i], nums[left], nums[right]&#125;);</span><br><span class="line">                    <span class="comment">// 去重逻辑应该放在找到一个三元组之后，对b 和 c去重</span></span><br><span class="line">                    <span class="keyword">while</span> (right &gt; left &amp;&amp; nums[right] == nums[right - <span class="number">1</span>]) right--;</span><br><span class="line">                    <span class="keyword">while</span> (right &gt; left &amp;&amp; nums[left] == nums[left + <span class="number">1</span>]) left++;</span><br><span class="line"></span><br><span class="line">                    <span class="comment">// 找到答案时，双指针同时收缩</span></span><br><span class="line">                    right--;</span><br><span class="line">                    left++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="去重逻辑的思考"><a href="#去重逻辑的思考" class="headerlink" title="去重逻辑的思考"></a>去重逻辑的思考</h2><h3 id="a的去重"><a href="#a的去重" class="headerlink" title="a的去重"></a>a的去重</h3><p>说道去重，其实主要考虑三个数的去重。 a, b ,c,  对应的就是 nums[i]，nums[left]，nums[right] </p>
+<p>a 如果重复了怎么办，a是nums里遍历的元素，那么应该直接跳过去。 </p>
+<p>但这里有一个问题，是判断 nums[i] 与 nums[i + 1]是否相同，还是判断 nums[i] 与 nums[i-1] 是否相同。 </p>
+<p>有可能想，这不都一样吗。</p>
+<p>其实不一样！</p>
+<p>都是和 nums[i]进行比较，是比较它的前一个，还是比较他的后一个。  </p>
+<p>如果的写法是 这样：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (nums[i] == nums[i + <span class="number">1</span>]) &#123; <span class="comment">// 去重操作</span></span><br><span class="line">    <span class="keyword">continue</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>那就就把 三元组中出现重复元素的情况直接pass掉了。 例如{-1, -1 ,2} 这组数据，当遍历到第一个-1 的时候，判断 下一个也是-1，那这组数据就pass了。</p>
+<p><strong>要做的是 不能有重复的三元组，但三元组内的元素是可以重复的！</strong></p>
+<p>所以这里是有两个重复的维度。</p>
+<p>那么应该这么写： </p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (i &gt; <span class="number">0</span> &amp;&amp; nums[i] == nums[i - <span class="number">1</span>]) &#123;</span><br><span class="line">    <span class="keyword">continue</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这么写就是当前使用 nums[i]，判断前一位是不是一样的元素，在看 {-1, -1 ,2} 这组数据，当遍历到 第一个 -1 的时候，只要前一位没有-1，那么  {-1, -1 ,2} 这组数据一样可以收录到 结果集里。 </p>
+<p>这是一个非常细节的思考过程。 </p>
+<h3 id="b与c的去重"><a href="#b与c的去重" class="headerlink" title="b与c的去重"></a>b与c的去重</h3><p>很多写本题的时候，去重的逻辑多加了 对right 和left 的去重：（代码中注释部分） </p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> (right &gt; left) &#123;</span><br><span class="line">    <span class="keyword">if</span> (nums[i] + nums[left] + nums[right] &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        right--;</span><br><span class="line">        <span class="comment">// 去重 right</span></span><br><span class="line">        <span class="keyword">while</span> (left &lt; right &amp;&amp; nums[right] == nums[right + <span class="number">1</span>]) right--;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (nums[i] + nums[left] + nums[right] &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        left++;</span><br><span class="line">        <span class="comment">// 去重 left</span></span><br><span class="line">        <span class="keyword">while</span> (left &lt; right &amp;&amp; nums[left] == nums[left - <span class="number">1</span>]) left++;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>但细想一下，这种去重其实对提升程序运行效率是没有帮助的。 </p>
+<p>拿right去重为例，即使不加这个去重逻辑，依然根据  <code>while (right &gt; left) </code> 和 <code>if (nums[i] + nums[left] + nums[right] &gt; 0)</code>  去完成right– 的操作。 </p>
+<p>多加了 <code> while (left &lt; right &amp;&amp; nums[right] == nums[right + 1]) right--;</code> 这一行代码，其实就是把 需要执行的逻辑提前执行了，但并没有减少 判断的逻辑。  </p>
+<p>最直白的思考过程，就是right还是一个数一个数的减下去的，所以在哪里减的都是一样的。 </p>
+<p>所以这种去重 是可以不加的。 仅仅是 把去重的逻辑提前了而已。</p>
+<h2 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h2><p>既然三数之和可以使用双指针法，之前讲过的<a target="_blank" rel="noopener" href="https://programmercarl.com/0001.%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C.html">1.两数之和</a>，可不可以使用双指针法呢？</p>
+<p>如果不能，题意如何更改就可以使用双指针法呢？  <strong>留言说出自己的想法吧！</strong></p>
+<p>两数之和 就不能使用双指针法，因为<a target="_blank" rel="noopener" href="https://programmercarl.com/0001.%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C.html">1.两数之和</a>要求返回的是索引下标， 而双指针法一定要排序，一旦排序之后原数组的索引就被改变了。</p>
+<p>如果<a target="_blank" rel="noopener" href="https://programmercarl.com/0001.%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C.html">1.两数之和</a>要求返回的是数值的话，就可以使用双指针法了。</p>
+<h2 id="其他语言版本-2"><a href="#其他语言版本-2" class="headerlink" title="其他语言版本"></a>其他语言版本</h2><p>Python：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">threeSum</span>(<span class="params">self, nums</span>):</span><br><span class="line">        ans = []</span><br><span class="line">        n = <span class="built_in">len</span>(nums)</span><br><span class="line">        nums.sort()</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">            left = i + <span class="number">1</span></span><br><span class="line">            right = n - <span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> nums[i] &gt; <span class="number">0</span>:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            <span class="keyword">if</span> i &gt;= <span class="number">1</span> <span class="keyword">and</span> nums[i] == nums[i - <span class="number">1</span>]:</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            <span class="keyword">while</span> left &lt; right:</span><br><span class="line">                total = nums[i] + nums[left] + nums[right]</span><br><span class="line">                <span class="keyword">if</span> total &gt; <span class="number">0</span>:</span><br><span class="line">                    right -= <span class="number">1</span></span><br><span class="line">                <span class="keyword">elif</span> total &lt; <span class="number">0</span>:</span><br><span class="line">                    left += <span class="number">1</span></span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    ans.append([nums[i], nums[left], nums[right]])</span><br><span class="line">                    <span class="keyword">while</span> left != right <span class="keyword">and</span> nums[left] == nums[left + <span class="number">1</span>]: left += <span class="number">1</span></span><br><span class="line">                    <span class="keyword">while</span> left != right <span class="keyword">and</span> nums[right] == nums[right - <span class="number">1</span>]: right -= <span class="number">1</span></span><br><span class="line">                    left += <span class="number">1</span></span><br><span class="line">                    right -= <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>
+<p>Python (v2):</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">threeSum</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]:</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(nums) &lt; <span class="number">3</span>: <span class="keyword">return</span> []</span><br><span class="line">        nums, res = <span class="built_in">sorted</span>(nums), []</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(nums) - <span class="number">2</span>):</span><br><span class="line">            cur, l, r = nums[i], i + <span class="number">1</span>, <span class="built_in">len</span>(nums) - <span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> res != [] <span class="keyword">and</span> res[-<span class="number">1</span>][<span class="number">0</span>] == cur: <span class="keyword">continue</span> <span class="comment"># Drop duplicates for the first time.</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">while</span> l &lt; r:</span><br><span class="line">                <span class="keyword">if</span> cur + nums[l] + nums[r] == <span class="number">0</span>:</span><br><span class="line">                    res.append([cur, nums[l], nums[r]])</span><br><span class="line">                    <span class="comment"># Drop duplicates for the second time in interation of l &amp; r. Only used when target situation occurs, because that is the reason for dropping duplicates.</span></span><br><span class="line">                    <span class="keyword">while</span> l &lt; r - <span class="number">1</span> <span class="keyword">and</span> nums[l] == nums[l + <span class="number">1</span>]:</span><br><span class="line">                        l += <span class="number">1</span></span><br><span class="line">                    <span class="keyword">while</span> r &gt; l + <span class="number">1</span> <span class="keyword">and</span> nums[r] == nums[r - <span class="number">1</span>]:</span><br><span class="line">                        r -= <span class="number">1</span></span><br><span class="line">                <span class="keyword">if</span> cur + nums[l] + nums[r] &gt; <span class="number">0</span>:</span><br><span class="line">                    r -= <span class="number">1</span></span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    l += <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+
+
+
+
+<p>C:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//qsort辅助cmp函数</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">cmp</span><span class="params">(<span class="type">const</span> <span class="type">void</span>* ptr1, <span class="type">const</span> <span class="type">void</span>* ptr2)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> *((<span class="type">int</span>*)ptr1) &gt; *((<span class="type">int</span>*)ptr2);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span>** <span class="title function_">threeSum</span><span class="params">(<span class="type">int</span>* nums, <span class="type">int</span> numsSize, <span class="type">int</span>* returnSize, <span class="type">int</span>** returnColumnSizes)</span> &#123;</span><br><span class="line">    <span class="comment">//开辟ans数组空间</span></span><br><span class="line">    <span class="type">int</span> **ans = (<span class="type">int</span>**)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="type">int</span>*) * <span class="number">18000</span>);</span><br><span class="line">    <span class="type">int</span> ansTop = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">//若传入nums数组大小小于3，则需要返回数组大小为0</span></span><br><span class="line">    <span class="keyword">if</span>(numsSize &lt; <span class="number">3</span>) &#123;</span><br><span class="line">        *returnSize = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//对nums数组进行排序</span></span><br><span class="line">    qsort(nums, numsSize, <span class="keyword">sizeof</span>(<span class="type">int</span>), cmp);</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">    <span class="comment">//用for循环遍历数组，结束条件为i &lt; numsSize - 2(因为要预留左右指针的位置)</span></span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; numsSize - <span class="number">2</span>; i++) &#123;</span><br><span class="line">        <span class="comment">//若当前i指向元素&gt;0，则代表left和right以及i的和大于0。直接break</span></span><br><span class="line">        <span class="keyword">if</span>(nums[i] &gt; <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="comment">//去重：i &gt; 0 &amp;&amp; nums[i] == nums[i-1]</span></span><br><span class="line">        <span class="keyword">if</span>(i &gt; <span class="number">0</span> &amp;&amp; nums[i] == nums[i<span class="number">-1</span>])</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        <span class="comment">//定义左指针和右指针</span></span><br><span class="line">        <span class="type">int</span> left = i + <span class="number">1</span>;</span><br><span class="line">        <span class="type">int</span> right = numsSize - <span class="number">1</span>;</span><br><span class="line">        <span class="comment">//当右指针比左指针大时进行循环</span></span><br><span class="line">        <span class="keyword">while</span>(right &gt; left) &#123;</span><br><span class="line">            <span class="comment">//求出三数之和</span></span><br><span class="line">            <span class="type">int</span> sum = nums[right] + nums[left] + nums[i];</span><br><span class="line">            <span class="comment">//若和小于0，则左指针+1（因为左指针右边的数比当前所指元素大）</span></span><br><span class="line">            <span class="keyword">if</span>(sum &lt; <span class="number">0</span>)</span><br><span class="line">                left++;</span><br><span class="line">            <span class="comment">//若和大于0，则将右指针-1</span></span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(sum &gt; <span class="number">0</span>)</span><br><span class="line">                right--;</span><br><span class="line">            <span class="comment">//若和等于0</span></span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">//开辟一个大小为3的数组空间，存入nums[i], nums[left]和nums[right]</span></span><br><span class="line">                <span class="type">int</span>* arr = (<span class="type">int</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="type">int</span>) * <span class="number">3</span>);</span><br><span class="line">                arr[<span class="number">0</span>] = nums[i];</span><br><span class="line">                arr[<span class="number">1</span>] = nums[left];</span><br><span class="line">                arr[<span class="number">2</span>] = nums[right];</span><br><span class="line">                <span class="comment">//将开辟数组存入ans中</span></span><br><span class="line">                ans[ansTop++] = arr;</span><br><span class="line">                <span class="comment">//去重</span></span><br><span class="line">                <span class="keyword">while</span>(right &gt; left &amp;&amp; nums[right] == nums[right - <span class="number">1</span>])</span><br><span class="line">                    right--;</span><br><span class="line">                <span class="keyword">while</span>(left &lt; right &amp;&amp; nums[left] == nums[left + <span class="number">1</span>])</span><br><span class="line">                    left++;</span><br><span class="line">                <span class="comment">//更新左右指针</span></span><br><span class="line">                left++;</span><br><span class="line">                right--;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//设定返回的数组大小</span></span><br><span class="line">    *returnSize = ansTop;</span><br><span class="line">    *returnColumnSizes = (<span class="type">int</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="type">int</span>) * ansTop);</span><br><span class="line">    <span class="type">int</span> z;</span><br><span class="line">    <span class="keyword">for</span>(z = <span class="number">0</span>; z &lt; ansTop; z++) &#123;</span><br><span class="line">        (*returnColumnSizes)[z] = <span class="number">3</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>一样的道理，能解决四数之和<br>那么五数之和、六数之和、N数之和呢？</p>
+</blockquote>
+<h1 id="第18题-四数之和"><a href="#第18题-四数之和" class="headerlink" title="第18题. 四数之和"></a>第18题. 四数之和</h1><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/4sum/">力扣题目链接</a></p>
+<p>题意：给定一个包含 n 个整数的数组 nums 和一个目标值 target，判断 nums 中是否存在四个元素 a，b，c 和 d ，使得 a + b + c + d 的值与 target 相等？找出所有满足条件且不重复的四元组。</p>
+<p><strong>注意：</strong></p>
+<p>答案中不可以包含重复的四元组。</p>
+<p>示例：<br>给定数组 nums &#x3D; [1, 0, -1, 0, -2, 2]，和 target &#x3D; 0。<br>满足要求的四元组集合为：<br>[<br>  [-1,  0, 0, 1],<br>  [-2, -1, 1, 2],<br>  [-2,  0, 0, 2]<br>]</p>
+<h2 id="思路-3"><a href="#思路-3" class="headerlink" title="思路"></a>思路</h2><p>针对本题，录制了视频讲解：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1DS4y147US">难在去重和剪枝！| LeetCode：18. 四数之和</a>，结合本题解一起看，事半功倍！</p>
+<p>四数之和，和<a target="_blank" rel="noopener" href="https://programmercarl.com/0015.%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C.html">15.三数之和</a>是一个思路，都是使用双指针法, 基本解法就是在<a target="_blank" rel="noopener" href="https://programmercarl.com/0015.%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C.html">15.三数之和</a> 的基础上再套一层for循环。</p>
+<p>但是有一些细节需要注意，例如： 不要判断<code>nums[k] &gt; target</code> 就返回了，三数之和 可以通过 <code>nums[i] &gt; 0</code> 就返回了，因为 0 已经是确定的数了，四数之和这道题目 target是任意值。比如：数组是<code>[-4, -3, -2, -1]</code>，<code>target</code>是<code>-10</code>，不能因为<code>-4 &gt; -10</code>而跳过。但是依旧可以去做剪枝，逻辑变成<code>nums[i] &gt; target &amp;&amp; (nums[i] &gt;=0 || target &gt;= 0)</code>就可以了。</p>
+<p><a target="_blank" rel="noopener" href="https://programmercarl.com/0015.%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C.html">15.三数之和</a>的双指针解法是一层for循环num[i]为确定值，然后循环内有left和right下标作为双指针，找到nums[i] + nums[left] + nums[right] &#x3D;&#x3D; 0。</p>
+<p>四数之和的双指针解法是两层for循环nums[k] + nums[i]为确定值，依然是循环内有left和right下标作为双指针，找出nums[k] + nums[i] + nums[left] + nums[right] &#x3D;&#x3D; target的情况，三数之和的时间复杂度是O(n^2)，四数之和的时间复杂度是O(n^3) 。</p>
+<p>那么一样的道理，五数之和、六数之和等等都采用这种解法。</p>
+<p>对于<a target="_blank" rel="noopener" href="https://programmercarl.com/0015.%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C.html">15.三数之和</a>双指针法就是将原本暴力O(n^3)的解法，降为O(n^2)的解法，四数之和的双指针解法就是将原本暴力O(n^4)的解法，降为O(n^3)的解法。</p>
+<p>之前讲过哈希表的经典题目：<a target="_blank" rel="noopener" href="https://programmercarl.com/0454.%E5%9B%9B%E6%95%B0%E7%9B%B8%E5%8A%A0II.html">454.四数相加II</a>，相对于本题简单很多，因为本题是要求在一个集合中找出四个数相加等于target，同时四元组不能重复。</p>
+<p>而<a target="_blank" rel="noopener" href="https://programmercarl.com/0454.%E5%9B%9B%E6%95%B0%E7%9B%B8%E5%8A%A0II.html">454.四数相加II</a>是四个独立的数组，只要找到A[i] + B[j] + C[k] + D[l] &#x3D; 0就可以，不用考虑有重复的四个元素相加等于0的情况，所以相对于本题还是简单了不少！</p>
+<p>来回顾一下，几道题目使用了双指针法。</p>
+<p>双指针法将时间复杂度：O(n^2)的解法优化为 O(n)的解法。也就是降一个数量级，题目如下：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://programmercarl.com/0027.%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0.html">27.移除元素</a></li>
+<li><a target="_blank" rel="noopener" href="https://programmercarl.com/0015.%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C.html">15.三数之和</a></li>
+<li><a target="_blank" rel="noopener" href="https://programmercarl.com/0018.%E5%9B%9B%E6%95%B0%E4%B9%8B%E5%92%8C.html">18.四数之和</a></li>
+</ul>
+<p>链表相关双指针题目：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://programmercarl.com/0206.%E7%BF%BB%E8%BD%AC%E9%93%BE%E8%A1%A8.html">206.反转链表</a></li>
+<li><a target="_blank" rel="noopener" href="https://programmercarl.com/0019.%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACN%E4%B8%AA%E8%8A%82%E7%82%B9.html">19.删除链表的倒数第N个节点</a></li>
+<li><a target="_blank" rel="noopener" href="https://programmercarl.com/%E9%9D%A2%E8%AF%95%E9%A2%9802.07.%E9%93%BE%E8%A1%A8%E7%9B%B8%E4%BA%A4.html">面试题 02.07. 链表相交</a></li>
+<li><a target="_blank" rel="noopener" href="https://programmercarl.com/0142.%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8II.html">142题.环形链表II</a></li>
+</ul>
+<p>双指针法在字符串题目中还有很多应用，后面还会介绍到。</p>
+<p>C++代码</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">fourSum</span>(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> target) &#123;</span><br><span class="line">        vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; result;</span><br><span class="line">        <span class="built_in">sort</span>(nums.<span class="built_in">begin</span>(), nums.<span class="built_in">end</span>());</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> k = <span class="number">0</span>; k &lt; nums.<span class="built_in">size</span>(); k++) &#123;</span><br><span class="line">            <span class="comment">// 剪枝处理</span></span><br><span class="line">            <span class="keyword">if</span> (nums[k] &gt; target &amp;&amp; nums[k] &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">            	<span class="keyword">break</span>; <span class="comment">// 这里使用break，统一通过最后的return返回</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 对nums[k]去重</span></span><br><span class="line">            <span class="keyword">if</span> (k &gt; <span class="number">0</span> &amp;&amp; nums[k] == nums[k - <span class="number">1</span>]) &#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> i = k + <span class="number">1</span>; i &lt; nums.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">                <span class="comment">// 2级剪枝处理</span></span><br><span class="line">                <span class="keyword">if</span> (nums[k] + nums[i] &gt; target &amp;&amp; nums[k] + nums[i] &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="comment">// 对nums[i]去重</span></span><br><span class="line">                <span class="keyword">if</span> (i &gt; k + <span class="number">1</span> &amp;&amp; nums[i] == nums[i - <span class="number">1</span>]) &#123;</span><br><span class="line">                    <span class="keyword">continue</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="type">int</span> left = i + <span class="number">1</span>;</span><br><span class="line">                <span class="type">int</span> right = nums.<span class="built_in">size</span>() - <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">while</span> (right &gt; left) &#123;</span><br><span class="line">                    <span class="comment">// nums[k] + nums[i] + nums[left] + nums[right] &gt; target 会溢出</span></span><br><span class="line">                    <span class="keyword">if</span> ((<span class="type">long</span>) nums[k] + nums[i] + nums[left] + nums[right] &gt; target) &#123;</span><br><span class="line">                        right--;</span><br><span class="line">                    <span class="comment">// nums[k] + nums[i] + nums[left] + nums[right] &lt; target 会溢出</span></span><br><span class="line">                    &#125; <span class="keyword">else</span> <span class="keyword">if</span> ((<span class="type">long</span>) nums[k] + nums[i] + nums[left] + nums[right]  &lt; target) &#123;</span><br><span class="line">                        left++;</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        result.<span class="built_in">push_back</span>(vector&lt;<span class="type">int</span>&gt;&#123;nums[k], nums[i], nums[left], nums[right]&#125;);</span><br><span class="line">                        <span class="comment">// 对nums[left]和nums[right]去重</span></span><br><span class="line">                        <span class="keyword">while</span> (right &gt; left &amp;&amp; nums[right] == nums[right - <span class="number">1</span>]) right--;</span><br><span class="line">                        <span class="keyword">while</span> (right &gt; left &amp;&amp; nums[left] == nums[left + <span class="number">1</span>]) left++;</span><br><span class="line"></span><br><span class="line">                        <span class="comment">// 找到答案时，双指针同时收缩</span></span><br><span class="line">                        right--;</span><br><span class="line">                        left++;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="其他语言版本-3"><a href="#其他语言版本-3" class="headerlink" title="其他语言版本"></a>其他语言版本</h2><p>Python：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 双指针法</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">fourSum</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>], target: <span class="built_in">int</span></span>) -&gt; <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]:</span><br><span class="line">        </span><br><span class="line">        nums.sort()</span><br><span class="line">        n = <span class="built_in">len</span>(nums)</span><br><span class="line">        res = []</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">            <span class="keyword">if</span> i &gt; <span class="number">0</span> <span class="keyword">and</span> nums[i] == nums[i - <span class="number">1</span>]: <span class="keyword">continue</span></span><br><span class="line">            <span class="keyword">for</span> k <span class="keyword">in</span> <span class="built_in">range</span>(i+<span class="number">1</span>, n):</span><br><span class="line">                <span class="keyword">if</span> k &gt; i + <span class="number">1</span> <span class="keyword">and</span> nums[k] == nums[k-<span class="number">1</span>]: <span class="keyword">continue</span></span><br><span class="line">                p = k + <span class="number">1</span></span><br><span class="line">                q = n - <span class="number">1</span></span><br><span class="line"></span><br><span class="line">                <span class="keyword">while</span> p &lt; q:</span><br><span class="line">                    <span class="keyword">if</span> nums[i] + nums[k] + nums[p] + nums[q] &gt; target: q -= <span class="number">1</span></span><br><span class="line">                    <span class="keyword">elif</span> nums[i] + nums[k] + nums[p] + nums[q] &lt; target: p += <span class="number">1</span></span><br><span class="line">                    <span class="keyword">else</span>:</span><br><span class="line">                        res.append([nums[i], nums[k], nums[p], nums[q]])</span><br><span class="line">                        <span class="keyword">while</span> p &lt; q <span class="keyword">and</span> nums[p] == nums[p + <span class="number">1</span>]: p += <span class="number">1</span></span><br><span class="line">                        <span class="keyword">while</span> p &lt; q <span class="keyword">and</span> nums[q] == nums[q - <span class="number">1</span>]: q -= <span class="number">1</span></span><br><span class="line">                        p += <span class="number">1</span></span><br><span class="line">                        q -= <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 哈希表法</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">fourSum</span>(<span class="params">self, nums, target</span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type nums: List[int]</span></span><br><span class="line"><span class="string">        :type target: int</span></span><br><span class="line"><span class="string">        :rtype: List[List[int]]</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="comment"># use a dict to store value:showtimes</span></span><br><span class="line">        hashmap = <span class="built_in">dict</span>()</span><br><span class="line">        <span class="keyword">for</span> n <span class="keyword">in</span> nums:</span><br><span class="line">            <span class="keyword">if</span> n <span class="keyword">in</span> hashmap:</span><br><span class="line">                hashmap[n] += <span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>: </span><br><span class="line">                hashmap[n] = <span class="number">1</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment"># good thing about using python is you can use set to drop duplicates.</span></span><br><span class="line">        ans = <span class="built_in">set</span>()</span><br><span class="line">        <span class="comment"># ans = []  # save results by list()</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(nums)):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(i + <span class="number">1</span>, <span class="built_in">len</span>(nums)):</span><br><span class="line">                <span class="keyword">for</span> k <span class="keyword">in</span> <span class="built_in">range</span>(j + <span class="number">1</span>, <span class="built_in">len</span>(nums)):</span><br><span class="line">                    val = target - (nums[i] + nums[j] + nums[k])</span><br><span class="line">                    <span class="keyword">if</span> val <span class="keyword">in</span> hashmap:</span><br><span class="line">                        <span class="comment"># make sure no duplicates.</span></span><br><span class="line">                        count = (nums[i] == val) + (nums[j] == val) + (nums[k] == val)</span><br><span class="line">                        <span class="keyword">if</span> hashmap[val] &gt; count:</span><br><span class="line">                          ans_tmp = <span class="built_in">tuple</span>(<span class="built_in">sorted</span>([nums[i], nums[j], nums[k], val]))</span><br><span class="line">                          ans.add(ans_tmp)</span><br><span class="line">                          <span class="comment"># Avoiding duplication in list manner but it cause time complexity increases</span></span><br><span class="line">                          <span class="comment"># if ans_tmp not in ans:  </span></span><br><span class="line">                          <span class="comment">#     ans.append(ans_tmp)</span></span><br><span class="line">                        <span class="keyword">else</span>:</span><br><span class="line">                            <span class="keyword">continue</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">list</span>(ans) </span><br><span class="line">        <span class="comment"># if used list() to save results, just </span></span><br><span class="line">        <span class="comment"># return ans</span></span><br><span class="line">        </span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-smile"></i>感谢您的阅读-------------</div>
+    
+</div>
+  
+</div>
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E8%AE%AD%E7%BB%83%E8%90%A5/" rel="tag"># 代码随想录训练营</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/10/31/%E7%A0%94%E4%B8%80%E4%B8%8A/%E7%A0%94%E4%B8%80%E4%B8%8A%E7%AC%AC%E4%B9%9D%E5%91%A8/%E3%80%90%E7%AC%AC%E4%B9%9D%E5%91%A8%E3%80%91Day1_%E8%AE%B0%E5%BD%95/" rel="prev" title="【第九周】Day1_记录">
+      <i class="fa fa-chevron-left"></i> 【第九周】Day1_记录
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/11/01/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E8%AE%AD%E7%BB%83%E8%90%A5/%E3%80%90%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E8%AE%AD%E7%BB%83%E8%90%A5%E3%80%91%E5%93%88%E5%B8%8C%E8%A1%A8%E6%80%BB%E7%BB%93/" rel="next" title="【代码随想录训练营】哈希表总结">
+      【代码随想录训练营】哈希表总结 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%AD%E7%BB%83%E8%90%A5%E4%BB%BB%E5%8A%A1"><span class="nav-number">1.</span> <span class="nav-text">训练营任务</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC454%E9%A2%98-%E5%9B%9B%E6%95%B0%E7%9B%B8%E5%8A%A0II"><span class="nav-number">2.</span> <span class="nav-text">第454题.四数相加II</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF"><span class="nav-number">2.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E8%AF%AD%E8%A8%80%E7%89%88%E6%9C%AC"><span class="nav-number">2.2.</span> <span class="nav-text">其他语言版本</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#383-%E8%B5%8E%E9%87%91%E4%BF%A1"><span class="nav-number">3.</span> <span class="nav-text">383. 赎金信</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-1"><span class="nav-number">3.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9A%B4%E5%8A%9B%E8%A7%A3%E6%B3%95"><span class="nav-number">3.2.</span> <span class="nav-text">暴力解法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%93%88%E5%B8%8C%E8%A7%A3%E6%B3%95"><span class="nav-number">3.3.</span> <span class="nav-text">哈希解法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E8%AF%AD%E8%A8%80%E7%89%88%E6%9C%AC-1"><span class="nav-number">3.4.</span> <span class="nav-text">其他语言版本</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC15%E9%A2%98-%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C"><span class="nav-number">4.</span> <span class="nav-text">第15题. 三数之和</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-2"><span class="nav-number">4.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%93%88%E5%B8%8C%E8%A7%A3%E6%B3%95-1"><span class="nav-number">4.2.</span> <span class="nav-text">哈希解法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8C%E6%8C%87%E9%92%88"><span class="nav-number">4.3.</span> <span class="nav-text">双指针</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%BB%E9%87%8D%E9%80%BB%E8%BE%91%E7%9A%84%E6%80%9D%E8%80%83"><span class="nav-number">4.4.</span> <span class="nav-text">去重逻辑的思考</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#a%E7%9A%84%E5%8E%BB%E9%87%8D"><span class="nav-number">4.4.1.</span> <span class="nav-text">a的去重</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#b%E4%B8%8Ec%E7%9A%84%E5%8E%BB%E9%87%8D"><span class="nav-number">4.4.2.</span> <span class="nav-text">b与c的去重</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%80%83%E9%A2%98"><span class="nav-number">4.5.</span> <span class="nav-text">思考题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E8%AF%AD%E8%A8%80%E7%89%88%E6%9C%AC-2"><span class="nav-number">4.6.</span> <span class="nav-text">其他语言版本</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC18%E9%A2%98-%E5%9B%9B%E6%95%B0%E4%B9%8B%E5%92%8C"><span class="nav-number">5.</span> <span class="nav-text">第18题. 四数之和</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-3"><span class="nav-number">5.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E8%AF%AD%E8%A8%80%E7%89%88%E6%9C%AC-3"><span class="nav-number">5.2.</span> <span class="nav-text">其他语言版本</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Cheng Qi"
+      src="/images/headImage.jpg">
+  <p class="site-author-name" itemprop="name">Cheng Qi</p>
+  <div class="site-description" itemprop="description">珍惜每分每秒，把硕士三年当做高中三年，只要学不死，就往死里学。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-smile"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">程麒</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'tIXMRMVc3JTbJ6jUnqKe9FrK-gzGzoHsz',
+      appKey     : 'fPmGzIKBwOIQ2T8AC1WwIyxT',
+      placeholder: "来吐槽吧！",
+      avatar     : 'retro',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : 'https://tixmrmvc.lc-cn-n1-shared.com'
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
