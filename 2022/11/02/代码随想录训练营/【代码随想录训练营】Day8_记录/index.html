@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/%E5%A4%A9%E7%A7%A4.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/%E5%A4%A9%E7%A7%A4.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="参考资料来自：代码随想录 训练营任务 344.反转字符串 541.反转字符串II 剑指Offer 05.替换空格 151.翻转字符串里的单词 剑指Offer58-II.左旋转字符串">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【代码随想录训练营】Day8_记录">
+<meta property="og:url" content="http://example.com/2022/11/02/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E8%AE%AD%E7%BB%83%E8%90%A5/%E3%80%90%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E8%AE%AD%E7%BB%83%E8%90%A5%E3%80%91Day8_%E8%AE%B0%E5%BD%95/index.html">
+<meta property="og:site_name" content="KeyChan&#39;s">
+<meta property="og:description" content="参考资料来自：代码随想录 训练营任务 344.反转字符串 541.反转字符串II 剑指Offer 05.替换空格 151.翻转字符串里的单词 剑指Offer58-II.左旋转字符串">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008eGmZEly1gp0fvi91pfg30de0akwnq.gif">
+<meta property="og:image" content="https://code-thinking.cdn.bcebos.com/pics/541_%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2II.png">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1go6qmevhgpg20du09m4qp.gif">
+<meta property="og:image" content="https://code-thinking.cdn.bcebos.com/pics/%E5%89%91%E6%8C%87Offer05.%E6%9B%BF%E6%8D%A2%E7%A9%BA%E6%A0%BC.png">
+<meta property="og:image" content="https://code-thinking.cdn.bcebos.com/pics/%E5%89%91%E6%8C%87Offer58-II.%E5%B7%A6%E6%97%8B%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2.png">
+<meta property="article:published_time" content="2022-11-02T07:00:00.000Z">
+<meta property="article:modified_time" content="2022-11-03T12:36:07.171Z">
+<meta property="article:author" content="Cheng Qi">
+<meta property="article:tag" content="代码随想录训练营">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/008eGmZEly1gp0fvi91pfg30de0akwnq.gif">
+
+<link rel="canonical" href="http://example.com/2022/11/02/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E8%AE%AD%E7%BB%83%E8%90%A5/%E3%80%90%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E8%AE%AD%E7%BB%83%E8%90%A5%E3%80%91Day8_%E8%AE%B0%E5%BD%95/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>【代码随想录训练营】Day8_记录 | KeyChan's</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">KeyChan's</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/11/02/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E8%AE%AD%E7%BB%83%E8%90%A5/%E3%80%90%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E8%AE%AD%E7%BB%83%E8%90%A5%E3%80%91Day8_%E8%AE%B0%E5%BD%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/headImage.jpg">
+      <meta itemprop="name" content="Cheng Qi">
+      <meta itemprop="description" content="要快乐！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KeyChan's">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【代码随想录训练营】Day8_记录
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-11-02 15:00:00" itemprop="dateCreated datePublished" datetime="2022-11-02T15:00:00+08:00">2022-11-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-11-03 20:36:07" itemprop="dateModified" datetime="2022-11-03T20:36:07+08:00">2022-11-03</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/" itemprop="url" rel="index"><span itemprop="name">学习总结</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2022/11/02/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E8%AE%AD%E7%BB%83%E8%90%A5/%E3%80%90%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E8%AE%AD%E7%BB%83%E8%90%A5%E3%80%91Day8_%E8%AE%B0%E5%BD%95/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2022/11/02/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E8%AE%AD%E7%BB%83%E8%90%A5/%E3%80%90%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E8%AE%AD%E7%BB%83%E8%90%A5%E3%80%91Day8_%E8%AE%B0%E5%BD%95/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><strong>参考资料来自：</strong><a target="_blank" rel="noopener" href="https://programmercarl.com/">代码随想录</a></p>
+<h1 id="训练营任务"><a href="#训练营任务" class="headerlink" title="训练营任务"></a>训练营任务</h1><ul>
+<li>344.反转字符串</li>
+<li>541.反转字符串II</li>
+<li>剑指Offer 05.替换空格</li>
+<li>151.翻转字符串里的单词</li>
+<li>剑指Offer58-II.左旋转字符串<span id="more"></span>
+<blockquote>
+<p>打基础的时候，不要太迷恋于库函数。</p>
+</blockquote>
+</li>
+</ul>
+<h1 id="344-反转字符串"><a href="#344-反转字符串" class="headerlink" title="344.反转字符串"></a>344.反转字符串</h1><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/reverse-string/">力扣题目链接</a></p>
+<p>编写一个函数，其作用是将输入的字符串反转过来。输入字符串以字符数组 char[] 的形式给出。</p>
+<p>不要给另外的数组分配额外的空间，你必须原地修改输入数组、使用 O(1)  的额外空间解决这一问题。</p>
+<p>你可以假设数组中的所有字符都是 ASCII 码表中的可打印字符。</p>
+<p>示例 1：<br>输入：[“h”,”e”,”l”,”l”,”o”]<br>输出：[“o”,”l”,”l”,”e”,”h”]      </p>
+<p>示例 2：<br>输入：[“H”,”a”,”n”,”n”,”a”,”h”]<br>输出：[“h”,”a”,”n”,”n”,”a”,”H”]       </p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>针对本题，我录制了视频讲解：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1fV4y17748">字符串基础操作！ | LeetCode：344.反转字符串</a>，结合本题解一起看，事半功倍！</p>
+<p>先说一说题外话：</p>
+<p>对于这道题目一些同学直接用C++里的一个库函数 reverse，调一下直接完事了， 相信每一门编程语言都有这样的库函数。</p>
+<p>如果这么做题的话，这样大家不会清楚反转字符串的实现原理了。</p>
+<p>但是也不是说库函数就不能用，是要分场景的。</p>
+<p>如果在现场面试中，我们什么时候使用库函数，什么时候不要用库函数呢？</p>
+<p><strong>如果题目关键的部分直接用库函数就可以解决，建议不要使用库函数。</strong></p>
+<p>毕竟面试官一定不是考察你对库函数的熟悉程度， 如果使用python和java 的同学更需要注意这一点，因为python、java提供的库函数十分丰富。</p>
+<p><strong>如果库函数仅仅是 解题过程中的一小部分，并且你已经很清楚这个库函数的内部实现原理的话，可以考虑使用库函数。</strong></p>
+<p>建议大家平时在leetcode上练习算法的时候本着这样的原则去练习，这样才有助于我们对算法的理解。</p>
+<p>不要沉迷于使用库函数一行代码解决题目之类的技巧，不是说这些技巧不好，而是说这些技巧可以用来娱乐一下。</p>
+<p>真正自己写的时候，要保证理解可以实现是相应的功能。</p>
+<p>接下来再来讲一下如何解决反转字符串的问题。</p>
+<p>大家应该还记得，我们已经讲过了<a target="_blank" rel="noopener" href="https://programmercarl.com/0206.%E7%BF%BB%E8%BD%AC%E9%93%BE%E8%A1%A8.html">206.反转链表</a>。</p>
+<p>在反转链表中，使用了双指针的方法。</p>
+<p>那么反转字符串依然是使用双指针的方法，只不过对于字符串的反转，其实要比链表简单一些。</p>
+<p>因为字符串也是一种数组，所以元素在内存中是连续分布，这就决定了反转链表和反转字符串方式上还是有所差异的。</p>
+<p>如果对数组和链表原理不清楚的同学，可以看这两篇，<a target="_blank" rel="noopener" href="https://programmercarl.com/%E9%93%BE%E8%A1%A8%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80.html">关于链表，你该了解这些！</a>，<a target="_blank" rel="noopener" href="https://programmercarl.com/%E6%95%B0%E7%BB%84%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80.html">必须掌握的数组理论知识</a>。</p>
+<p>对于字符串，我们定义两个指针（也可以说是索引下标），一个从字符串前面，一个从字符串后面，两个指针同时向中间移动，并交换元素。</p>
+<p>以字符串<code>hello</code>为例，过程如下：</p>
+<p><img src="https://tva1.sinaimg.cn/large/008eGmZEly1gp0fvi91pfg30de0akwnq.gif" alt="344.反转字符串"></p>
+<p>不难写出如下C++代码:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">reverseString</span><span class="params">(vector&lt;<span class="type">char</span>&gt;&amp; s)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>, j = s.<span class="built_in">size</span>() - <span class="number">1</span>; i &lt; s.<span class="built_in">size</span>()/<span class="number">2</span>; i++, j--) &#123;</span><br><span class="line">        <span class="built_in">swap</span>(s[i],s[j]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>循环里只要做交换s[i] 和s[j]操作就可以了，那么我这里使用了swap 这个库函数。大家可以使用。</p>
+<p>因为相信大家都知道交换函数如何实现，而且这个库函数仅仅是解题中的一部分， 所以这里使用库函数也是可以的。</p>
+<p>swap可以有两种实现。</p>
+<p>一种就是常见的交换数值：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> tmp = s[i];</span><br><span class="line">s[i] = s[j];</span><br><span class="line">s[j] = tmp;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>一种就是通过位运算：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">s[i] ^= s[j];</span><br><span class="line">s[j] ^= s[i];</span><br><span class="line">s[i] ^= s[j];</span><br></pre></td></tr></table></figure>
+
+<p>这道题目还是比较简单的，但是我正好可以通过这道题目说一说在刷题的时候，使用库函数的原则。</p>
+<p>如果题目关键的部分直接用库函数就可以解决，建议不要使用库函数。</p>
+<p>如果库函数仅仅是 解题过程中的一小部分，并且你已经很清楚这个库函数的内部实现原理的话，可以考虑使用库函数。</p>
+<p>本着这样的原则，我没有使用reverse库函数，而使用swap库函数。</p>
+<p><strong>在字符串相关的题目中，库函数对大家的诱惑力是非常大的，因为会有各种反转，切割取词之类的操作</strong>，这也是为什么字符串的库函数这么丰富的原因。</p>
+<p>相信大家本着我所讲述的原则来做字符串相关的题目，在选择库函数的角度上会有所原则，也会有所收获。</p>
+<p>C++代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">reverseString</span><span class="params">(vector&lt;<span class="type">char</span>&gt;&amp; s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>, j = s.<span class="built_in">size</span>() - <span class="number">1</span>; i &lt; s.<span class="built_in">size</span>()/<span class="number">2</span>; i++, j--) &#123;</span><br><span class="line">            <span class="built_in">swap</span>(s[i],s[j]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+
+<h2 id="其他语言版本"><a href="#其他语言版本" class="headerlink" title="其他语言版本"></a>其他语言版本</h2><p>Python：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">reverseString</span>(<span class="params">self, s: <span class="type">List</span>[<span class="built_in">str</span>]</span>) -&gt; <span class="literal">None</span>:</span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        Do not return anything, modify s in-place instead.</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        left, right = <span class="number">0</span>, <span class="built_in">len</span>(s) - <span class="number">1</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 该方法已经不需要判断奇偶数，经测试后时间空间复杂度比用 for i in range(right//2)更低</span></span><br><span class="line">        <span class="comment"># 推荐该写法，更加通俗易懂</span></span><br><span class="line">        <span class="keyword">while</span> left &lt; right:</span><br><span class="line">            s[left], s[right] = s[right], s[left]</span><br><span class="line">            left += <span class="number">1</span></span><br><span class="line">            right -= <span class="number">1</span></span><br><span class="line">       </span><br></pre></td></tr></table></figure>
+<p>C:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">reverseString</span><span class="params">(<span class="type">char</span>* s, <span class="type">int</span> sSize)</span>&#123;</span><br><span class="line">    <span class="type">int</span> left = <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> right = sSize - <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(left &lt; right) &#123;</span><br><span class="line">        <span class="type">char</span> temp = s[left];</span><br><span class="line">        s[left++] = s[right];</span><br><span class="line">        s[right--] = temp;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>简单的反转还不够，我要花式反转</p>
+</blockquote>
+<h1 id="541-反转字符串II"><a href="#541-反转字符串II" class="headerlink" title="541. 反转字符串II"></a>541. 反转字符串II</h1><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/reverse-string-ii/">力扣题目链接</a></p>
+<p>给定一个字符串 s 和一个整数 k，从字符串开头算起, 每计数至 2k 个字符，就反转这 2k 个字符中的前 k 个字符。</p>
+<p>如果剩余字符少于 k 个，则将剩余字符全部反转。</p>
+<p>如果剩余字符小于 2k 但大于或等于 k 个，则反转前 k 个字符，其余字符保持原样。</p>
+<p>示例:</p>
+<p>输入: s &#x3D; “abcdefg”, k &#x3D; 2<br>输出: “bacdfeg”    </p>
+<h2 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h2><p>针对本题，我录制了视频讲解：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1dT411j7NN">字符串操作进阶！ | LeetCode：541. 反转字符串II</a>，结合本题解一起看，事半功倍！</p>
+<p>这道题目其实也是模拟，实现题目中规定的反转规则就可以了。</p>
+<p>一些同学可能为了处理逻辑：每隔2k个字符的前k的字符，写了一堆逻辑代码或者再搞一个计数器，来统计2k，再统计前k个字符。</p>
+<p>其实在遍历字符串的过程中，只要让 i +&#x3D; (2 * k)，i 每次移动 2 * k 就可以了，然后判断是否需要有反转的区间。</p>
+<p>因为要找的也就是每2 * k 区间的起点，这样写，程序会高效很多。</p>
+<p><strong>所以当需要固定规律一段一段去处理字符串的时候，要想想在在for循环的表达式上做做文章。</strong></p>
+<p>性能如下：<br><img src='https://code-thinking.cdn.bcebos.com/pics/541_反转字符串II.png' width=600> </img></div></p>
+<p>那么这里具体反转的逻辑我们要不要使用库函数呢，其实用不用都可以，使用reverse来实现反转也没毛病，毕竟不是解题关键部分。</p>
+<h2 id="C-代码"><a href="#C-代码" class="headerlink" title="C++代码"></a>C++代码</h2><p>使用C++库函数reverse的版本如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">string <span class="title">reverseStr</span><span class="params">(string s, <span class="type">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; s.<span class="built_in">size</span>(); i += (<span class="number">2</span> * k)) &#123;</span><br><span class="line">            <span class="comment">// 1. 每隔 2k 个字符的前 k 个字符进行反转</span></span><br><span class="line">            <span class="comment">// 2. 剩余字符小于 2k 但大于或等于 k 个，则反转前 k 个字符</span></span><br><span class="line">            <span class="keyword">if</span> (i + k &lt;= s.<span class="built_in">size</span>()) &#123;</span><br><span class="line">                <span class="built_in">reverse</span>(s.<span class="built_in">begin</span>() + i, s.<span class="built_in">begin</span>() + i + k );</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">// 3. 剩余字符少于 k 个，则将剩余字符全部反转。</span></span><br><span class="line">                <span class="built_in">reverse</span>(s.<span class="built_in">begin</span>() + i, s.<span class="built_in">end</span>());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> s;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+
+<p>那么我们也可以实现自己的reverse函数，其实和题目<a target="_blank" rel="noopener" href="https://programmercarl.com/0344.%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2.html">344. 反转字符串</a>道理是一样的。</p>
+<p>下面我实现的reverse函数区间是左闭右闭区间，代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">reverse</span><span class="params">(string&amp; s, <span class="type">int</span> start, <span class="type">int</span> end)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = start, j = end; i &lt; j; i++, j--) &#123;</span><br><span class="line">            <span class="built_in">swap</span>(s[i], s[j]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">string <span class="title">reverseStr</span><span class="params">(string s, <span class="type">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; s.<span class="built_in">size</span>(); i += (<span class="number">2</span> * k)) &#123;</span><br><span class="line">            <span class="comment">// 1. 每隔 2k 个字符的前 k 个字符进行反转</span></span><br><span class="line">            <span class="comment">// 2. 剩余字符小于 2k 但大于或等于 k 个，则反转前 k 个字符</span></span><br><span class="line">            <span class="keyword">if</span> (i + k &lt;= s.<span class="built_in">size</span>()) &#123;</span><br><span class="line">                <span class="built_in">reverse</span>(s, i, i + k - <span class="number">1</span>);</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 3. 剩余字符少于 k 个，则将剩余字符全部反转。</span></span><br><span class="line">            <span class="built_in">reverse</span>(s, i, s.<span class="built_in">size</span>() - <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> s;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+<p>另一种思路的解法</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">string <span class="title">reverseStr</span><span class="params">(string s, <span class="type">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> n = s.<span class="built_in">size</span>(),pos = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(pos &lt; n)&#123;</span><br><span class="line">            <span class="comment">//剩余字符串大于等于k的情况</span></span><br><span class="line">            <span class="keyword">if</span>(pos + k &lt; n) <span class="built_in">reverse</span>(s.<span class="built_in">begin</span>() + pos, s.<span class="built_in">begin</span>() + pos + k);</span><br><span class="line">            <span class="comment">//剩余字符串不足k的情况 </span></span><br><span class="line">            <span class="keyword">else</span> <span class="built_in">reverse</span>(s.<span class="built_in">begin</span>() + pos,s.<span class="built_in">end</span>());</span><br><span class="line">            pos += <span class="number">2</span> * k;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> s;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="其他语言版本-1"><a href="#其他语言版本-1" class="headerlink" title="其他语言版本"></a>其他语言版本</h2><p>C：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> * <span class="title function_">reverseStr</span><span class="params">(<span class="type">char</span> * s, <span class="type">int</span> k)</span>&#123;</span><br><span class="line">    <span class="type">int</span> len = <span class="built_in">strlen</span>(s);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; len; i += (<span class="number">2</span> * k)) &#123;</span><br><span class="line">        <span class="comment">//判断剩余字符是否少于 k</span></span><br><span class="line">        k = i + k &gt; len ? len - i : k;</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> left = i;</span><br><span class="line">        <span class="type">int</span> right = i + k - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (left &lt; right) &#123;</span><br><span class="line">            <span class="type">char</span> temp = s[left];</span><br><span class="line">            s[left++] = s[right];</span><br><span class="line">            s[right--] = temp;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> s;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Python：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">reverseStr</span>(<span class="params">self, s: <span class="built_in">str</span>, k: <span class="built_in">int</span></span>) -&gt; <span class="built_in">str</span>:</span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        1. 使用range(start, end, step)来确定需要调换的初始位置</span></span><br><span class="line"><span class="string">        2. 对于字符串s = &#x27;abc&#x27;，如果使用s[0:999] ===&gt; &#x27;abc&#x27;。字符串末尾如果超过最大长度，则会返回至字符串最后一个值，这个特性可以避免一些边界条件的处理。</span></span><br><span class="line"><span class="string">        3. 用切片整体替换，而不是一个个替换.</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">reverse_substring</span>(<span class="params">text</span>):</span><br><span class="line">            left, right = <span class="number">0</span>, <span class="built_in">len</span>(text) - <span class="number">1</span></span><br><span class="line">            <span class="keyword">while</span> left &lt; right:</span><br><span class="line">                text[left], text[right] = text[right], text[left]</span><br><span class="line">                left += <span class="number">1</span></span><br><span class="line">                right -= <span class="number">1</span></span><br><span class="line">            <span class="keyword">return</span> text</span><br><span class="line">        </span><br><span class="line">        res = <span class="built_in">list</span>(s)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> cur <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(s), <span class="number">2</span> * k):</span><br><span class="line">            res[cur: cur + k] = reverse_substring(res[cur: cur + k])</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;&#x27;</span>.join(res)</span><br></pre></td></tr></table></figure>
+
+<p>Python3 (v2):</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">reverseStr</span>(<span class="params">self, s: <span class="built_in">str</span>, k: <span class="built_in">int</span></span>) -&gt; <span class="built_in">str</span>:</span><br><span class="line">        <span class="comment"># Two pointers. Another is inside the loop.</span></span><br><span class="line">        p = <span class="number">0</span></span><br><span class="line">        <span class="keyword">while</span> p &lt; <span class="built_in">len</span>(s):</span><br><span class="line">            p2 = p + k</span><br><span class="line">            <span class="comment"># Written in this could be more pythonic.</span></span><br><span class="line">            s = s[:p] + s[p: p2][::-<span class="number">1</span>] + s[p2:]</span><br><span class="line">            p = p + <span class="number">2</span> * k</span><br><span class="line">        <span class="keyword">return</span> s</span><br></pre></td></tr></table></figure>
+<h1 id="题目：剑指Offer-05-替换空格"><a href="#题目：剑指Offer-05-替换空格" class="headerlink" title="题目：剑指Offer 05.替换空格"></a>题目：剑指Offer 05.替换空格</h1><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/ti-huan-kong-ge-lcof/">力扣题目链接</a></p>
+<p>请实现一个函数，把字符串 s 中的每个空格替换成”%20”。</p>
+<p>示例 1：<br>输入：s &#x3D; “We are happy.”<br>输出：”We%20are%20happy.”     </p>
+<h2 id="思路-2"><a href="#思路-2" class="headerlink" title="思路"></a>思路</h2><p>如果想把这道题目做到极致，就不要只用额外的辅助空间了！</p>
+<p>首先扩充数组到每个空格替换成”%20”之后的大小。</p>
+<p>然后从后向前替换空格，也就是双指针法，过程如下：</p>
+<p>i指向新长度的末尾，j指向旧长度的末尾。</p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1go6qmevhgpg20du09m4qp.gif" alt="替换空格"></p>
+<p>有同学问了，为什么要从后向前填充，从前向后填充不行么？</p>
+<p>从前向后填充就是O(n^2)的算法了，因为每次添加元素都要将添加元素之后的所有元素向后移动。</p>
+<p><strong>其实很多数组填充类的问题，都可以先预先给数组扩容带填充后的大小，然后在从后向前进行操作。</strong></p>
+<p>这么做有两个好处：</p>
+<ol>
+<li>不用申请新数组。</li>
+<li>从后向前填充元素，避免了从前先后填充元素要来的 每次添加元素都要将添加元素之后的所有元素向后移动。</li>
+</ol>
+<p>时间复杂度，空间复杂度均超过100%的用户。</p>
+<p><img src='https://code-thinking.cdn.bcebos.com/pics/剑指Offer05.替换空格.png' width=600> </img></div></p>
+<p>C++代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">string <span class="title">replaceSpace</span><span class="params">(string s)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> count = <span class="number">0</span>; <span class="comment">// 统计空格的个数</span></span><br><span class="line">        <span class="type">int</span> sOldSize = s.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; s.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (s[i] == <span class="string">&#x27; &#x27;</span>) &#123;</span><br><span class="line">                count++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 扩充字符串s的大小，也就是每个空格替换成&quot;%20&quot;之后的大小</span></span><br><span class="line">        s.<span class="built_in">resize</span>(s.<span class="built_in">size</span>() + count * <span class="number">2</span>);</span><br><span class="line">        <span class="type">int</span> sNewSize = s.<span class="built_in">size</span>();</span><br><span class="line">        <span class="comment">// 从后先前将空格替换为&quot;%20&quot;</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = sNewSize - <span class="number">1</span>, j = sOldSize - <span class="number">1</span>; j &lt; i; i--, j--) &#123;</span><br><span class="line">            <span class="keyword">if</span> (s[j] != <span class="string">&#x27; &#x27;</span>) &#123;</span><br><span class="line">                s[i] = s[j];</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                s[i] = <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">                s[i - <span class="number">1</span>] = <span class="string">&#x27;2&#x27;</span>;</span><br><span class="line">                s[i - <span class="number">2</span>] = <span class="string">&#x27;%&#x27;</span>;</span><br><span class="line">                i -= <span class="number">2</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> s;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>时间复杂度：O(n)</li>
+<li>空间复杂度：O(1)</li>
+</ul>
+<p>此时算上本题，我们已经做了七道双指针相关的题目了分别是：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://programmercarl.com/0027.%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0.html">27.移除元素</a></li>
+<li><a target="_blank" rel="noopener" href="https://programmercarl.com/0015.%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C.html">15.三数之和</a></li>
+<li><a target="_blank" rel="noopener" href="https://programmercarl.com/0018.%E5%9B%9B%E6%95%B0%E4%B9%8B%E5%92%8C.html">18.四数之和</a></li>
+<li><a target="_blank" rel="noopener" href="https://programmercarl.com/0206.%E7%BF%BB%E8%BD%AC%E9%93%BE%E8%A1%A8.html">206.翻转链表</a></li>
+<li><a target="_blank" rel="noopener" href="https://programmercarl.com/0142.%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8II.html">142.环形链表II</a></li>
+<li><a target="_blank" rel="noopener" href="https://programmercarl.com/0344.%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2.html">344.反转字符串</a></li>
+</ul>
+<h2 id="拓展"><a href="#拓展" class="headerlink" title="拓展"></a>拓展</h2><p>这里也给大家拓展一下字符串和数组有什么差别，</p>
+<p>字符串是若干字符组成的有限序列，也可以理解为是一个字符数组，但是很多语言对字符串做了特殊的规定，接下来我来说一说C&#x2F;C++中的字符串。</p>
+<p>在C语言中，把一个字符串存入一个数组时，也把结束符 ‘\0’存入数组，并以此作为该字符串是否结束的标志。</p>
+<p>例如这段代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">char a[5] = &quot;asd&quot;;</span><br><span class="line">for (int i = 0; a[i] != &#x27;\0&#x27;; i++) &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在C++中，提供一个string类，string类会提供 size接口，可以用来判断string类字符串是否结束，就不用’\0’来判断是否结束。</p>
+<p>例如这段代码:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">string a = &quot;asd&quot;;</span><br><span class="line">for (int i = 0; i &lt; a.size(); i++) &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>那么vector&lt; char &gt; 和 string 又有什么区别呢？</p>
+<p>其实在基本操作上没有区别，但是 string提供更多的字符串处理的相关接口，例如string 重载了+，而vector却没有。</p>
+<p>所以想处理字符串，我们还是会定义一个string类型。</p>
+<h2 id="其他语言版本-2"><a href="#其他语言版本-2" class="headerlink" title="其他语言版本"></a>其他语言版本</h2><p>C：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span>* <span class="title function_">replaceSpace</span><span class="params">(<span class="type">char</span>* s)</span>&#123;</span><br><span class="line">    <span class="comment">//统计空格数量</span></span><br><span class="line">    <span class="type">int</span> count = <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> len = <span class="built_in">strlen</span>(s);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (s[i] == <span class="string">&#x27; &#x27;</span>) &#123;</span><br><span class="line">            count++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//为新数组分配空间</span></span><br><span class="line">    <span class="type">int</span> newLen = len + count * <span class="number">2</span>;</span><br><span class="line">    <span class="type">char</span>* result = <span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="type">char</span>) * newLen + <span class="number">1</span>);</span><br><span class="line">    <span class="comment">//填充新数组并替换空格</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = len - <span class="number">1</span>, j = newLen - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--, j--) &#123;</span><br><span class="line">        <span class="keyword">if</span> (s[i] != <span class="string">&#x27; &#x27;</span>) &#123;</span><br><span class="line">            result[j] = s[i];</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            result[j--] = <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">            result[j--] = <span class="string">&#x27;2&#x27;</span>;</span><br><span class="line">            result[j] = <span class="string">&#x27;%&#x27;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    result[newLen] = <span class="string">&#x27;\0&#x27;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>python：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">replaceSpace</span>(<span class="params">self, s: <span class="built_in">str</span></span>) -&gt; <span class="built_in">str</span>:</span><br><span class="line">        counter = s.count(<span class="string">&#x27; &#x27;</span>)</span><br><span class="line">        </span><br><span class="line">        res = <span class="built_in">list</span>(s)</span><br><span class="line">        <span class="comment"># 每碰到一个空格就多拓展两个格子，1 + 2 = 3个位置存’%20‘</span></span><br><span class="line">        res.extend([<span class="string">&#x27; &#x27;</span>] * counter * <span class="number">2</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 原始字符串的末尾，拓展后的末尾</span></span><br><span class="line">        left, right = <span class="built_in">len</span>(s) - <span class="number">1</span>, <span class="built_in">len</span>(res) - <span class="number">1</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span> left &gt;= <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">if</span> res[left] != <span class="string">&#x27; &#x27;</span>:</span><br><span class="line">                res[right] = res[left]</span><br><span class="line">                right -= <span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="comment"># [right - 2, right), 左闭右开</span></span><br><span class="line">                res[right - <span class="number">2</span>: right + <span class="number">1</span>] = <span class="string">&#x27;%20&#x27;</span></span><br><span class="line">                right -= <span class="number">3</span></span><br><span class="line">            left -= <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;&#x27;</span>.join(res)</span><br><span class="line">            </span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">replaceSpace</span>(<span class="params">self, s: <span class="built_in">str</span></span>) -&gt; <span class="built_in">str</span>:</span><br><span class="line">        <span class="comment"># method 1 - Very rude</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;%20&quot;</span>.join(s.split(<span class="string">&quot; &quot;</span>))</span><br><span class="line"></span><br><span class="line">        <span class="comment"># method 2 - Reverse the s when counting in for loop, then update from the end.</span></span><br><span class="line">        n = <span class="built_in">len</span>(s)</span><br><span class="line">        <span class="keyword">for</span> e, i <span class="keyword">in</span> <span class="built_in">enumerate</span>(s[::-<span class="number">1</span>]):</span><br><span class="line">            <span class="built_in">print</span>(i, e)</span><br><span class="line">            <span class="keyword">if</span> i == <span class="string">&quot; &quot;</span>:</span><br><span class="line">                s = s[: n - (e + <span class="number">1</span>)] + <span class="string">&quot;%20&quot;</span> + s[n - e:]</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span> s</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>综合考察字符串操作的好题。</p>
+</blockquote>
+<h1 id="151-翻转字符串里的单词"><a href="#151-翻转字符串里的单词" class="headerlink" title="151.翻转字符串里的单词"></a>151.翻转字符串里的单词</h1><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/reverse-words-in-a-string/">力扣题目链接</a></p>
+<p>给定一个字符串，逐个翻转字符串中的每个单词。</p>
+<p>示例 1：<br>输入: “the sky is blue”<br>输出: “blue is sky the”    </p>
+<p>示例 2：<br>输入: “  hello world!  “<br>输出: “world! hello”<br>解释: 输入字符串可以在前面或者后面包含多余的空格，但是反转后的字符不能包括。 </p>
+<p>示例 3：<br>输入: “a good   example”<br>输出: “example good a”<br>解释: 如果两个单词间有多余的空格，将反转后单词间的空格减少到只含一个。  </p>
+<h2 id="思路-3"><a href="#思路-3" class="headerlink" title="思路"></a>思路</h2><p>针对本题，我录制了视频讲解：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1uT41177fX">字符串复杂操作拿捏了！ | LeetCode:151.翻转字符串里的单词</a>，结合本题解一起看，事半功倍！</p>
+<p><strong>这道题目可以说是综合考察了字符串的多种操作。</strong></p>
+<p>一些同学会使用split库函数，分隔单词，然后定义一个新的string字符串，最后再把单词倒序相加，那么这道题题目就是一道水题了，失去了它的意义。</p>
+<p>所以这里我还是提高一下本题的难度：<strong>不要使用辅助空间，空间复杂度要求为O(1)。</strong></p>
+<p>不能使用辅助空间之后，那么只能在原字符串上下功夫了。</p>
+<p>想一下，我们将整个字符串都反转过来，那么单词的顺序指定是倒序了，只不过单词本身也倒序了，那么再把单词反转一下，单词不就正过来了。</p>
+<p>所以解题思路如下：</p>
+<ul>
+<li>移除多余空格</li>
+<li>将整个字符串反转</li>
+<li>将每个单词反转</li>
+</ul>
+<p>举个例子，源字符串为：”the sky is    blue   “</p>
+<ul>
+<li>移除多余空格 : “the sky is blue”</li>
+<li>字符串反转：”eulb si yks eht”</li>
+<li>单词反转：”blue is sky the”</li>
+</ul>
+<p>这样我们就完成了翻转字符串里的单词。</p>
+<p>思路很明确了，我们说一说代码的实现细节，就拿移除多余空格来说，一些同学会上来写如下代码：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">removeExtraSpaces</span><span class="params">(string&amp; s)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = s.<span class="built_in">size</span>() - <span class="number">1</span>; i &gt; <span class="number">0</span>; i--) &#123;</span><br><span class="line">        <span class="keyword">if</span> (s[i] == s[i - <span class="number">1</span>] &amp;&amp; s[i] == <span class="string">&#x27; &#x27;</span>) &#123;</span><br><span class="line">            s.<span class="built_in">erase</span>(s.<span class="built_in">begin</span>() + i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 删除字符串最后面的空格</span></span><br><span class="line">    <span class="keyword">if</span> (s.<span class="built_in">size</span>() &gt; <span class="number">0</span> &amp;&amp; s[s.<span class="built_in">size</span>() - <span class="number">1</span>] == <span class="string">&#x27; &#x27;</span>) &#123;</span><br><span class="line">        s.<span class="built_in">erase</span>(s.<span class="built_in">begin</span>() + s.<span class="built_in">size</span>() - <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 删除字符串最前面的空格</span></span><br><span class="line">    <span class="keyword">if</span> (s.<span class="built_in">size</span>() &gt; <span class="number">0</span> &amp;&amp; s[<span class="number">0</span>] == <span class="string">&#x27; &#x27;</span>) &#123;</span><br><span class="line">        s.<span class="built_in">erase</span>(s.<span class="built_in">begin</span>());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>逻辑很简单，从前向后遍历，遇到空格了就erase。</p>
+<p>如果不仔细琢磨一下erase的时间复杂度，还以为以上的代码是O(n)的时间复杂度呢。</p>
+<p>想一下真正的时间复杂度是多少，一个erase本来就是O(n)的操作。</p>
+<p>erase操作上面还套了一个for循环，那么以上代码移除冗余空格的代码时间复杂度为O(n^2)。</p>
+<p>那么使用双指针法来去移除空格，最后resize（重新设置）一下字符串的大小，就可以做到O(n)的时间复杂度。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//版本一 </span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">removeExtraSpaces</span><span class="params">(string&amp; s)</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> slowIndex = <span class="number">0</span>, fastIndex = <span class="number">0</span>; <span class="comment">// 定义快指针，慢指针</span></span><br><span class="line">    <span class="comment">// 去掉字符串前面的空格</span></span><br><span class="line">    <span class="keyword">while</span> (s.<span class="built_in">size</span>() &gt; <span class="number">0</span> &amp;&amp; fastIndex &lt; s.<span class="built_in">size</span>() &amp;&amp; s[fastIndex] == <span class="string">&#x27; &#x27;</span>) &#123;</span><br><span class="line">        fastIndex++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (; fastIndex &lt; s.<span class="built_in">size</span>(); fastIndex++) &#123;</span><br><span class="line">        <span class="comment">// 去掉字符串中间部分的冗余空格</span></span><br><span class="line">        <span class="keyword">if</span> (fastIndex - <span class="number">1</span> &gt; <span class="number">0</span></span><br><span class="line">                &amp;&amp; s[fastIndex - <span class="number">1</span>] == s[fastIndex]</span><br><span class="line">                &amp;&amp; s[fastIndex] == <span class="string">&#x27; &#x27;</span>) &#123;</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            s[slowIndex++] = s[fastIndex];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (slowIndex - <span class="number">1</span> &gt; <span class="number">0</span> &amp;&amp; s[slowIndex - <span class="number">1</span>] == <span class="string">&#x27; &#x27;</span>) &#123; <span class="comment">// 去掉字符串末尾的空格</span></span><br><span class="line">        s.<span class="built_in">resize</span>(slowIndex - <span class="number">1</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        s.<span class="built_in">resize</span>(slowIndex); <span class="comment">// 重新设置字符串大小</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>有的同学可能发现用erase来移除空格，在leetcode上性能也还行。主要是以下几点；：</p>
+<ol>
+<li>leetcode上的测试集里，字符串的长度不够长，如果足够长，性能差距会非常明显。</li>
+<li>leetcode的测程序耗时不是很准确的。</li>
+</ol>
+<p>版本一的代码是比较如何一般思考过程，就是 先移除字符串钱的空格，在移除中间的，在移除后面部分。 </p>
+<p>不过其实还可以优化，这部分和<a target="_blank" rel="noopener" href="https://programmercarl.com/0027.%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0.html">27.移除元素</a>的逻辑是一样一样的，本题是移除空格，而 27.移除元素 就是移除元素。 </p>
+<p>所以代码可以写的很精简，大家可以看 如下 代码 removeExtraSpaces 函数的实现：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 版本二 </span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">removeExtraSpaces</span><span class="params">(string&amp; s)</span> </span>&#123;<span class="comment">//去除所有空格并在相邻单词之间添加空格, 快慢指针。</span></span><br><span class="line">    <span class="type">int</span> slow = <span class="number">0</span>;   <span class="comment">//整体思想参考https://programmercarl.com/0027.移除元素.html</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; s.<span class="built_in">size</span>(); ++i) &#123; <span class="comment">//</span></span><br><span class="line">        <span class="keyword">if</span> (s[i] != <span class="string">&#x27; &#x27;</span>) &#123; <span class="comment">//遇到非空格就处理，即删除所有空格。</span></span><br><span class="line">            <span class="keyword">if</span> (slow != <span class="number">0</span>) s[slow++] = <span class="string">&#x27; &#x27;</span>; <span class="comment">//手动控制空格，给单词之间添加空格。slow != 0说明不是第一个单词，需要在单词前添加空格。</span></span><br><span class="line">            <span class="keyword">while</span> (i &lt; s.<span class="built_in">size</span>() &amp;&amp; s[i] != <span class="string">&#x27; &#x27;</span>) &#123; <span class="comment">//补上该单词，遇到空格说明单词结束。</span></span><br><span class="line">                s[slow++] = s[i++];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    s.<span class="built_in">resize</span>(slow); <span class="comment">//slow的大小即为去除多余空格后的大小。</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果以上代码看不懂，建议先把 <a target="_blank" rel="noopener" href="https://programmercarl.com/0027.%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0.html">27.移除元素</a>这道题目做了，或者看视频讲解：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV12A4y1Z7LP">数组中移除元素并不容易！LeetCode：27. 移除元素</a> 。</p>
+<p>此时我们已经实现了removeExtraSpaces函数来移除冗余空格。</p>
+<p>还做实现反转字符串的功能，支持反转字符串子区间，这个实现我们分别在<a target="_blank" rel="noopener" href="https://programmercarl.com/0344.%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2.html">344.反转字符串</a>和<a target="_blank" rel="noopener" href="https://programmercarl.com/0541.%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2II.html">541.反转字符串II</a>里已经讲过了。</p>
+<p>代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 反转字符串s中左闭又闭的区间[start, end]</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">reverse</span><span class="params">(string&amp; s, <span class="type">int</span> start, <span class="type">int</span> end)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = start, j = end; i &lt; j; i++, j--) &#123;</span><br><span class="line">        <span class="built_in">swap</span>(s[i], s[j]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>整体代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">reverse</span><span class="params">(string&amp; s, <span class="type">int</span> start, <span class="type">int</span> end)</span></span>&#123; <span class="comment">//翻转，区间写法：左闭又闭 []</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = start, j = end; i &lt; j; i++, j--) &#123;</span><br><span class="line">            <span class="built_in">swap</span>(s[i], s[j]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">removeExtraSpaces</span><span class="params">(string&amp; s)</span> </span>&#123;<span class="comment">//去除所有空格并在相邻单词之间添加空格, 快慢指针。</span></span><br><span class="line">        <span class="type">int</span> slow = <span class="number">0</span>;   <span class="comment">//整体思想参考https://programmercarl.com/0027.移除元素.html</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; s.<span class="built_in">size</span>(); ++i) &#123; <span class="comment">//</span></span><br><span class="line">            <span class="keyword">if</span> (s[i] != <span class="string">&#x27; &#x27;</span>) &#123; <span class="comment">//遇到非空格就处理，即删除所有空格。</span></span><br><span class="line">                <span class="keyword">if</span> (slow != <span class="number">0</span>) s[slow++] = <span class="string">&#x27; &#x27;</span>; <span class="comment">//手动控制空格，给单词之间添加空格。slow != 0说明不是第一个单词，需要在单词前添加空格。</span></span><br><span class="line">                <span class="keyword">while</span> (i &lt; s.<span class="built_in">size</span>() &amp;&amp; s[i] != <span class="string">&#x27; &#x27;</span>) &#123; <span class="comment">//补上该单词，遇到空格说明单词结束。</span></span><br><span class="line">                    s[slow++] = s[i++];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        s.<span class="built_in">resize</span>(slow); <span class="comment">//slow的大小即为去除多余空格后的大小。</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">string <span class="title">reverseWords</span><span class="params">(string s)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">removeExtraSpaces</span>(s); <span class="comment">//去除多余空格，保证单词之间之只有一个空格，且字符串首尾没空格。</span></span><br><span class="line">        <span class="built_in">reverse</span>(s, <span class="number">0</span>, s.<span class="built_in">size</span>() - <span class="number">1</span>);</span><br><span class="line">        <span class="type">int</span> start = <span class="number">0</span>; <span class="comment">//removeExtraSpaces后保证第一个单词的开始下标一定是0。</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt;= s.<span class="built_in">size</span>(); ++i) &#123;</span><br><span class="line">            <span class="keyword">if</span> (i == s.<span class="built_in">size</span>() || s[i] == <span class="string">&#x27; &#x27;</span>) &#123; <span class="comment">//到达空格或者串尾，说明一个单词结束。进行翻转。</span></span><br><span class="line">                <span class="built_in">reverse</span>(s, start, i - <span class="number">1</span>); <span class="comment">//翻转，注意是左闭右闭 []的翻转。</span></span><br><span class="line">                start = i + <span class="number">1</span>; <span class="comment">//更新下一个单词的开始下标start</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> s;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="其他语言版本-3"><a href="#其他语言版本-3" class="headerlink" title="其他语言版本"></a>其他语言版本</h2><p>python:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">  <span class="comment">#1.去除多余的空格</span></span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">trim_spaces</span>(<span class="params">self,s</span>):     </span><br><span class="line">            n=<span class="built_in">len</span>(s)</span><br><span class="line">            left=<span class="number">0</span></span><br><span class="line">            right=n-<span class="number">1</span></span><br><span class="line">        </span><br><span class="line">            <span class="keyword">while</span> left&lt;=right <span class="keyword">and</span> s[left]==<span class="string">&#x27; &#x27;</span>:       <span class="comment">#去除开头的空格</span></span><br><span class="line">                left+=<span class="number">1</span></span><br><span class="line">            <span class="keyword">while</span> left&lt;=right <span class="keyword">and</span> s[right]==<span class="string">&#x27; &#x27;</span>:        <span class="comment">#去除结尾的空格</span></span><br><span class="line">                right=right-<span class="number">1</span></span><br><span class="line">            tmp=[]</span><br><span class="line">            <span class="keyword">while</span> left&lt;=right:                                    <span class="comment">#去除单词中间多余的空格</span></span><br><span class="line">                <span class="keyword">if</span> s[left]!=<span class="string">&#x27; &#x27;</span>:</span><br><span class="line">                    tmp.append(s[left])</span><br><span class="line">                <span class="keyword">elif</span> tmp[-<span class="number">1</span>]!=<span class="string">&#x27; &#x27;</span>:                                  <span class="comment">#当前位置是空格，但是相邻的上一个位置不是空格，则该空格是合理的</span></span><br><span class="line">                    tmp.append(s[left])</span><br><span class="line">                left+=<span class="number">1</span></span><br><span class="line">            <span class="keyword">return</span> tmp</span><br><span class="line"><span class="comment">#2.翻转字符数组</span></span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">reverse_string</span>(<span class="params">self,nums,left,right</span>):</span><br><span class="line">            <span class="keyword">while</span> left&lt;right:</span><br><span class="line">                nums[left], nums[right]=nums[right],nums[left]</span><br><span class="line">                left+=<span class="number">1</span></span><br><span class="line">                right-=<span class="number">1</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"><span class="comment">#3.翻转每个单词</span></span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">reverse_each_word</span>(<span class="params">self, nums</span>):</span><br><span class="line">            start=<span class="number">0</span></span><br><span class="line">            end=<span class="number">0</span></span><br><span class="line">            n=<span class="built_in">len</span>(nums)</span><br><span class="line">            <span class="keyword">while</span> start&lt;n:</span><br><span class="line">                <span class="keyword">while</span> end&lt;n <span class="keyword">and</span> nums[end]!=<span class="string">&#x27; &#x27;</span>:</span><br><span class="line">                    end+=<span class="number">1</span></span><br><span class="line">                self.reverse_string(nums,start,end-<span class="number">1</span>)</span><br><span class="line">                start=end+<span class="number">1</span></span><br><span class="line">                end+=<span class="number">1</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#4.翻转字符串里的单词</span></span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">reverseWords</span>(<span class="params">self, s</span>): <span class="comment">#测试用例：&quot;the sky is blue&quot;</span></span><br><span class="line">            l = self.trim_spaces(s)                     <span class="comment">#输出：[&#x27;t&#x27;, &#x27;h&#x27;, &#x27;e&#x27;, &#x27; &#x27;, &#x27;s&#x27;, &#x27;k&#x27;, &#x27;y&#x27;, &#x27; &#x27;, &#x27;i&#x27;, &#x27;s&#x27;, &#x27; &#x27;, &#x27;b&#x27;, &#x27;l&#x27;, &#x27;u&#x27;, &#x27;e&#x27;</span></span><br><span class="line">            self.reverse_string( l,  <span class="number">0</span>, <span class="built_in">len</span>(l) - <span class="number">1</span>)   <span class="comment">#输出：[&#x27;e&#x27;, &#x27;u&#x27;, &#x27;l&#x27;, &#x27;b&#x27;, &#x27; &#x27;, &#x27;s&#x27;, &#x27;i&#x27;, &#x27; &#x27;, &#x27;y&#x27;, &#x27;k&#x27;, &#x27;s&#x27;, &#x27; &#x27;, &#x27;e&#x27;, &#x27;h&#x27;, &#x27;t&#x27;]</span></span><br><span class="line">            self.reverse_each_word(l)               <span class="comment">#输出：[&#x27;b&#x27;, &#x27;l&#x27;, &#x27;u&#x27;, &#x27;e&#x27;, &#x27; &#x27;, &#x27;i&#x27;, &#x27;s&#x27;, &#x27; &#x27;, &#x27;s&#x27;, &#x27;k&#x27;, &#x27;y&#x27;, &#x27; &#x27;, &#x27;t&#x27;, &#x27;h&#x27;, &#x27;e&#x27;]</span></span><br><span class="line">            <span class="keyword">return</span> <span class="string">&#x27;&#x27;</span>.join(l)                                 <span class="comment">#输出：blue is sky the</span></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">reverseWords</span>(<span class="params">self, s: <span class="built_in">str</span></span>) -&gt; <span class="built_in">str</span>:</span><br><span class="line">        <span class="comment"># method 1 - Rude but work &amp; efficient method.</span></span><br><span class="line">        s_list = [i <span class="keyword">for</span> i <span class="keyword">in</span> s.split(<span class="string">&quot; &quot;</span>) <span class="keyword">if</span> <span class="built_in">len</span>(i) &gt; <span class="number">0</span>]</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot; &quot;</span>.join(s_list[::-<span class="number">1</span>])</span><br><span class="line"></span><br><span class="line">        <span class="comment"># method 2 - Carlo&#x27;s idea</span></span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">trim_head_tail_space</span>(<span class="params">ss: <span class="built_in">str</span></span>):</span><br><span class="line">            p = <span class="number">0</span></span><br><span class="line">            <span class="keyword">while</span> p &lt; <span class="built_in">len</span>(ss) <span class="keyword">and</span> ss[p] == <span class="string">&quot; &quot;</span>:</span><br><span class="line">                p += <span class="number">1</span></span><br><span class="line">            <span class="keyword">return</span> ss[p:]</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Trim the head and tail space</span></span><br><span class="line">        s = trim_head_tail_space(s)</span><br><span class="line">        s = trim_head_tail_space(s[::-<span class="number">1</span>])[::-<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">        pf, ps, s = <span class="number">0</span>, <span class="number">0</span>, s[::-<span class="number">1</span>] <span class="comment"># Reverse the string.</span></span><br><span class="line">        <span class="keyword">while</span> pf &lt; <span class="built_in">len</span>(s):</span><br><span class="line">            <span class="keyword">if</span> s[pf] == <span class="string">&quot; &quot;</span>:</span><br><span class="line">                <span class="comment"># Will not excede. Because we have clean the tail space.</span></span><br><span class="line">                <span class="keyword">if</span> s[pf] == s[pf + <span class="number">1</span>]:</span><br><span class="line">                    s = s[:pf] + s[pf + <span class="number">1</span>:]</span><br><span class="line">                    <span class="keyword">continue</span></span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    s = s[:ps] + s[ps: pf][::-<span class="number">1</span>] + s[pf:]</span><br><span class="line">                    ps, pf = pf + <span class="number">1</span>, pf + <span class="number">2</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                pf += <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> s[:ps] + s[ps:][::-<span class="number">1</span>] <span class="comment"># Must do the last step, because the last word is omit though the pointers are on the correct positions,</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>反转个字符串还有这么多用处？</p>
+</blockquote>
+<h1 id="题目：剑指Offer58-II-左旋转字符串"><a href="#题目：剑指Offer58-II-左旋转字符串" class="headerlink" title="题目：剑指Offer58-II.左旋转字符串"></a>题目：剑指Offer58-II.左旋转字符串</h1><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/zuo-xuan-zhuan-zi-fu-chuan-lcof/">力扣题目链接</a></p>
+<p>字符串的左旋转操作是把字符串前面的若干个字符转移到字符串的尾部。请定义一个函数实现字符串左旋转操作的功能。比如，输入字符串”abcdefg”和数字2，该函数将返回左旋转两位得到的结果”cdefgab”。</p>
+<p>示例 1：<br>输入: s &#x3D; “abcdefg”, k &#x3D; 2<br>输出: “cdefgab”      </p>
+<p>示例 2：<br>输入: s &#x3D; “lrloseumgh”, k &#x3D; 6<br>输出: “umghlrlose”        </p>
+<p>限制：<br>1 &lt;&#x3D; k &lt; s.length &lt;&#x3D; 10000        </p>
+<h2 id="思路-4"><a href="#思路-4" class="headerlink" title="思路"></a>思路</h2><p>为了让本题更有意义，提升一下本题难度：<strong>不能申请额外空间，只能在本串上操作</strong>。</p>
+<p>不能使用额外空间的话，模拟在本串操作要实现左旋转字符串的功能还是有点困难的。</p>
+<p>那么我们可以想一下上一题目<a target="_blank" rel="noopener" href="https://programmercarl.com/0151.%E7%BF%BB%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%87%8C%E7%9A%84%E5%8D%95%E8%AF%8D.html">字符串：花式反转还不够！</a>中讲过，使用整体反转+局部反转就可以实现，反转单词顺序的目的。</p>
+<p>这道题目也非常类似，依然可以通过局部反转+整体反转 达到左旋转的目的。</p>
+<p>具体步骤为：</p>
+<ol>
+<li>反转区间为前n的子串</li>
+<li>反转区间为n到末尾的子串</li>
+<li>反转整个字符串</li>
+</ol>
+<p>最后就可以得到左旋n的目的，而不用定义新的字符串，完全在本串上操作。</p>
+<p>例如 ：示例1中 输入：字符串abcdefg，n&#x3D;2</p>
+<p>如图：</p>
+<p><img src='https://code-thinking.cdn.bcebos.com/pics/剑指Offer58-II.左旋转字符串.png' width=600> </img></div></p>
+<p>最终得到左旋2个单元的字符串：cdefgab</p>
+<p>思路明确之后，那么代码实现就很简单了</p>
+<p>C++代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">string <span class="title">reverseLeftWords</span><span class="params">(string s, <span class="type">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">reverse</span>(s.<span class="built_in">begin</span>(), s.<span class="built_in">begin</span>() + n);</span><br><span class="line">        <span class="built_in">reverse</span>(s.<span class="built_in">begin</span>() + n, s.<span class="built_in">end</span>());</span><br><span class="line">        <span class="built_in">reverse</span>(s.<span class="built_in">begin</span>(), s.<span class="built_in">end</span>());</span><br><span class="line">        <span class="keyword">return</span> s;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>是不是发现这代码也太简单了，哈哈。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>此时我们已经反转好多次字符串了，来一起回顾一下吧。</p>
+<p>在这篇文章<a target="_blank" rel="noopener" href="https://programmercarl.com/0344.%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2.html">344.反转字符串</a>，第一次讲到反转一个字符串应该怎么做，使用了双指针法。</p>
+<p>然后发现<a target="_blank" rel="noopener" href="https://programmercarl.com/0541.%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2II.html">541. 反转字符串II</a>，这里开始给反转加上了一些条件，当需要固定规律一段一段去处理字符串的时候，要想想在在for循环的表达式上做做文章。</p>
+<p>后来在<a target="_blank" rel="noopener" href="https://programmercarl.com/0151.%E7%BF%BB%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%87%8C%E7%9A%84%E5%8D%95%E8%AF%8D.html">151.翻转字符串里的单词</a>中，要对一句话里的单词顺序进行反转，发现先整体反转再局部反转 是一个很妙的思路。</p>
+<p>最后再讲到本题，本题则是先局部反转再 整体反转，与<a target="_blank" rel="noopener" href="https://programmercarl.com/0151.%E7%BF%BB%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%87%8C%E7%9A%84%E5%8D%95%E8%AF%8D.html">151.翻转字符串里的单词</a>类似，但是也是一种新的思路。</p>
+<p>好了，反转字符串一共就介绍到这里，相信大家此时对反转字符串的常见操作已经很了解了。</p>
+<h2 id="题外话"><a href="#题外话" class="headerlink" title="题外话"></a>题外话</h2><p>一些同学热衷于使用substr，来做这道题。<br>其实使用substr 和 反转 时间复杂度是一样的 ，都是O(n)，但是使用substr申请了额外空间，所以空间复杂度是O(n)，而反转方法的空间复杂度是O(1)。</p>
+<p><strong>如果想让这套题目有意义，就不要申请额外空间。</strong></p>
+<h2 id="其他语言版本-4"><a href="#其他语言版本-4" class="headerlink" title="其他语言版本"></a>其他语言版本</h2><p>python: </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 方法一：可以使用切片方法</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">reverseLeftWords</span>(<span class="params">self, s: <span class="built_in">str</span>, n: <span class="built_in">int</span></span>) -&gt; <span class="built_in">str</span>:</span><br><span class="line">        <span class="keyword">return</span> s[n:] + s[<span class="number">0</span>:n]</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 方法二：也可以使用上文描述的方法，有些面试中不允许使用切片，那就使用上文作者提到的方法</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">reverseLeftWords</span>(<span class="params">self, s: <span class="built_in">str</span>, n: <span class="built_in">int</span></span>) -&gt; <span class="built_in">str</span>:</span><br><span class="line">        s = <span class="built_in">list</span>(s)</span><br><span class="line">        s[<span class="number">0</span>:n] = <span class="built_in">list</span>(<span class="built_in">reversed</span>(s[<span class="number">0</span>:n]))</span><br><span class="line">        s[n:] = <span class="built_in">list</span>(<span class="built_in">reversed</span>(s[n:]))</span><br><span class="line">        s.reverse()</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;&quot;</span>.join(s)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 方法三：如果连reversed也不让使用，那么自己手写一个</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">reverseLeftWords</span>(<span class="params">self, s: <span class="built_in">str</span>, n: <span class="built_in">int</span></span>) -&gt; <span class="built_in">str</span>:</span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">reverse_sub</span>(<span class="params">lst, left, right</span>):</span><br><span class="line">            <span class="keyword">while</span> left &lt; right:</span><br><span class="line">                lst[left], lst[right] = lst[right], lst[left]</span><br><span class="line">                left += <span class="number">1</span></span><br><span class="line">                right -= <span class="number">1</span></span><br><span class="line">        </span><br><span class="line">        res = <span class="built_in">list</span>(s)</span><br><span class="line">        end = <span class="built_in">len</span>(res) - <span class="number">1</span></span><br><span class="line">        reverse_sub(res, <span class="number">0</span>, n - <span class="number">1</span>)</span><br><span class="line">        reverse_sub(res, n, end)</span><br><span class="line">        reverse_sub(res, <span class="number">0</span>, end)</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;&#x27;</span>.join(res)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 同方法二</span></span><br><span class="line"><span class="comment"># 时间复杂度：O(n)</span></span><br><span class="line"><span class="comment"># 空间复杂度：O(n)，python的string为不可变，需要开辟同样大小的list空间来修改</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><figcaption><span>3</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#方法四：考虑不能用切片的情况下，利用模+下标实现</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">reverseLeftWords</span>(<span class="params">self, s: <span class="built_in">str</span>, n: <span class="built_in">int</span></span>) -&gt; <span class="built_in">str</span>:</span><br><span class="line">        new_s = <span class="string">&#x27;&#x27;</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(s)):</span><br><span class="line">            j = (i+n)%<span class="built_in">len</span>(s)</span><br><span class="line">            new_s = new_s + s[j]</span><br><span class="line">        <span class="keyword">return</span> new_s</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-smile"></i>感谢您的阅读-------------</div>
+    
+</div>
+  
+</div>
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E8%AE%AD%E7%BB%83%E8%90%A5/" rel="tag"># 代码随想录训练营</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/11/01/%E7%A0%94%E4%B8%80%E4%B8%8A/%E7%A0%94%E4%B8%80%E4%B8%8A%E7%AC%AC%E4%B9%9D%E5%91%A8/%E3%80%90%E7%AC%AC%E4%B9%9D%E5%91%A8%E3%80%91Day2_%E8%AE%B0%E5%BD%95/" rel="prev" title="【第九周】Day2_记录">
+      <i class="fa fa-chevron-left"></i> 【第九周】Day2_记录
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/11/02/%E7%A0%94%E4%B8%80%E4%B8%8A/%E7%A0%94%E4%B8%80%E4%B8%8A%E7%AC%AC%E4%B9%9D%E5%91%A8/%E3%80%90%E7%AC%AC%E4%B9%9D%E5%91%A8%E3%80%91Day3_%E8%AE%B0%E5%BD%95/" rel="next" title="【第九周】Day3_记录">
+      【第九周】Day3_记录 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%AD%E7%BB%83%E8%90%A5%E4%BB%BB%E5%8A%A1"><span class="nav-number">1.</span> <span class="nav-text">训练营任务</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#344-%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">2.</span> <span class="nav-text">344.反转字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF"><span class="nav-number">2.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E8%AF%AD%E8%A8%80%E7%89%88%E6%9C%AC"><span class="nav-number">2.2.</span> <span class="nav-text">其他语言版本</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#541-%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2II"><span class="nav-number">3.</span> <span class="nav-text">541. 反转字符串II</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-1"><span class="nav-number">3.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E4%BB%A3%E7%A0%81"><span class="nav-number">3.2.</span> <span class="nav-text">C++代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E8%AF%AD%E8%A8%80%E7%89%88%E6%9C%AC-1"><span class="nav-number">3.3.</span> <span class="nav-text">其他语言版本</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%EF%BC%9A%E5%89%91%E6%8C%87Offer-05-%E6%9B%BF%E6%8D%A2%E7%A9%BA%E6%A0%BC"><span class="nav-number">4.</span> <span class="nav-text">题目：剑指Offer 05.替换空格</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-2"><span class="nav-number">4.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8B%93%E5%B1%95"><span class="nav-number">4.2.</span> <span class="nav-text">拓展</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E8%AF%AD%E8%A8%80%E7%89%88%E6%9C%AC-2"><span class="nav-number">4.3.</span> <span class="nav-text">其他语言版本</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#151-%E7%BF%BB%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%87%8C%E7%9A%84%E5%8D%95%E8%AF%8D"><span class="nav-number">5.</span> <span class="nav-text">151.翻转字符串里的单词</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-3"><span class="nav-number">5.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E8%AF%AD%E8%A8%80%E7%89%88%E6%9C%AC-3"><span class="nav-number">5.2.</span> <span class="nav-text">其他语言版本</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%EF%BC%9A%E5%89%91%E6%8C%87Offer58-II-%E5%B7%A6%E6%97%8B%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">6.</span> <span class="nav-text">题目：剑指Offer58-II.左旋转字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-4"><span class="nav-number">6.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">6.2.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E5%A4%96%E8%AF%9D"><span class="nav-number">6.3.</span> <span class="nav-text">题外话</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E8%AF%AD%E8%A8%80%E7%89%88%E6%9C%AC-4"><span class="nav-number">6.4.</span> <span class="nav-text">其他语言版本</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Cheng Qi"
+      src="/images/headImage.jpg">
+  <p class="site-author-name" itemprop="name">Cheng Qi</p>
+  <div class="site-description" itemprop="description">要快乐！</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">35</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-smile"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">程麒</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'tIXMRMVc3JTbJ6jUnqKe9FrK-gzGzoHsz',
+      appKey     : 'fPmGzIKBwOIQ2T8AC1WwIyxT',
+      placeholder: "来吐槽吧！",
+      avatar     : 'retro',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : 'https://tixmrmvc.lc-cn-n1-shared.com'
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
