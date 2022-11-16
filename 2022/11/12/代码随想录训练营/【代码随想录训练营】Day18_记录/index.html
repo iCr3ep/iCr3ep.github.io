@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/%E5%A4%A9%E7%A7%A4.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/%E5%A4%A9%E7%A7%A4.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="参考资料来自：代码随想录 训练营任务 513.找树左下角的值  112.路径总和  113.路径总和ii  106.从中序与后序遍历序列构造二叉树 105.从前序与中序遍历序列构造二叉树">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【代码随想录训练营】Day18_记录">
+<meta property="og:url" content="http://example.com/2022/11/12/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E8%AE%AD%E7%BB%83%E8%90%A5/%E3%80%90%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E8%AE%AD%E7%BB%83%E8%90%A5%E3%80%91Day18_%E8%AE%B0%E5%BD%95/index.html">
+<meta property="og:site_name" content="KeyChan&#39;s">
+<meta property="og:description" content="参考资料来自：代码随想录 训练营任务 513.找树左下角的值  112.路径总和  113.路径总和ii  106.从中序与后序遍历序列构造二叉树 105.从前序与中序遍历序列构造二叉树">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210204152956836.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210204153017586.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210203160355234.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2021020316051216.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210203160854654.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210203160922745.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210203154316774.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210203154249860.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210203154626672.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210203154720326.png">
+<meta property="article:published_time" content="2022-11-12T07:00:00.000Z">
+<meta property="article:modified_time" content="2022-11-16T09:48:04.533Z">
+<meta property="article:author" content="Cheng Qi">
+<meta property="article:tag" content="代码随想录训练营">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20210204152956836.png">
+
+<link rel="canonical" href="http://example.com/2022/11/12/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E8%AE%AD%E7%BB%83%E8%90%A5/%E3%80%90%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E8%AE%AD%E7%BB%83%E8%90%A5%E3%80%91Day18_%E8%AE%B0%E5%BD%95/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>【代码随想录训练营】Day18_记录 | KeyChan's</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">KeyChan's</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/11/12/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E8%AE%AD%E7%BB%83%E8%90%A5/%E3%80%90%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E8%AE%AD%E7%BB%83%E8%90%A5%E3%80%91Day18_%E8%AE%B0%E5%BD%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/headImage.jpg">
+      <meta itemprop="name" content="Cheng Qi">
+      <meta itemprop="description" content="要快乐！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KeyChan's">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【代码随想录训练营】Day18_记录
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-11-12 15:00:00" itemprop="dateCreated datePublished" datetime="2022-11-12T15:00:00+08:00">2022-11-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-11-16 17:48:04" itemprop="dateModified" datetime="2022-11-16T17:48:04+08:00">2022-11-16</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/" itemprop="url" rel="index"><span itemprop="name">学习总结</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2022/11/12/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E8%AE%AD%E7%BB%83%E8%90%A5/%E3%80%90%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E8%AE%AD%E7%BB%83%E8%90%A5%E3%80%91Day18_%E8%AE%B0%E5%BD%95/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2022/11/12/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E8%AE%AD%E7%BB%83%E8%90%A5/%E3%80%90%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E8%AE%AD%E7%BB%83%E8%90%A5%E3%80%91Day18_%E8%AE%B0%E5%BD%95/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><strong>参考资料来自：</strong><a target="_blank" rel="noopener" href="https://programmercarl.com/">代码随想录</a></p>
+<h1 id="训练营任务"><a href="#训练营任务" class="headerlink" title="训练营任务"></a>训练营任务</h1><ul>
+<li><p>513.找树左下角的值</p>
+</li>
+<li><p>112.路径总和  113.路径总和ii</p>
+</li>
+<li><p>106.从中序与后序遍历序列构造二叉树 105.从前序与中序遍历序列构造二叉树</p>
+</li>
+</ul>
+<span id="more"></span>
+
+<h1 id="513-找树左下角的值"><a href="#513-找树左下角的值" class="headerlink" title="513.找树左下角的值"></a>513.找树左下角的值</h1><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-bottom-left-tree-value/">力扣题目链接</a></p>
+<p>给定一个二叉树，在树的最后一行找到最左边的值。</p>
+<p>示例 1:</p>
+<p><img src="https://img-blog.csdnimg.cn/20210204152956836.png" alt="513.找树左下角的值"></p>
+<p>示例 2:</p>
+<p><img src="https://img-blog.csdnimg.cn/20210204153017586.png" alt="513.找树左下角的值1"></p>
+<h2 id="视频讲解"><a href="#视频讲解" class="headerlink" title="视频讲解"></a>视频讲解</h2><p><strong>《代码随想录》算法视频公开课：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1424y1Z7pn">怎么找二叉树的左下角？ 递归中又带回溯了，怎么办？| LeetCode：513.找二叉树左下角的值</a>，相信结合视频在看本篇题解，更有助于大家对本题的理解</strong>。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>本地要找出树的最后一行找到最左边的值。此时大家应该想起用层序遍历是非常简单的了，反而用递归的话会比较难一点。</p>
+<p>我们依然还是先介绍递归法。</p>
+<h3 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h3><p>咋眼一看，这道题目用递归的话就就一直向左遍历，最后一个就是答案呗？</p>
+<p>没有这么简单，一直向左遍历到最后一个，它未必是最后一行啊。</p>
+<p>我们来分析一下题目：在树的<strong>最后一行</strong>找到<strong>最左边的值</strong>。</p>
+<p>首先要是最后一行，然后是最左边的值。</p>
+<p>如果使用递归法，如何判断是最后一行呢，其实就是深度最大的叶子节点一定是最后一行。</p>
+<p>如果对二叉树深度和高度还有点疑惑的话，请看：<a target="_blank" rel="noopener" href="https://programmercarl.com/0110.%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91.html">110.平衡二叉树</a>。</p>
+<p>所以要找深度最大的叶子节点。</p>
+<p>那么如果找最左边的呢？可以使用前序遍历（当然中序，后序都可以，因为本题没有 中间节点的处理逻辑，只要左优先就行），保证优先左边搜索，然后记录深度最大的叶子节点，此时就是树的最后一行最左边的值。</p>
+<p>递归三部曲：</p>
+<ol>
+<li>确定递归函数的参数和返回值</li>
+</ol>
+<p>参数必须有要遍历的树的根节点，还有就是一个int型的变量用来记录最长深度。 这里就不需要返回值了，所以递归函数的返回类型为void。</p>
+<p>本题还需要类里的两个全局变量，maxLen用来记录最大深度，result记录最大深度最左节点的数值。</p>
+<p>代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> maxDepth = INT_MIN;   <span class="comment">// 全局变量 记录最大深度</span></span><br><span class="line"><span class="type">int</span> result;       <span class="comment">// 全局变量 最大深度最左节点的数值</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">traversal</span><span class="params">(TreeNode* root, <span class="type">int</span> depth)</span></span></span><br></pre></td></tr></table></figure>
+
+
+<ol start="2">
+<li>确定终止条件</li>
+</ol>
+<p>当遇到叶子节点的时候，就需要统计一下最大的深度了，所以需要遇到叶子节点来更新最大深度。</p>
+<p>代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (root-&gt;left == <span class="literal">NULL</span> &amp;&amp; root-&gt;right == <span class="literal">NULL</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (depth &gt; maxDepth) &#123;</span><br><span class="line">        maxDepth = depth;           <span class="comment">// 更新最大深度</span></span><br><span class="line">        result = root-&gt;val;   <span class="comment">// 最大深度最左面的数值</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>确定单层递归的逻辑</li>
+</ol>
+<p>在找最大深度的时候，递归的过程中依然要使用回溯，代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">                    <span class="comment">// 中</span></span><br><span class="line"><span class="keyword">if</span> (root-&gt;left) &#123;   <span class="comment">// 左</span></span><br><span class="line">    depth++; <span class="comment">// 深度加一</span></span><br><span class="line">    <span class="built_in">traversal</span>(root-&gt;left, depth);</span><br><span class="line">    depth--; <span class="comment">// 回溯，深度减一</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (root-&gt;right) &#123; <span class="comment">// 右</span></span><br><span class="line">    depth++; <span class="comment">// 深度加一</span></span><br><span class="line">    <span class="built_in">traversal</span>(root-&gt;right, depth);</span><br><span class="line">    depth--; <span class="comment">// 回溯，深度减一</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span>;</span><br></pre></td></tr></table></figure>
+
+<p>完整代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="type">int</span> maxDepth = INT_MIN;</span><br><span class="line">    <span class="type">int</span> result;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">traversal</span><span class="params">(TreeNode* root, <span class="type">int</span> depth)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (root-&gt;left == <span class="literal">NULL</span> &amp;&amp; root-&gt;right == <span class="literal">NULL</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (depth &gt; maxDepth) &#123;</span><br><span class="line">                maxDepth = depth;</span><br><span class="line">                result = root-&gt;val;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (root-&gt;left) &#123;</span><br><span class="line">            depth++;</span><br><span class="line">            <span class="built_in">traversal</span>(root-&gt;left, depth);</span><br><span class="line">            depth--; <span class="comment">// 回溯</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (root-&gt;right) &#123;</span><br><span class="line">            depth++;</span><br><span class="line">            <span class="built_in">traversal</span>(root-&gt;right, depth);</span><br><span class="line">            depth--; <span class="comment">// 回溯</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">findBottomLeftValue</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">traversal</span>(root, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>当然回溯的地方可以精简，精简代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="type">int</span> maxDepth = INT_MIN;</span><br><span class="line">    <span class="type">int</span> result;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">traversal</span><span class="params">(TreeNode* root, <span class="type">int</span> depth)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (root-&gt;left == <span class="literal">NULL</span> &amp;&amp; root-&gt;right == <span class="literal">NULL</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (depth &gt; maxDepth) &#123;</span><br><span class="line">                maxDepth = depth;</span><br><span class="line">                result = root-&gt;val;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (root-&gt;left) &#123;</span><br><span class="line">            <span class="built_in">traversal</span>(root-&gt;left, depth + <span class="number">1</span>); <span class="comment">// 隐藏着回溯</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (root-&gt;right) &#123;</span><br><span class="line">            <span class="built_in">traversal</span>(root-&gt;right, depth + <span class="number">1</span>); <span class="comment">// 隐藏着回溯</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">findBottomLeftValue</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">traversal</span>(root, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>如果对回溯部分精简的代码 不理解的话，可以看这篇<a target="_blank" rel="noopener" href="https://programmercarl.com/0257.%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%89%80%E6%9C%89%E8%B7%AF%E5%BE%84.html">257. 二叉树的所有路径</a> </p>
+<h3 id="迭代法"><a href="#迭代法" class="headerlink" title="迭代法"></a>迭代法</h3><p>本题使用层序遍历再合适不过了，比递归要好理解的多！</p>
+<p>只需要记录最后一行第一个节点的数值就可以了。</p>
+<p>如果对层序遍历不了解，看这篇<a target="_blank" rel="noopener" href="https://programmercarl.com/0102.%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B1%82%E5%BA%8F%E9%81%8D%E5%8E%86.html">二叉树：层序遍历登场！</a>，这篇里也给出了层序遍历的模板，稍作修改就一过刷了这道题了。</p>
+<p>代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">findBottomLeftValue</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        queue&lt;TreeNode*&gt; que;</span><br><span class="line">        <span class="keyword">if</span> (root != <span class="literal">NULL</span>) que.<span class="built_in">push</span>(root);</span><br><span class="line">        <span class="type">int</span> result = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (!que.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">            <span class="type">int</span> size = que.<span class="built_in">size</span>();</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; size; i++) &#123;</span><br><span class="line">                TreeNode* node = que.<span class="built_in">front</span>();</span><br><span class="line">                que.<span class="built_in">pop</span>();</span><br><span class="line">                <span class="keyword">if</span> (i == <span class="number">0</span>) result = node-&gt;val; <span class="comment">// 记录最后一行第一个元素</span></span><br><span class="line">                <span class="keyword">if</span> (node-&gt;left) que.<span class="built_in">push</span>(node-&gt;left);</span><br><span class="line">                <span class="keyword">if</span> (node-&gt;right) que.<span class="built_in">push</span>(node-&gt;right);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>本题涉及如下几点：</p>
+<ul>
+<li>递归求深度的写法，我们在<a target="_blank" rel="noopener" href="https://programmercarl.com/0110.%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91.html">110.平衡二叉树</a>中详细的分析了深度应该怎么求，高度应该怎么求。</li>
+<li>递归中其实隐藏了回溯，在<a target="_blank" rel="noopener" href="https://programmercarl.com/0257.%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%89%80%E6%9C%89%E8%B7%AF%E5%BE%84.html">257. 二叉树的所有路径</a>中讲解了究竟哪里使用了回溯，哪里隐藏了回溯。</li>
+<li>层次遍历，在<a target="_blank" rel="noopener" href="https://programmercarl.com/0102.%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B1%82%E5%BA%8F%E9%81%8D%E5%8E%86.html">二叉树：层序遍历登场！</a>深度讲解了二叉树层次遍历。<br>所以本题涉及到的点，我们之前都讲解过，这些知识点需要同学们灵活运用，这样就举一反三了。</li>
+</ul>
+<h2 id="其他语言版本"><a href="#其他语言版本" class="headerlink" title="其他语言版本"></a>其他语言版本</h2><h3 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h3><p>递归:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">findBottomLeftValue</span>(<span class="params">self, root: TreeNode</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        max_depth = -<span class="built_in">float</span>(<span class="string">&quot;INF&quot;</span>)</span><br><span class="line">        leftmost_val = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">__traverse</span>(<span class="params">root, cur_depth</span>): </span><br><span class="line">            <span class="keyword">nonlocal</span> max_depth, leftmost_val</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> root.left <span class="keyword">and</span> <span class="keyword">not</span> root.right: </span><br><span class="line">                <span class="keyword">if</span> cur_depth &gt; max_depth: </span><br><span class="line">                    max_depth = cur_depth</span><br><span class="line">                    leftmost_val = root.val  </span><br><span class="line">            <span class="keyword">if</span> root.left: </span><br><span class="line">                cur_depth += <span class="number">1</span></span><br><span class="line">                __traverse(root.left, cur_depth)</span><br><span class="line">                cur_depth -= <span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> root.right: </span><br><span class="line">                cur_depth += <span class="number">1</span></span><br><span class="line">                __traverse(root.right, cur_depth)</span><br><span class="line">                cur_depth -= <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        __traverse(root, <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> leftmost_val</span><br></pre></td></tr></table></figure>
+
+<p>迭代 - 层序遍历:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">findBottomLeftValue</span>(<span class="params">self, root: TreeNode</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        queue = deque()</span><br><span class="line">        <span class="keyword">if</span> root: </span><br><span class="line">            queue.append(root)</span><br><span class="line">        result = <span class="number">0</span></span><br><span class="line">        <span class="keyword">while</span> queue: </span><br><span class="line">            q_len = <span class="built_in">len</span>(queue)</span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(q_len): </span><br><span class="line">                <span class="keyword">if</span> i == <span class="number">0</span>: </span><br><span class="line">                    result = queue[i].val </span><br><span class="line">                cur = queue.popleft()</span><br><span class="line">                <span class="keyword">if</span> cur.left: </span><br><span class="line">                    queue.append(cur.left)</span><br><span class="line">                <span class="keyword">if</span> cur.right: </span><br><span class="line">                    queue.append(cur.right)</span><br><span class="line">        <span class="keyword">return</span> result</span><br></pre></td></tr></table></figure>
+
+<h1 id="112-路径总和"><a href="#112-路径总和" class="headerlink" title="112. 路径总和"></a>112. 路径总和</h1><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/path-sum/">力扣题目链接</a></p>
+<p>给定一个二叉树和一个目标和，判断该树中是否存在根节点到叶子节点的路径，这条路径上所有节点值相加等于目标和。</p>
+<p>说明: 叶子节点是指没有子节点的节点。</p>
+<p>示例: <br>给定如下二叉树，以及目标和 sum &#x3D; 22，</p>
+<p><img src="https://img-blog.csdnimg.cn/20210203160355234.png" alt="112.路径总和1"></p>
+<p>返回 true, 因为存在目标和为 22 的根节点到叶子节点的路径 5-&gt;4-&gt;11-&gt;2。</p>
+<h2 id="视频讲解-1"><a href="#视频讲解-1" class="headerlink" title="视频讲解"></a>视频讲解</h2><p><strong>《代码随想录》算法视频公开课：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV19t4y1L7CR">拿不准的遍历顺序，搞不清的回溯过程，我太难了！ | LeetCode：112. 路径总和</a>，相信结合视频在看本篇题解，更有助于大家对本题的理解</strong>。</p>
+<h2 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h2><p>相信很多同学都会疑惑，递归函数什么时候要有返回值，什么时候没有返回值，特别是有的时候递归函数返回类型为bool类型。</p>
+<p>那么接下来我通过详细讲解如下两道题，来回答这个问题：</p>
+<ul>
+<li>112.路径总和</li>
+<li>113.路径总和ii</li>
+</ul>
+<p>这道题我们要遍历从根节点到叶子节点的的路径看看总和是不是目标和。</p>
+<h3 id="递归-1"><a href="#递归-1" class="headerlink" title="递归"></a>递归</h3><p>可以使用深度优先遍历的方式（本题前中后序都可以，无所谓，因为中节点也没有处理逻辑）来遍历二叉树</p>
+<ol>
+<li>确定递归函数的参数和返回类型</li>
+</ol>
+<p>参数：需要二叉树的根节点，还需要一个计数器，这个计数器用来计算二叉树的一条边之和是否正好是目标和，计数器为int型。</p>
+<p>再来看返回值，递归函数什么时候需要返回值？什么时候不需要返回值？这里总结如下三点：</p>
+<ul>
+<li>如果需要搜索整棵二叉树且不用处理递归返回值，递归函数就不要返回值。（这种情况就是本文下半部分介绍的113.路径总和ii）</li>
+<li>如果需要搜索整棵二叉树且需要处理递归返回值，递归函数就需要返回值。 （这种情况我们在<a target="_blank" rel="noopener" href="https://programmercarl.com/0236.%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88.html">236. 二叉树的最近公共祖先</a>中介绍）</li>
+<li>如果要搜索其中一条符合条件的路径，那么递归一定需要返回值，因为遇到符合条件的路径了就要及时返回。（本题的情况）</li>
+</ul>
+<p>而本题我们要找一条符合条件的路径，所以递归函数需要返回值，及时返回，那么返回类型是什么呢？</p>
+<p>如图所示：</p>
+<p><img src="https://img-blog.csdnimg.cn/2021020316051216.png" alt="112.路径总和"></p>
+<p>图中可以看出，遍历的路线，并不要遍历整棵树，所以递归函数需要返回值，可以用bool类型表示。</p>
+<p>所以代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">bool</span> <span class="title">traversal</span><span class="params">(treenode* cur, <span class="type">int</span> count)</span>   <span class="comment">// 注意函数的返回类型</span></span></span><br></pre></td></tr></table></figure>
+
+
+<ol start="2">
+<li>确定终止条件</li>
+</ol>
+<p>首先计数器如何统计这一条路径的和呢？</p>
+<p>不要去累加然后判断是否等于目标和，那么代码比较麻烦，可以用递减，让计数器count初始为目标和，然后每次减去遍历路径节点上的数值。</p>
+<p>如果最后count &#x3D;&#x3D; 0，同时到了叶子节点的话，说明找到了目标和。</p>
+<p>如果遍历到了叶子节点，count不为0，就是没找到。</p>
+<p>递归终止条件代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (!cur-&gt;left &amp;&amp; !cur-&gt;right &amp;&amp; count == <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">true</span>; <span class="comment">// 遇到叶子节点，并且计数为0</span></span><br><span class="line"><span class="keyword">if</span> (!cur-&gt;left &amp;&amp; !cur-&gt;right) <span class="keyword">return</span> <span class="literal">false</span>; <span class="comment">// 遇到叶子节点而没有找到合适的边，直接返回</span></span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>确定单层递归的逻辑</li>
+</ol>
+<p>因为终止条件是判断叶子节点，所以递归的过程中就不要让空节点进入递归了。</p>
+<p>递归函数是有返回值的，如果递归函数返回true，说明找到了合适的路径，应该立刻返回。</p>
+<p>代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (cur-&gt;left) &#123; <span class="comment">// 左 （空节点不遍历）</span></span><br><span class="line">    <span class="comment">// 遇到叶子节点返回true，则直接返回true</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">traversal</span>(cur-&gt;left, count - cur-&gt;left-&gt;val)) <span class="keyword">return</span> <span class="literal">true</span>; <span class="comment">// 注意这里有回溯的逻辑</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (cur-&gt;right) &#123; <span class="comment">// 右 （空节点不遍历）</span></span><br><span class="line">    <span class="comment">// 遇到叶子节点返回true，则直接返回true</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">traversal</span>(cur-&gt;right, count - cur-&gt;right-&gt;val)) <span class="keyword">return</span> <span class="literal">true</span>; <span class="comment">// 注意这里有回溯的逻辑</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> <span class="literal">false</span>;</span><br></pre></td></tr></table></figure>
+
+<p>以上代码中是包含着回溯的，没有回溯，如何后撤重新找另一条路径呢。</p>
+<p>回溯隐藏在<code>traversal(cur-&gt;left, count - cur-&gt;left-&gt;val)</code>这里， 因为把<code>count - cur-&gt;left-&gt;val</code> 直接作为参数传进去，函数结束，count的数值没有改变。</p>
+<p>为了把回溯的过程体现出来，可以改为如下代码：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (cur-&gt;left) &#123; <span class="comment">// 左</span></span><br><span class="line">    count -= cur-&gt;left-&gt;val; <span class="comment">// 递归，处理节点;</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">traversal</span>(cur-&gt;left, count)) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    count += cur-&gt;left-&gt;val; <span class="comment">// 回溯，撤销处理结果</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (cur-&gt;right) &#123; <span class="comment">// 右</span></span><br><span class="line">    count -= cur-&gt;right-&gt;val;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">traversal</span>(cur-&gt;right, count)) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    count += cur-&gt;right-&gt;val;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> <span class="literal">false</span>;</span><br></pre></td></tr></table></figure>
+
+
+<p>整体代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">traversal</span><span class="params">(TreeNode* cur, <span class="type">int</span> count)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!cur-&gt;left &amp;&amp; !cur-&gt;right &amp;&amp; count == <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">true</span>; <span class="comment">// 遇到叶子节点，并且计数为0</span></span><br><span class="line">        <span class="keyword">if</span> (!cur-&gt;left &amp;&amp; !cur-&gt;right) <span class="keyword">return</span> <span class="literal">false</span>; <span class="comment">// 遇到叶子节点直接返回</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (cur-&gt;left) &#123; <span class="comment">// 左</span></span><br><span class="line">            count -= cur-&gt;left-&gt;val; <span class="comment">// 递归，处理节点;</span></span><br><span class="line">            <span class="keyword">if</span> (<span class="built_in">traversal</span>(cur-&gt;left, count)) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            count += cur-&gt;left-&gt;val; <span class="comment">// 回溯，撤销处理结果</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (cur-&gt;right) &#123; <span class="comment">// 右</span></span><br><span class="line">            count -= cur-&gt;right-&gt;val; <span class="comment">// 递归，处理节点;</span></span><br><span class="line">            <span class="keyword">if</span> (<span class="built_in">traversal</span>(cur-&gt;right, count)) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            count += cur-&gt;right-&gt;val; <span class="comment">// 回溯，撤销处理结果</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">hasPathSum</span><span class="params">(TreeNode* root, <span class="type">int</span> sum)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="literal">NULL</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">traversal</span>(root, sum - root-&gt;val);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>以上代码精简之后如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">hasPathSum</span><span class="params">(TreeNode* root, <span class="type">int</span> sum)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (root == null) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">if</span> (!root-&gt;left &amp;&amp; !root-&gt;right &amp;&amp; sum == root-&gt;val) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">haspathsum</span>(root-&gt;left, sum - root-&gt;val) || <span class="built_in">haspathsum</span>(root-&gt;right, sum - root-&gt;val);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><strong>是不是发现精简之后的代码，已经完全看不出分析的过程了，所以我们要把题目分析清楚之后，在追求代码精简。</strong> 这一点我已经强调很多次了！</p>
+<h3 id="迭代"><a href="#迭代" class="headerlink" title="迭代"></a>迭代</h3><p>如果使用栈模拟递归的话，那么如果做回溯呢？</p>
+<p><strong>此时栈里一个元素不仅要记录该节点指针，还要记录从头结点到该节点的路径数值总和。</strong></p>
+<p>c++就我们用pair结构来存放这个栈里的元素。</p>
+<p>定义为：<code>pair&lt;TreeNode*, int&gt;</code> pair&lt;节点指针，路径数值&gt;</p>
+<p>这个为栈里的一个元素。</p>
+<p>如下代码是使用栈模拟的前序遍历，如下：（详细注释）</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">solution</span> &#123;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">haspathsum</span><span class="params">(TreeNode* root, <span class="type">int</span> sum)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (root == null) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="comment">// 此时栈里要放的是pair&lt;节点指针，路径数值&gt;</span></span><br><span class="line">        stack&lt;pair&lt;TreeNode*, <span class="type">int</span>&gt;&gt; st;</span><br><span class="line">        st.<span class="built_in">push</span>(<span class="built_in">pair</span>&lt;TreeNode*, <span class="type">int</span>&gt;(root, root-&gt;val));</span><br><span class="line">        <span class="keyword">while</span> (!st.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">            pair&lt;TreeNode*, <span class="type">int</span>&gt; node = st.<span class="built_in">top</span>();</span><br><span class="line">            st.<span class="built_in">pop</span>();</span><br><span class="line">            <span class="comment">// 如果该节点是叶子节点了，同时该节点的路径数值等于sum，那么就返回true</span></span><br><span class="line">            <span class="keyword">if</span> (!node.first-&gt;left &amp;&amp; !node.first-&gt;right &amp;&amp; sum == node.second) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 右节点，压进去一个节点的时候，将该节点的路径数值也记录下来</span></span><br><span class="line">            <span class="keyword">if</span> (node.first-&gt;right) &#123;</span><br><span class="line">                st.<span class="built_in">push</span>(<span class="built_in">pair</span>&lt;TreeNode*, <span class="type">int</span>&gt;(node.first-&gt;right, node.second + node.first-&gt;right-&gt;val));</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 左节点，压进去一个节点的时候，将该节点的路径数值也记录下来</span></span><br><span class="line">            <span class="keyword">if</span> (node.first-&gt;left) &#123;</span><br><span class="line">                st.<span class="built_in">push</span>(<span class="built_in">pair</span>&lt;TreeNode*, <span class="type">int</span>&gt;(node.first-&gt;left, node.second + node.first-&gt;left-&gt;val));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>如果大家完全理解了本题的递归方法之后，就可以顺便把leetcode上113. 路径总和ii做了。</p>
+<h1 id="113-路径总和ii"><a href="#113-路径总和ii" class="headerlink" title="113. 路径总和ii"></a>113. 路径总和ii</h1><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/path-sum-ii/">力扣题目链接</a></p>
+<p>给定一个二叉树和一个目标和，找到所有从根节点到叶子节点路径总和等于给定目标和的路径。</p>
+<p>说明: 叶子节点是指没有子节点的节点。</p>
+<p>示例:<br>给定如下二叉树，以及目标和 sum &#x3D; 22，</p>
+<p><img src="https://img-blog.csdnimg.cn/20210203160854654.png" alt="113.路径总和ii1.png"></p>
+<h2 id="思路-2"><a href="#思路-2" class="headerlink" title="思路"></a>思路</h2><p>113.路径总和ii要遍历整个树，找到所有路径，<strong>所以递归函数不要返回值！</strong></p>
+<p>如图：</p>
+<p><img src="https://img-blog.csdnimg.cn/20210203160922745.png" alt="113.路径总和ii"></p>
+<p>为了尽可能的把细节体现出来，我写出如下代码（<strong>这份代码并不简洁，但是逻辑非常清晰</strong>）</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">solution</span> &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; result;</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; path;</span><br><span class="line">    <span class="comment">// 递归函数不需要返回值，因为我们要遍历整个树</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">traversal</span><span class="params">(treenode* cur, <span class="type">int</span> count)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!cur-&gt;left &amp;&amp; !cur-&gt;right &amp;&amp; count == <span class="number">0</span>) &#123; <span class="comment">// 遇到了叶子节点且找到了和为sum的路径</span></span><br><span class="line">            result.<span class="built_in">push_back</span>(path);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (!cur-&gt;left &amp;&amp; !cur-&gt;right) <span class="keyword">return</span> ; <span class="comment">// 遇到叶子节点而没有找到合适的边，直接返回</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (cur-&gt;left) &#123; <span class="comment">// 左 （空节点不遍历）</span></span><br><span class="line">            path.<span class="built_in">push_back</span>(cur-&gt;left-&gt;val);</span><br><span class="line">            count -= cur-&gt;left-&gt;val;</span><br><span class="line">            <span class="built_in">traversal</span>(cur-&gt;left, count);    <span class="comment">// 递归</span></span><br><span class="line">            count += cur-&gt;left-&gt;val;        <span class="comment">// 回溯</span></span><br><span class="line">            path.<span class="built_in">pop_back</span>();                <span class="comment">// 回溯</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (cur-&gt;right) &#123; <span class="comment">// 右 （空节点不遍历）</span></span><br><span class="line">            path.<span class="built_in">push_back</span>(cur-&gt;right-&gt;val);</span><br><span class="line">            count -= cur-&gt;right-&gt;val;</span><br><span class="line">            <span class="built_in">traversal</span>(cur-&gt;right, count);   <span class="comment">// 递归</span></span><br><span class="line">            count += cur-&gt;right-&gt;val;       <span class="comment">// 回溯</span></span><br><span class="line">            path.<span class="built_in">pop_back</span>();                <span class="comment">// 回溯</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">pathsum</span>(treenode* root, <span class="type">int</span> sum) &#123;</span><br><span class="line">        result.<span class="built_in">clear</span>();</span><br><span class="line">        path.<span class="built_in">clear</span>();</span><br><span class="line">        <span class="keyword">if</span> (root == null) <span class="keyword">return</span> result;</span><br><span class="line">        path.<span class="built_in">push_back</span>(root-&gt;val); <span class="comment">// 把根节点放进路径</span></span><br><span class="line">        <span class="built_in">traversal</span>(root, sum - root-&gt;val);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>至于113. 路径总和ii 的迭代法我并没有写，用迭代方式记录所有路径比较麻烦，也没有必要，如果大家感兴趣的话，可以再深入研究研究。</p>
+<h2 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h2><p>本篇通过leetcode上112. 路径总和 和 113. 路径总和ii 详细的讲解了 递归函数什么时候需要返回值，什么不需要返回值。</p>
+<p>这两道题目是掌握这一知识点非常好的题目，大家看完本篇文章再去做题，就会感受到搜索整棵树和搜索某一路径的差别。</p>
+<p>对于112. 路径总和，我依然给出了递归法和迭代法，这种题目其实用迭代法会复杂一些，能掌握递归方式就够了！</p>
+<h2 id="python"><a href="#python" class="headerlink" title="python"></a>python</h2><h3 id="0112-路径总和"><a href="#0112-路径总和" class="headerlink" title="0112.路径总和"></a>0112.路径总和</h3><p><strong>递归</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">haspathsum</span>(<span class="params">self, root: treenode, targetsum: <span class="built_in">int</span></span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">isornot</span>(<span class="params">root, targetsum</span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">            <span class="keyword">if</span> (<span class="keyword">not</span> root.left) <span class="keyword">and</span> (<span class="keyword">not</span> root.right) <span class="keyword">and</span> targetsum == <span class="number">0</span>:</span><br><span class="line">                <span class="keyword">return</span> true  <span class="comment"># 遇到叶子节点，并且计数为0</span></span><br><span class="line">            <span class="keyword">if</span> (<span class="keyword">not</span> root.left) <span class="keyword">and</span> (<span class="keyword">not</span> root.right):</span><br><span class="line">                <span class="keyword">return</span> false  <span class="comment"># 遇到叶子节点，计数不为0</span></span><br><span class="line">            <span class="keyword">if</span> root.left:</span><br><span class="line">                targetsum -= root.left.val  <span class="comment"># 左节点</span></span><br><span class="line">                <span class="keyword">if</span> isornot(root.left, targetsum): <span class="keyword">return</span> true  <span class="comment"># 递归，处理左节点</span></span><br><span class="line">                targetsum += root.left.val  <span class="comment"># 回溯</span></span><br><span class="line">            <span class="keyword">if</span> root.right:</span><br><span class="line">                targetsum -= root.right.val  <span class="comment"># 右节点</span></span><br><span class="line">                <span class="keyword">if</span> isornot(root.right, targetsum): <span class="keyword">return</span> true  <span class="comment"># 递归，处理右节点</span></span><br><span class="line">                targetsum += root.right.val  <span class="comment"># 回溯</span></span><br><span class="line">            <span class="keyword">return</span> false</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> root == none:</span><br><span class="line">            <span class="keyword">return</span> false  <span class="comment"># 别忘记处理空treenode</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> isornot(root, targetsum - root.val)</span><br></pre></td></tr></table></figure>
+
+<p><strong>迭代 - 层序遍历</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">haspathsum</span>(<span class="params">self, root: treenode, targetsum: <span class="built_in">int</span></span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> root: </span><br><span class="line">            <span class="keyword">return</span> false</span><br><span class="line"></span><br><span class="line">        stack = []  <span class="comment"># [(当前节点，路径数值), ...]</span></span><br><span class="line">        stack.append((root, root.val))</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> stack: </span><br><span class="line">            cur_node, path_sum = stack.pop()</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> cur_node.left <span class="keyword">and</span> <span class="keyword">not</span> cur_node.right <span class="keyword">and</span> path_sum == targetsum: </span><br><span class="line">                <span class="keyword">return</span> true</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> cur_node.right: </span><br><span class="line">                stack.append((cur_node.right, path_sum + cur_node.right.val))    </span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> cur_node.left: </span><br><span class="line">                stack.append((cur_node.left, path_sum + cur_node.left.val))</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> false</span><br></pre></td></tr></table></figure>
+
+<h3 id="0113-路径总和-ii"><a href="#0113-路径总和-ii" class="headerlink" title="0113.路径总和-ii"></a>0113.路径总和-ii</h3><p><strong>递归</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">pathsum</span>(<span class="params">self, root: treenode, targetsum: <span class="built_in">int</span></span>) -&gt; <span class="built_in">list</span>[<span class="built_in">list</span>[<span class="built_in">int</span>]]:</span><br><span class="line"></span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">traversal</span>(<span class="params">cur_node, remain</span>): </span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> cur_node.left <span class="keyword">and</span> <span class="keyword">not</span> cur_node.right:</span><br><span class="line">                <span class="keyword">if</span> remain == <span class="number">0</span>: </span><br><span class="line">                    result.append(path[:])</span><br><span class="line">                <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> cur_node.left: </span><br><span class="line">                path.append(cur_node.left.val)</span><br><span class="line">                traversal(cur_node.left, remain-cur_node.left.val)</span><br><span class="line">                path.pop()</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> cur_node.right: </span><br><span class="line">                path.append(cur_node.right.val)</span><br><span class="line">                traversal(cur_node.right, remain-cur_node.right.val)</span><br><span class="line">                path.pop()</span><br><span class="line"></span><br><span class="line">        result, path = [], []</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> root: </span><br><span class="line">            <span class="keyword">return</span> []</span><br><span class="line">        path.append(root.val)</span><br><span class="line">        traversal(root, targetsum - root.val)</span><br><span class="line">        <span class="keyword">return</span> result</span><br></pre></td></tr></table></figure>
+
+<p><strong>迭代法，用第二个队列保存目前的总和与路径</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">pathSum</span>(<span class="params">self, root: <span class="type">Optional</span>[TreeNode], targetSum: <span class="built_in">int</span></span>) -&gt; <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]:</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> root:</span><br><span class="line">            <span class="keyword">return</span> []</span><br><span class="line">        que, temp = deque([root]), deque([(root.val, [root.val])])</span><br><span class="line">        result = []</span><br><span class="line">        <span class="keyword">while</span> que:</span><br><span class="line">            <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(que)):</span><br><span class="line">                node = que.popleft()</span><br><span class="line">                value, path = temp.popleft()</span><br><span class="line">                <span class="keyword">if</span> (<span class="keyword">not</span> node.left) <span class="keyword">and</span> (<span class="keyword">not</span> node.right):</span><br><span class="line">                    <span class="keyword">if</span> value == targetSum:</span><br><span class="line">                        result.append(path)</span><br><span class="line">                <span class="keyword">if</span> node.left:</span><br><span class="line">                    que.append(node.left)</span><br><span class="line">                    temp.append((node.left.val+value, path+[node.left.val]))</span><br><span class="line">                <span class="keyword">if</span> node.right:</span><br><span class="line">                    que.append(node.right)</span><br><span class="line">                    temp.append((node.right.val+value, path+[node.right.val]))</span><br><span class="line">        <span class="keyword">return</span> result</span><br></pre></td></tr></table></figure>
+
+<p>看完本文，可以一起解决如下两道题目</p>
+<ul>
+<li>106.从中序与后序遍历序列构造二叉树</li>
+<li>105.从前序与中序遍历序列构造二叉树</li>
+</ul>
+<h1 id="106-从中序与后序遍历序列构造二叉树"><a href="#106-从中序与后序遍历序列构造二叉树" class="headerlink" title="106.从中序与后序遍历序列构造二叉树"></a>106.从中序与后序遍历序列构造二叉树</h1><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/construct-binary-tree-from-inorder-and-postorder-traversal/">力扣题目链接</a></p>
+<p>根据一棵树的中序遍历与后序遍历构造二叉树。</p>
+<p>注意:<br>你可以假设树中没有重复的元素。</p>
+<p>例如，给出</p>
+<p>中序遍历 inorder &#x3D; [9,3,15,20,7]<br>后序遍历 postorder &#x3D; [9,15,7,20,3]<br>返回如下的二叉树：</p>
+<p><img src="https://img-blog.csdnimg.cn/20210203154316774.png" alt="106. 从中序与后序遍历序列构造二叉树1"></p>
+<h2 id="视频讲解-2"><a href="#视频讲解-2" class="headerlink" title="视频讲解"></a>视频讲解</h2><p><strong>《代码随想录》算法视频公开课：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1vW4y1i7dn">坑很多！来看看你掉过几次坑 | LeetCode：106.从中序与后序遍历序列构造二叉树</a>，相信结合视频在看本篇题解，更有助于大家对本题的理解</strong>。</p>
+<h2 id="思路-3"><a href="#思路-3" class="headerlink" title="思路"></a>思路</h2><p>首先回忆一下如何根据两个顺序构造一个唯一的二叉树，相信理论知识大家应该都清楚，就是以 后序数组的最后一个元素为切割点，先切中序数组，根据中序数组，反过来在切后序数组。一层一层切下去，每次后序数组最后一个元素就是节点元素。</p>
+<p>如果让我们肉眼看两个序列，画一棵二叉树的话，应该分分钟都可以画出来。</p>
+<p>流程如图：</p>
+<p><img src="https://img-blog.csdnimg.cn/20210203154249860.png" alt="106.从中序与后序遍历序列构造二叉树"></p>
+<p>那么代码应该怎么写呢？</p>
+<p>说到一层一层切割，就应该想到了递归。</p>
+<p>来看一下一共分几步：</p>
+<ul>
+<li><p>第一步：如果数组大小为零的话，说明是空节点了。</p>
+</li>
+<li><p>第二步：如果不为空，那么取后序数组最后一个元素作为节点元素。</p>
+</li>
+<li><p>第三步：找到后序数组最后一个元素在中序数组的位置，作为切割点</p>
+</li>
+<li><p>第四步：切割中序数组，切成中序左数组和中序右数组 （顺序别搞反了，一定是先切中序数组）</p>
+</li>
+<li><p>第五步：切割后序数组，切成后序左数组和后序右数组</p>
+</li>
+<li><p>第六步：递归处理左区间和右区间</p>
+</li>
+</ul>
+<p>不难写出如下代码：（先把框架写出来）</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">TreeNode* <span class="title">traversal</span> <span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; inorder, vector&lt;<span class="type">int</span>&gt;&amp; postorder)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 第一步</span></span><br><span class="line">    <span class="keyword">if</span> (postorder.<span class="built_in">size</span>() == <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 第二步：后序遍历数组最后一个元素，就是当前的中间节点</span></span><br><span class="line">    <span class="type">int</span> rootValue = postorder[postorder.<span class="built_in">size</span>() - <span class="number">1</span>];</span><br><span class="line">    TreeNode* root = <span class="keyword">new</span> <span class="built_in">TreeNode</span>(rootValue);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 叶子节点</span></span><br><span class="line">    <span class="keyword">if</span> (postorder.<span class="built_in">size</span>() == <span class="number">1</span>) <span class="keyword">return</span> root;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 第三步：找切割点</span></span><br><span class="line">    <span class="type">int</span> delimiterIndex;</span><br><span class="line">    <span class="keyword">for</span> (delimiterIndex = <span class="number">0</span>; delimiterIndex &lt; inorder.<span class="built_in">size</span>(); delimiterIndex++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (inorder[delimiterIndex] == rootValue) <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 第四步：切割中序数组，得到 中序左数组和中序右数组</span></span><br><span class="line">    <span class="comment">// 第五步：切割后序数组，得到 后序左数组和后序右数组</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 第六步</span></span><br><span class="line">    root-&gt;left = <span class="built_in">traversal</span>(中序左数组, 后序左数组);</span><br><span class="line">    root-&gt;right = <span class="built_in">traversal</span>(中序右数组, 后序右数组);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> root;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>难点大家应该发现了，就是如何切割，以及边界值找不好很容易乱套。</strong></p>
+<p>此时应该注意确定切割的标准，是左闭右开，还有左开右闭，还是左闭右闭，这个就是不变量，要在递归中保持这个不变量。</p>
+<p><strong>在切割的过程中会产生四个区间，把握不好不变量的话，一会左闭右开，一会左闭右闭，必然乱套！</strong></p>
+<p>我在<a target="_blank" rel="noopener" href="https://programmercarl.com/0035.%E6%90%9C%E7%B4%A2%E6%8F%92%E5%85%A5%E4%BD%8D%E7%BD%AE.html">数组：每次遇到二分法，都是一看就会，一写就废</a>和<a target="_blank" rel="noopener" href="https://programmercarl.com/0059.%E8%9E%BA%E6%97%8B%E7%9F%A9%E9%98%B5II.html">数组：这个循环可以转懵很多人！</a>中都强调过循环不变量的重要性，在二分查找以及螺旋矩阵的求解中，坚持循环不变量非常重要，本题也是。</p>
+<p>首先要切割中序数组，为什么先切割中序数组呢？</p>
+<p>切割点在后序数组的最后一个元素，就是用这个元素来切割中序数组的，所以必要先切割中序数组。</p>
+<p>中序数组相对比较好切，找到切割点（后序数组的最后一个元素）在中序数组的位置，然后切割，如下代码中我坚持左闭右开的原则：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 找到中序遍历的切割点</span></span><br><span class="line"><span class="type">int</span> delimiterIndex;</span><br><span class="line"><span class="keyword">for</span> (delimiterIndex = <span class="number">0</span>; delimiterIndex &lt; inorder.<span class="built_in">size</span>(); delimiterIndex++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (inorder[delimiterIndex] == rootValue) <span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 左闭右开区间：[0, delimiterIndex)</span></span><br><span class="line"><span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">leftInorder</span><span class="params">(inorder.begin(), inorder.begin() + delimiterIndex)</span></span>;</span><br><span class="line"><span class="comment">// [delimiterIndex + 1, end)</span></span><br><span class="line"><span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">rightInorder</span><span class="params">(inorder.begin() + delimiterIndex + <span class="number">1</span>, inorder.end() )</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>接下来就要切割后序数组了。</p>
+<p>首先后序数组的最后一个元素指定不能要了，这是切割点 也是 当前二叉树中间节点的元素，已经用了。</p>
+<p>后序数组的切割点怎么找？</p>
+<p>后序数组没有明确的切割元素来进行左右切割，不像中序数组有明确的切割点，切割点左右分开就可以了。</p>
+<p><strong>此时有一个很重的点，就是中序数组大小一定是和后序数组的大小相同的（这是必然）。</strong></p>
+<p>中序数组我们都切成了左中序数组和右中序数组了，那么后序数组就可以按照左中序数组的大小来切割，切成左后序数组和右后序数组。</p>
+<p>代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// postorder 舍弃末尾元素，因为这个元素就是中间节点，已经用过了</span></span><br><span class="line">postorder.<span class="built_in">resize</span>(postorder.<span class="built_in">size</span>() - <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 左闭右开，注意这里使用了左中序数组大小作为切割点：[0, leftInorder.size)</span></span><br><span class="line"><span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">leftPostorder</span><span class="params">(postorder.begin(), postorder.begin() + leftInorder.size())</span></span>;</span><br><span class="line"><span class="comment">// [leftInorder.size(), end)</span></span><br><span class="line"><span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">rightPostorder</span><span class="params">(postorder.begin() + leftInorder.size(), postorder.end())</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>此时，中序数组切成了左中序数组和右中序数组，后序数组切割成左后序数组和右后序数组。</p>
+<p>接下来可以递归了，代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">root-&gt;left = <span class="built_in">traversal</span>(leftInorder, leftPostorder);</span><br><span class="line">root-&gt;right = <span class="built_in">traversal</span>(rightInorder, rightPostorder);</span><br></pre></td></tr></table></figure>
+
+<p>完整代码如下：</p>
+<h3 id="C-完整代码"><a href="#C-完整代码" class="headerlink" title="C++完整代码"></a>C++完整代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">traversal</span> <span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; inorder, vector&lt;<span class="type">int</span>&gt;&amp; postorder)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (postorder.<span class="built_in">size</span>() == <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 后序遍历数组最后一个元素，就是当前的中间节点</span></span><br><span class="line">        <span class="type">int</span> rootValue = postorder[postorder.<span class="built_in">size</span>() - <span class="number">1</span>];</span><br><span class="line">        TreeNode* root = <span class="keyword">new</span> <span class="built_in">TreeNode</span>(rootValue);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 叶子节点</span></span><br><span class="line">        <span class="keyword">if</span> (postorder.<span class="built_in">size</span>() == <span class="number">1</span>) <span class="keyword">return</span> root;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 找到中序遍历的切割点</span></span><br><span class="line">        <span class="type">int</span> delimiterIndex;</span><br><span class="line">        <span class="keyword">for</span> (delimiterIndex = <span class="number">0</span>; delimiterIndex &lt; inorder.<span class="built_in">size</span>(); delimiterIndex++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (inorder[delimiterIndex] == rootValue) <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 切割中序数组</span></span><br><span class="line">        <span class="comment">// 左闭右开区间：[0, delimiterIndex)</span></span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">leftInorder</span><span class="params">(inorder.begin(), inorder.begin() + delimiterIndex)</span></span>;</span><br><span class="line">        <span class="comment">// [delimiterIndex + 1, end)</span></span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">rightInorder</span><span class="params">(inorder.begin() + delimiterIndex + <span class="number">1</span>, inorder.end() )</span></span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// postorder 舍弃末尾元素</span></span><br><span class="line">        postorder.<span class="built_in">resize</span>(postorder.<span class="built_in">size</span>() - <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 切割后序数组</span></span><br><span class="line">        <span class="comment">// 依然左闭右开，注意这里使用了左中序数组大小作为切割点</span></span><br><span class="line">        <span class="comment">// [0, leftInorder.size)</span></span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">leftPostorder</span><span class="params">(postorder.begin(), postorder.begin() + leftInorder.size())</span></span>;</span><br><span class="line">        <span class="comment">// [leftInorder.size(), end)</span></span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">rightPostorder</span><span class="params">(postorder.begin() + leftInorder.size(), postorder.end())</span></span>;</span><br><span class="line"></span><br><span class="line">        root-&gt;left = <span class="built_in">traversal</span>(leftInorder, leftPostorder);</span><br><span class="line">        root-&gt;right = <span class="built_in">traversal</span>(rightInorder, rightPostorder);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">buildTree</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; inorder, vector&lt;<span class="type">int</span>&gt;&amp; postorder)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (inorder.<span class="built_in">size</span>() == <span class="number">0</span> || postorder.<span class="built_in">size</span>() == <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">traversal</span>(inorder, postorder);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>相信大家自己就算是思路清晰， 代码写出来一定是各种问题，所以一定要加日志来调试，看看是不是按照自己思路来切割的，不要大脑模拟，那样越想越糊涂。</p>
+<p>加了日志的代码如下：（加了日志的代码不要在leetcode上提交，容易超时）</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">traversal</span> <span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; inorder, vector&lt;<span class="type">int</span>&gt;&amp; postorder)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (postorder.<span class="built_in">size</span>() == <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> rootValue = postorder[postorder.<span class="built_in">size</span>() - <span class="number">1</span>];</span><br><span class="line">        TreeNode* root = <span class="keyword">new</span> <span class="built_in">TreeNode</span>(rootValue);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (postorder.<span class="built_in">size</span>() == <span class="number">1</span>) <span class="keyword">return</span> root;</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> delimiterIndex;</span><br><span class="line">        <span class="keyword">for</span> (delimiterIndex = <span class="number">0</span>; delimiterIndex &lt; inorder.<span class="built_in">size</span>(); delimiterIndex++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (inorder[delimiterIndex] == rootValue) <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">leftInorder</span><span class="params">(inorder.begin(), inorder.begin() + delimiterIndex)</span></span>;</span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">rightInorder</span><span class="params">(inorder.begin() + delimiterIndex + <span class="number">1</span>, inorder.end() )</span></span>;</span><br><span class="line"></span><br><span class="line">        postorder.<span class="built_in">resize</span>(postorder.<span class="built_in">size</span>() - <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">leftPostorder</span><span class="params">(postorder.begin(), postorder.begin() + leftInorder.size())</span></span>;</span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">rightPostorder</span><span class="params">(postorder.begin() + leftInorder.size(), postorder.end())</span></span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 一下为日志</span></span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;----------&quot;</span> &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;leftInorder :&quot;</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i : leftInorder) &#123;</span><br><span class="line">            cout &lt;&lt; i &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        cout &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;rightInorder :&quot;</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i : rightInorder) &#123;</span><br><span class="line">            cout &lt;&lt; i &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        cout &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;leftPostorder :&quot;</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i : leftPostorder) &#123;</span><br><span class="line">            cout &lt;&lt; i &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        cout &lt;&lt; endl;</span><br><span class="line">         cout &lt;&lt; <span class="string">&quot;rightPostorder :&quot;</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i : rightPostorder) &#123;</span><br><span class="line">            cout &lt;&lt; i &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        cout &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">        root-&gt;left = <span class="built_in">traversal</span>(leftInorder, leftPostorder);</span><br><span class="line">        root-&gt;right = <span class="built_in">traversal</span>(rightInorder, rightPostorder);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">buildTree</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; inorder, vector&lt;<span class="type">int</span>&gt;&amp; postorder)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (inorder.<span class="built_in">size</span>() == <span class="number">0</span> || postorder.<span class="built_in">size</span>() == <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">traversal</span>(inorder, postorder);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><strong>此时应该发现了，如上的代码性能并不好，应为每层递归定定义了新的vector（就是数组），既耗时又耗空间，但上面的代码是最好理解的，为了方便读者理解，所以用如上的代码来讲解。</strong></p>
+<p>下面给出用下标索引写出的代码版本：（思路是一样的，只不过不用重复定义vector了，每次用下标索引来分割）</p>
+<h3 id="C-优化版本"><a href="#C-优化版本" class="headerlink" title="C++优化版本"></a>C++优化版本</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="comment">// 中序区间：[inorderBegin, inorderEnd)，后序区间[postorderBegin, postorderEnd)</span></span><br><span class="line">    <span class="function">TreeNode* <span class="title">traversal</span> <span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; inorder, <span class="type">int</span> inorderBegin, <span class="type">int</span> inorderEnd, vector&lt;<span class="type">int</span>&gt;&amp; postorder, <span class="type">int</span> postorderBegin, <span class="type">int</span> postorderEnd)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (postorderBegin == postorderEnd) <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> rootValue = postorder[postorderEnd - <span class="number">1</span>];</span><br><span class="line">        TreeNode* root = <span class="keyword">new</span> <span class="built_in">TreeNode</span>(rootValue);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (postorderEnd - postorderBegin == <span class="number">1</span>) <span class="keyword">return</span> root;</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> delimiterIndex;</span><br><span class="line">        <span class="keyword">for</span> (delimiterIndex = inorderBegin; delimiterIndex &lt; inorderEnd; delimiterIndex++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (inorder[delimiterIndex] == rootValue) <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 切割中序数组</span></span><br><span class="line">        <span class="comment">// 左中序区间，左闭右开[leftInorderBegin, leftInorderEnd)</span></span><br><span class="line">        <span class="type">int</span> leftInorderBegin = inorderBegin;</span><br><span class="line">        <span class="type">int</span> leftInorderEnd = delimiterIndex;</span><br><span class="line">        <span class="comment">// 右中序区间，左闭右开[rightInorderBegin, rightInorderEnd)</span></span><br><span class="line">        <span class="type">int</span> rightInorderBegin = delimiterIndex + <span class="number">1</span>;</span><br><span class="line">        <span class="type">int</span> rightInorderEnd = inorderEnd;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 切割后序数组</span></span><br><span class="line">        <span class="comment">// 左后序区间，左闭右开[leftPostorderBegin, leftPostorderEnd)</span></span><br><span class="line">        <span class="type">int</span> leftPostorderBegin =  postorderBegin;</span><br><span class="line">        <span class="type">int</span> leftPostorderEnd = postorderBegin + delimiterIndex - inorderBegin; <span class="comment">// 终止位置是 需要加上 中序区间的大小size</span></span><br><span class="line">        <span class="comment">// 右后序区间，左闭右开[rightPostorderBegin, rightPostorderEnd)</span></span><br><span class="line">        <span class="type">int</span> rightPostorderBegin = postorderBegin + (delimiterIndex - inorderBegin);</span><br><span class="line">        <span class="type">int</span> rightPostorderEnd = postorderEnd - <span class="number">1</span>; <span class="comment">// 排除最后一个元素，已经作为节点了</span></span><br><span class="line"></span><br><span class="line">        root-&gt;left = <span class="built_in">traversal</span>(inorder, leftInorderBegin, leftInorderEnd,  postorder, leftPostorderBegin, leftPostorderEnd);</span><br><span class="line">        root-&gt;right = <span class="built_in">traversal</span>(inorder, rightInorderBegin, rightInorderEnd, postorder, rightPostorderBegin, rightPostorderEnd);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">buildTree</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; inorder, vector&lt;<span class="type">int</span>&gt;&amp; postorder)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (inorder.<span class="built_in">size</span>() == <span class="number">0</span> || postorder.<span class="built_in">size</span>() == <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">        <span class="comment">// 左闭右开的原则</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">traversal</span>(inorder, <span class="number">0</span>, inorder.<span class="built_in">size</span>(), postorder, <span class="number">0</span>, postorder.<span class="built_in">size</span>());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>那么这个版本写出来依然要打日志进行调试，打日志的版本如下：（<strong>该版本不要在leetcode上提交，容易超时</strong>）</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">traversal</span> <span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; inorder, <span class="type">int</span> inorderBegin, <span class="type">int</span> inorderEnd, vector&lt;<span class="type">int</span>&gt;&amp; postorder, <span class="type">int</span> postorderBegin, <span class="type">int</span> postorderEnd)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (postorderBegin == postorderEnd) <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> rootValue = postorder[postorderEnd - <span class="number">1</span>];</span><br><span class="line">        TreeNode* root = <span class="keyword">new</span> <span class="built_in">TreeNode</span>(rootValue);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (postorderEnd - postorderBegin == <span class="number">1</span>) <span class="keyword">return</span> root;</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> delimiterIndex;</span><br><span class="line">        <span class="keyword">for</span> (delimiterIndex = inorderBegin; delimiterIndex &lt; inorderEnd; delimiterIndex++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (inorder[delimiterIndex] == rootValue) <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 切割中序数组</span></span><br><span class="line">        <span class="comment">// 左中序区间，左闭右开[leftInorderBegin, leftInorderEnd)</span></span><br><span class="line">        <span class="type">int</span> leftInorderBegin = inorderBegin;</span><br><span class="line">        <span class="type">int</span> leftInorderEnd = delimiterIndex;</span><br><span class="line">        <span class="comment">// 右中序区间，左闭右开[rightInorderBegin, rightInorderEnd)</span></span><br><span class="line">        <span class="type">int</span> rightInorderBegin = delimiterIndex + <span class="number">1</span>;</span><br><span class="line">        <span class="type">int</span> rightInorderEnd = inorderEnd;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 切割后序数组</span></span><br><span class="line">        <span class="comment">// 左后序区间，左闭右开[leftPostorderBegin, leftPostorderEnd)</span></span><br><span class="line">        <span class="type">int</span> leftPostorderBegin =  postorderBegin;</span><br><span class="line">        <span class="type">int</span> leftPostorderEnd = postorderBegin + delimiterIndex - inorderBegin; <span class="comment">// 终止位置是 需要加上 中序区间的大小size</span></span><br><span class="line">        <span class="comment">// 右后序区间，左闭右开[rightPostorderBegin, rightPostorderEnd)</span></span><br><span class="line">        <span class="type">int</span> rightPostorderBegin = postorderBegin + (delimiterIndex - inorderBegin);</span><br><span class="line">        <span class="type">int</span> rightPostorderEnd = postorderEnd - <span class="number">1</span>; <span class="comment">// 排除最后一个元素，已经作为节点了</span></span><br><span class="line"></span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;----------&quot;</span> &lt;&lt; endl;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;leftInorder :&quot;</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = leftInorderBegin; i &lt; leftInorderEnd; i++) &#123;</span><br><span class="line">            cout &lt;&lt; inorder[i] &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        cout &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;rightInorder :&quot;</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = rightInorderBegin; i &lt; rightInorderEnd; i++) &#123;</span><br><span class="line">            cout &lt;&lt; inorder[i] &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        cout &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;leftpostorder :&quot;</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = leftPostorderBegin; i &lt; leftPostorderEnd; i++) &#123;</span><br><span class="line">            cout &lt;&lt; postorder[i] &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        cout &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;rightpostorder :&quot;</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = rightPostorderBegin; i &lt; rightPostorderEnd; i++) &#123;</span><br><span class="line">            cout &lt;&lt; postorder[i] &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        cout &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">        root-&gt;left = <span class="built_in">traversal</span>(inorder, leftInorderBegin, leftInorderEnd,  postorder, leftPostorderBegin, leftPostorderEnd);</span><br><span class="line">        root-&gt;right = <span class="built_in">traversal</span>(inorder, rightInorderBegin, rightInorderEnd, postorder, rightPostorderBegin, rightPostorderEnd);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">buildTree</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; inorder, vector&lt;<span class="type">int</span>&gt;&amp; postorder)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (inorder.<span class="built_in">size</span>() == <span class="number">0</span> || postorder.<span class="built_in">size</span>() == <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">traversal</span>(inorder, <span class="number">0</span>, inorder.<span class="built_in">size</span>(), postorder, <span class="number">0</span>, postorder.<span class="built_in">size</span>());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h1 id="105-从前序与中序遍历序列构造二叉树"><a href="#105-从前序与中序遍历序列构造二叉树" class="headerlink" title="105.从前序与中序遍历序列构造二叉树"></a>105.从前序与中序遍历序列构造二叉树</h1><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/construct-binary-tree-from-preorder-and-inorder-traversal/">力扣题目链接</a></p>
+<p>根据一棵树的前序遍历与中序遍历构造二叉树。</p>
+<p>注意:<br>你可以假设树中没有重复的元素。</p>
+<p>例如，给出</p>
+<p>前序遍历 preorder &#x3D; [3,9,20,15,7]<br>中序遍历 inorder &#x3D; [9,3,15,20,7]<br>返回如下的二叉树：</p>
+<p><img src="https://img-blog.csdnimg.cn/20210203154626672.png" alt="105. 从前序与中序遍历序列构造二叉树"></p>
+<h2 id="思路-4"><a href="#思路-4" class="headerlink" title="思路"></a>思路</h2><p>本题和106是一样的道理。</p>
+<p>我就直接给出代码了。</p>
+<p>带日志的版本C++代码如下： （<strong>带日志的版本仅用于调试，不要在leetcode上提交，会超时</strong>）</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">        <span class="function">TreeNode* <span class="title">traversal</span> <span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; inorder, <span class="type">int</span> inorderBegin, <span class="type">int</span> inorderEnd, vector&lt;<span class="type">int</span>&gt;&amp; preorder, <span class="type">int</span> preorderBegin, <span class="type">int</span> preorderEnd)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (preorderBegin == preorderEnd) <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> rootValue = preorder[preorderBegin]; <span class="comment">// 注意用preorderBegin 不要用0</span></span><br><span class="line">        TreeNode* root = <span class="keyword">new</span> <span class="built_in">TreeNode</span>(rootValue);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (preorderEnd - preorderBegin == <span class="number">1</span>) <span class="keyword">return</span> root;</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> delimiterIndex;</span><br><span class="line">        <span class="keyword">for</span> (delimiterIndex = inorderBegin; delimiterIndex &lt; inorderEnd; delimiterIndex++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (inorder[delimiterIndex] == rootValue) <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 切割中序数组</span></span><br><span class="line">        <span class="comment">// 中序左区间，左闭右开[leftInorderBegin, leftInorderEnd)</span></span><br><span class="line">        <span class="type">int</span> leftInorderBegin = inorderBegin;</span><br><span class="line">        <span class="type">int</span> leftInorderEnd = delimiterIndex;</span><br><span class="line">        <span class="comment">// 中序右区间，左闭右开[rightInorderBegin, rightInorderEnd)</span></span><br><span class="line">        <span class="type">int</span> rightInorderBegin = delimiterIndex + <span class="number">1</span>;</span><br><span class="line">        <span class="type">int</span> rightInorderEnd = inorderEnd;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 切割前序数组</span></span><br><span class="line">        <span class="comment">// 前序左区间，左闭右开[leftPreorderBegin, leftPreorderEnd)</span></span><br><span class="line">        <span class="type">int</span> leftPreorderBegin =  preorderBegin + <span class="number">1</span>;</span><br><span class="line">        <span class="type">int</span> leftPreorderEnd = preorderBegin + <span class="number">1</span> + delimiterIndex - inorderBegin; <span class="comment">// 终止位置是起始位置加上中序左区间的大小size</span></span><br><span class="line">        <span class="comment">// 前序右区间, 左闭右开[rightPreorderBegin, rightPreorderEnd)</span></span><br><span class="line">        <span class="type">int</span> rightPreorderBegin = preorderBegin + <span class="number">1</span> + (delimiterIndex - inorderBegin);</span><br><span class="line">        <span class="type">int</span> rightPreorderEnd = preorderEnd;</span><br><span class="line"></span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;----------&quot;</span> &lt;&lt; endl;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;leftInorder :&quot;</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = leftInorderBegin; i &lt; leftInorderEnd; i++) &#123;</span><br><span class="line">            cout &lt;&lt; inorder[i] &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        cout &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;rightInorder :&quot;</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = rightInorderBegin; i &lt; rightInorderEnd; i++) &#123;</span><br><span class="line">            cout &lt;&lt; inorder[i] &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        cout &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;leftPreorder :&quot;</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = leftPreorderBegin; i &lt; leftPreorderEnd; i++) &#123;</span><br><span class="line">            cout &lt;&lt; preorder[i] &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        cout &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;rightPreorder :&quot;</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = rightPreorderBegin; i &lt; rightPreorderEnd; i++) &#123;</span><br><span class="line">            cout &lt;&lt; preorder[i] &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        cout &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        root-&gt;left = <span class="built_in">traversal</span>(inorder, leftInorderBegin, leftInorderEnd,  preorder, leftPreorderBegin, leftPreorderEnd);</span><br><span class="line">        root-&gt;right = <span class="built_in">traversal</span>(inorder, rightInorderBegin, rightInorderEnd, preorder, rightPreorderBegin, rightPreorderEnd);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">buildTree</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; preorder, vector&lt;<span class="type">int</span>&gt;&amp; inorder)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (inorder.<span class="built_in">size</span>() == <span class="number">0</span> || preorder.<span class="built_in">size</span>() == <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">traversal</span>(inorder, <span class="number">0</span>, inorder.<span class="built_in">size</span>(), preorder, <span class="number">0</span>, preorder.<span class="built_in">size</span>());</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>105.从前序与中序遍历序列构造二叉树，最后版本，C++代码：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">        <span class="function">TreeNode* <span class="title">traversal</span> <span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; inorder, <span class="type">int</span> inorderBegin, <span class="type">int</span> inorderEnd, vector&lt;<span class="type">int</span>&gt;&amp; preorder, <span class="type">int</span> preorderBegin, <span class="type">int</span> preorderEnd)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (preorderBegin == preorderEnd) <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> rootValue = preorder[preorderBegin]; <span class="comment">// 注意用preorderBegin 不要用0</span></span><br><span class="line">        TreeNode* root = <span class="keyword">new</span> <span class="built_in">TreeNode</span>(rootValue);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (preorderEnd - preorderBegin == <span class="number">1</span>) <span class="keyword">return</span> root;</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> delimiterIndex;</span><br><span class="line">        <span class="keyword">for</span> (delimiterIndex = inorderBegin; delimiterIndex &lt; inorderEnd; delimiterIndex++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (inorder[delimiterIndex] == rootValue) <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 切割中序数组</span></span><br><span class="line">        <span class="comment">// 中序左区间，左闭右开[leftInorderBegin, leftInorderEnd)</span></span><br><span class="line">        <span class="type">int</span> leftInorderBegin = inorderBegin;</span><br><span class="line">        <span class="type">int</span> leftInorderEnd = delimiterIndex;</span><br><span class="line">        <span class="comment">// 中序右区间，左闭右开[rightInorderBegin, rightInorderEnd)</span></span><br><span class="line">        <span class="type">int</span> rightInorderBegin = delimiterIndex + <span class="number">1</span>;</span><br><span class="line">        <span class="type">int</span> rightInorderEnd = inorderEnd;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 切割前序数组</span></span><br><span class="line">        <span class="comment">// 前序左区间，左闭右开[leftPreorderBegin, leftPreorderEnd)</span></span><br><span class="line">        <span class="type">int</span> leftPreorderBegin =  preorderBegin + <span class="number">1</span>;</span><br><span class="line">        <span class="type">int</span> leftPreorderEnd = preorderBegin + <span class="number">1</span> + delimiterIndex - inorderBegin; <span class="comment">// 终止位置是起始位置加上中序左区间的大小size</span></span><br><span class="line">        <span class="comment">// 前序右区间, 左闭右开[rightPreorderBegin, rightPreorderEnd)</span></span><br><span class="line">        <span class="type">int</span> rightPreorderBegin = preorderBegin + <span class="number">1</span> + (delimiterIndex - inorderBegin);</span><br><span class="line">        <span class="type">int</span> rightPreorderEnd = preorderEnd;</span><br><span class="line"></span><br><span class="line">        root-&gt;left = <span class="built_in">traversal</span>(inorder, leftInorderBegin, leftInorderEnd,  preorder, leftPreorderBegin, leftPreorderEnd);</span><br><span class="line">        root-&gt;right = <span class="built_in">traversal</span>(inorder, rightInorderBegin, rightInorderEnd, preorder, rightPreorderBegin, rightPreorderEnd);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">buildTree</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; preorder, vector&lt;<span class="type">int</span>&gt;&amp; inorder)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (inorder.<span class="built_in">size</span>() == <span class="number">0</span> || preorder.<span class="built_in">size</span>() == <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 参数坚持左闭右开的原则</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">traversal</span>(inorder, <span class="number">0</span>, inorder.<span class="built_in">size</span>(), preorder, <span class="number">0</span>, preorder.<span class="built_in">size</span>());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h2><p>前序和中序可以唯一确定一棵二叉树。</p>
+<p>后序和中序可以唯一确定一棵二叉树。</p>
+<p>那么前序和后序可不可以唯一确定一棵二叉树呢？</p>
+<p><strong>前序和后序不能唯一确定一棵二叉树！</strong>，因为没有中序遍历无法确定左右部分，也就是无法分割。</p>
+<p>举一个例子：</p>
+<p><img src="https://img-blog.csdnimg.cn/20210203154720326.png" alt="106.从中序与后序遍历序列构造二叉树2"></p>
+<p>tree1 的前序遍历是[1 2 3]， 后序遍历是[3 2 1]。</p>
+<p>tree2 的前序遍历是[1 2 3]， 后序遍历是[3 2 1]。</p>
+<p>那么tree1 和 tree2 的前序和后序完全相同，这是一棵树么，很明显是两棵树！</p>
+<p>所以前序和后序不能唯一确定一棵二叉树！</p>
+<h2 id="总结-2"><a href="#总结-2" class="headerlink" title="总结"></a>总结</h2><p>之前我们讲的二叉树题目都是各种遍历二叉树，这次开始构造二叉树了，思路其实比较简单，但是真正代码实现出来并不容易。</p>
+<p>所以要避免眼高手低，踏实的把代码写出来。</p>
+<p>我同时给出了添加日志的代码版本，因为这种题目是不太容易写出来调一调就能过的，所以一定要把流程日志打出来，看看符不符合自己的思路。</p>
+<p>大家遇到这种题目的时候，也要学会打日志来调试（如何打日志有时候也是个技术活），不要脑动模拟，脑动模拟很容易越想越乱。</p>
+<p>最后我还给出了为什么前序和中序可以唯一确定一棵二叉树，后序和中序可以唯一确定一棵二叉树，而前序和后序却不行。</p>
+<p>认真研究完本篇，相信大家对二叉树的构造会清晰很多。</p>
+<h2 id="其他语言版本-1"><a href="#其他语言版本-1" class="headerlink" title="其他语言版本"></a>其他语言版本</h2><h2 id="Python-1"><a href="#Python-1" class="headerlink" title="Python"></a>Python</h2><p>105.从前序与中序遍历序列构造二叉树</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">buildTree</span>(<span class="params">self, preorder: <span class="type">List</span>[<span class="built_in">int</span>], inorder: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; TreeNode:</span><br><span class="line">        <span class="comment"># 第一步: 特殊情况讨论: 树为空. 或者说是递归终止条件</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> preorder: </span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 第二步: 前序遍历的第一个就是当前的中间节点. </span></span><br><span class="line">        root_val = preorder[<span class="number">0</span>]</span><br><span class="line">        root = TreeNode(root_val)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 第三步: 找切割点. </span></span><br><span class="line">        separator_idx = inorder.index(root_val)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 第四步: 切割inorder数组. 得到inorder数组的左,右半边. </span></span><br><span class="line">        inorder_left = inorder[:separator_idx]</span><br><span class="line">        inorder_right = inorder[separator_idx + <span class="number">1</span>:]</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 第五步: 切割preorder数组. 得到preorder数组的左,右半边.</span></span><br><span class="line">        <span class="comment"># ⭐️ 重点1: 中序数组大小一定跟前序数组大小是相同的. </span></span><br><span class="line">        preorder_left = preorder[<span class="number">1</span>:<span class="number">1</span> + <span class="built_in">len</span>(inorder_left)]</span><br><span class="line">        preorder_right = preorder[<span class="number">1</span> + <span class="built_in">len</span>(inorder_left):]</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 第六步: 递归</span></span><br><span class="line">        root.left = self.buildTree(preorder_left, inorder_left)</span><br><span class="line">        root.right = self.buildTree(preorder_right, inorder_right)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> root</span><br></pre></td></tr></table></figure>
+
+<p>106.从中序与后序遍历序列构造二叉树</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">buildTree</span>(<span class="params">self, inorder: <span class="type">List</span>[<span class="built_in">int</span>], postorder: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; TreeNode:</span><br><span class="line">        <span class="comment"># 第一步: 特殊情况讨论: 树为空. (递归终止条件)</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> postorder: </span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 第二步: 后序遍历的最后一个就是当前的中间节点. </span></span><br><span class="line">        root_val = postorder[-<span class="number">1</span>]</span><br><span class="line">        root = TreeNode(root_val)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 第三步: 找切割点. </span></span><br><span class="line">        separator_idx = inorder.index(root_val)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 第四步: 切割inorder数组. 得到inorder数组的左,右半边. </span></span><br><span class="line">        inorder_left = inorder[:separator_idx]</span><br><span class="line">        inorder_right = inorder[separator_idx + <span class="number">1</span>:]</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 第五步: 切割postorder数组. 得到postorder数组的左,右半边.</span></span><br><span class="line">        <span class="comment"># ⭐️ 重点1: 中序数组大小一定跟后序数组大小是相同的. </span></span><br><span class="line">        postorder_left = postorder[:<span class="built_in">len</span>(inorder_left)]</span><br><span class="line">        postorder_right = postorder[<span class="built_in">len</span>(inorder_left): <span class="built_in">len</span>(postorder) - <span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 第六步: 递归</span></span><br><span class="line">        root.left = self.buildTree(inorder_left, postorder_left)</span><br><span class="line">        root.right = self.buildTree(inorder_right, postorder_right)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> root </span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-smile"></i>感谢您的阅读-------------</div>
+    
+</div>
+  
+</div>
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E8%AE%AD%E7%BB%83%E8%90%A5/" rel="tag"># 代码随想录训练营</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/11/11/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E8%AE%AD%E7%BB%83%E8%90%A5/%E3%80%90%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E8%AE%AD%E7%BB%83%E8%90%A5%E3%80%91Day17_%E8%AE%B0%E5%BD%95/" rel="prev" title="【代码随想录训练营】Day17_记录">
+      <i class="fa fa-chevron-left"></i> 【代码随想录训练营】Day17_记录
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/11/14/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E8%AE%AD%E7%BB%83%E8%90%A5/%E3%80%90%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E8%AE%AD%E7%BB%83%E8%90%A5%E3%80%91Day20_%E8%AE%B0%E5%BD%95/" rel="next" title="【代码随想录训练营】Day20_记录">
+      【代码随想录训练营】Day20_记录 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%AD%E7%BB%83%E8%90%A5%E4%BB%BB%E5%8A%A1"><span class="nav-number">1.</span> <span class="nav-text">训练营任务</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#513-%E6%89%BE%E6%A0%91%E5%B7%A6%E4%B8%8B%E8%A7%92%E7%9A%84%E5%80%BC"><span class="nav-number">2.</span> <span class="nav-text">513.找树左下角的值</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%86%E9%A2%91%E8%AE%B2%E8%A7%A3"><span class="nav-number">2.1.</span> <span class="nav-text">视频讲解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF"><span class="nav-number">2.2.</span> <span class="nav-text">思路</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%92%E5%BD%92"><span class="nav-number">2.2.1.</span> <span class="nav-text">递归</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%AD%E4%BB%A3%E6%B3%95"><span class="nav-number">2.2.2.</span> <span class="nav-text">迭代法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">2.3.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E8%AF%AD%E8%A8%80%E7%89%88%E6%9C%AC"><span class="nav-number">2.4.</span> <span class="nav-text">其他语言版本</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Python"><span class="nav-number">2.4.1.</span> <span class="nav-text">Python</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#112-%E8%B7%AF%E5%BE%84%E6%80%BB%E5%92%8C"><span class="nav-number">3.</span> <span class="nav-text">112. 路径总和</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%86%E9%A2%91%E8%AE%B2%E8%A7%A3-1"><span class="nav-number">3.1.</span> <span class="nav-text">视频讲解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-1"><span class="nav-number">3.2.</span> <span class="nav-text">思路</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%92%E5%BD%92-1"><span class="nav-number">3.2.1.</span> <span class="nav-text">递归</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%AD%E4%BB%A3"><span class="nav-number">3.2.2.</span> <span class="nav-text">迭代</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#113-%E8%B7%AF%E5%BE%84%E6%80%BB%E5%92%8Cii"><span class="nav-number">4.</span> <span class="nav-text">113. 路径总和ii</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-2"><span class="nav-number">4.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93-1"><span class="nav-number">4.2.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#python"><span class="nav-number">4.3.</span> <span class="nav-text">python</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#0112-%E8%B7%AF%E5%BE%84%E6%80%BB%E5%92%8C"><span class="nav-number">4.3.1.</span> <span class="nav-text">0112.路径总和</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0113-%E8%B7%AF%E5%BE%84%E6%80%BB%E5%92%8C-ii"><span class="nav-number">4.3.2.</span> <span class="nav-text">0113.路径总和-ii</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#106-%E4%BB%8E%E4%B8%AD%E5%BA%8F%E4%B8%8E%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86%E5%BA%8F%E5%88%97%E6%9E%84%E9%80%A0%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="nav-number">5.</span> <span class="nav-text">106.从中序与后序遍历序列构造二叉树</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%86%E9%A2%91%E8%AE%B2%E8%A7%A3-2"><span class="nav-number">5.1.</span> <span class="nav-text">视频讲解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-3"><span class="nav-number">5.2.</span> <span class="nav-text">思路</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#C-%E5%AE%8C%E6%95%B4%E4%BB%A3%E7%A0%81"><span class="nav-number">5.2.1.</span> <span class="nav-text">C++完整代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C-%E4%BC%98%E5%8C%96%E7%89%88%E6%9C%AC"><span class="nav-number">5.2.2.</span> <span class="nav-text">C++优化版本</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#105-%E4%BB%8E%E5%89%8D%E5%BA%8F%E4%B8%8E%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E5%BA%8F%E5%88%97%E6%9E%84%E9%80%A0%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="nav-number">6.</span> <span class="nav-text">105.从前序与中序遍历序列构造二叉树</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-4"><span class="nav-number">6.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%80%83%E9%A2%98"><span class="nav-number">6.2.</span> <span class="nav-text">思考题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93-2"><span class="nav-number">6.3.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E8%AF%AD%E8%A8%80%E7%89%88%E6%9C%AC-1"><span class="nav-number">6.4.</span> <span class="nav-text">其他语言版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Python-1"><span class="nav-number">6.5.</span> <span class="nav-text">Python</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Cheng Qi"
+      src="/images/headImage.jpg">
+  <p class="site-author-name" itemprop="name">Cheng Qi</p>
+  <div class="site-description" itemprop="description">要快乐！</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">35</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-smile"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">程麒</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'tIXMRMVc3JTbJ6jUnqKe9FrK-gzGzoHsz',
+      appKey     : 'fPmGzIKBwOIQ2T8AC1WwIyxT',
+      placeholder: "来吐槽吧！",
+      avatar     : 'retro',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : 'https://tixmrmvc.lc-cn-n1-shared.com'
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
